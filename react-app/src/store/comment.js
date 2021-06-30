@@ -1,13 +1,12 @@
 //constants
 
-const ADD_COMMENT = 'comments/ADD_COMMENT';
+const ADD_OR_UPDATE_COMMENT = 'comments/ADD_OR_UPDATE_COMMENT';
 const GET_COMMENTS_OF_PLAY_SESSION = 'comments/GET_COMMENTS_OF_PLAY_SESSION';
-
 
 // action creators
 
-const addComment = (comment) => ({
-    type: ADD_COMMENT,
+const addOrUpdateComment = (comment) => ({
+    type: ADD_OR_UPDATE_COMMENT,
     payload: comment,
 });
 
@@ -40,7 +39,6 @@ export const fetchCommentsOfPlaySession = (playSessionId) => async (dispatch) =>
 }
 
 export const fetchAddComment = (comment) => async (dispatch) => {
-    console.log('############')
     const response = await fetch(`/api/play_sessions/${comment.play_session_id}/comments`, {
         method: "POST",
         headers: {
@@ -50,7 +48,29 @@ export const fetchAddComment = (comment) => async (dispatch) => {
     });
     if (response.ok) {
         const data = await response.json();
-        dispatch(addComment(data))
+        dispatch(addOrUpdateComment(data))
+        return data;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ['An error occured. Please try again.']
+    }
+}
+
+export const fetchUpdateComment = (comment) => async (dispatch) => {
+    const response = await fetch(`/api/play_sessions/${comment.play_session_id}/comments/${comment.id}`, {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(comment),
+    });
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(addOrUpdateComment(data))
         return data;
     } else if (response.status < 500) {
         const data = await response.json();
@@ -68,7 +88,7 @@ const initialState = {};
 export default function playSessionsReducer(state = initialState, action) {
     let newState;
     switch (action.type) {
-        case ADD_COMMENT:
+        case ADD_OR_UPDATE_COMMENT:
             newState = {...state}
             const newComment = action.payload;
             newState[newComment.id] = newComment;

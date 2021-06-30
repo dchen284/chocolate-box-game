@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 // Internal imports
 import * as commentActions from '../../store/comment';
+import CommentDisplay from './CommentDisplay';
 import CommentForm from './CommentForm';
 //import * as playsessionActions from '../../store/playsession';
 
@@ -15,7 +16,7 @@ const PlaySessionDetails = () => {
 
     // const playSession = useSelector(state => state.playSessions[playsessionId]);
     const comments = useSelector(state => state.comments);
-    const commentValues = Object.values(comments);
+    const commentValues = Object.values(comments).reverse();
 
     // useEffects
     useEffect(() => {
@@ -28,7 +29,7 @@ const PlaySessionDetails = () => {
             <CommentForm />
             {commentValues?.map( comment => {
                 return (
-                    <div key={comment.id}>{comment.body}</div>
+                    <CommentDisplay comment={comment} key={comment.id}/>
                 )
             })}
         </div>

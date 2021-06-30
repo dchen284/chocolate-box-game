@@ -5,23 +5,34 @@ import { useParams } from 'react-router-dom';
 // Internal imports
 import * as commentActions from '../../store/comment';
 
-const CommentForm = () => {
+const CommentForm = ({ comment, setIsEditing }) => {
 
     // hooks and state variables
     const dispatch = useDispatch();
     const { playSessionId } = useParams();
-    const [comment, setComment] = useState('');
+    const [bodyText, setBodyText] = useState(comment?.body);
     const user = useSelector(state => state.session.user)
 
     // functions
     const commentSubmit = (e) => {
         e.preventDefault();
+
         const commentToAdd = {
             user_id: user.id,
             play_session_id: playSessionId,
-            body: comment,
+            body: bodyText,
         }
-        dispatch(commentActions.fetchAddComment(commentToAdd));
+
+        if (comment) { // this is editing an existing comment
+            const commentToEdit = { ...commentToAdd, id: comment.id }
+            dispatch(commentActions.fetchUpdateComment(commentToEdit));
+            setIsEditing(false);
+        }
+        else { // this is not editing an existing comment, it is adding a new comment
+            dispatch(commentActions.fetchAddComment(commentToAdd));
+            setBodyText('');
+        }
+
     }
 
     // useEffects
@@ -29,19 +40,23 @@ const CommentForm = () => {
 
     // JSX
     return (
-        <form action="post" method={`/${playSessionId}/comments`}>
+        <form>
             <label htmlFor="comment_text">Comment Here:</label>
             <textarea
                 id="comment_text"
                 placeholder="Type your comment here."
-                onChange={(e) => setComment(e.target.value)}
+                value={bodyText}
+                onChange={(e) => setBodyText(e.target.value)}
             >
             </textarea>
-            <button
-                onClick={commentSubmit}
-            >
+            <button onClick={commentSubmit}>
                 Submit
             </button>
+            { comment ?
+            <button onClick={() => setIsEditing(false)}>
+                Cancel
+            </button>
+            : null }
         </form>
     )
 }
