@@ -5,8 +5,8 @@ from flask_login import UserMixin
 # Implemented from example at https://hackmd.io/@jpshafto/H1VbmP3yO
 favorite_players = db.Table(
     "favorite_players",
-    db.Column("user_id", db.Integer, db.ForeignKey("users.id")),
-    db.Column("favorite_player_id", db.Integer, db.ForeignKey("users.id"))
+    db.Column("owner_id", db.Integer, db.ForeignKey("users.id")),
+    db.Column("favorite_id", db.Integer, db.ForeignKey("users.id"))
 )
 
 class User(db.Model, UserMixin):
@@ -17,12 +17,17 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
+    # Relationships
+
+    comments = db.relationship("Comment", back_populates="user")
+    play_sessions = db.relationship("PlaySession", back_populates="user")
+
     # Implemented from example at https://hackmd.io/@jpshafto/H1VbmP3yO
     followers = db.relationship(
         "User",
         secondary=favorite_players,
-        primaryjoin=(favorite_players.c.user_id == id),
-        secondaryjoin=(favorite_players.c.favorite_player_id == id),
+        primaryjoin=(favorite_players.c.owner_id == id),
+        secondaryjoin=(favorite_players.c.favorite_id == id),
         backref=db.backref("follows", lazy="dynamic"),
         lazy="dynamic"
     )
