@@ -3,6 +3,7 @@ from flask.cli import AppGroup
 # Internal imports
 from .board_seeds import seed_boards, undo_boards
 from .comment_seeds import seed_comments, undo_comments
+# from .favorite_player_seeds import seed_favorite_players, undo_favorite_players
 from .play_session_seeds import seed_play_sessions, undo_play_sessions
 from .users import seed_users, undo_users
 
@@ -18,6 +19,7 @@ def seed():
     seed_boards()
     seed_play_sessions()
     seed_comments()
+    # seed_favorite_players()
     # Add other seed functions here
 
 
@@ -26,6 +28,7 @@ def seed():
 def undo():
     undo_boards()
     undo_comments()
+    # undo_favorite_players()
     undo_play_sessions()
     undo_users()
     # Add other undo functions here

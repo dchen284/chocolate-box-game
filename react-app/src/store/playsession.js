@@ -1,16 +1,22 @@
-// constant
+// constants
+// const GET_ONE_PLAY_SESSION = 'playsessino/GET_ONE_PLAY_SESSION';
 const GET_PLAY_SESSIONS = 'playsession/GET_PLAY_SESSIONS';
 
-//action creator
+// action creators
 const getAllPlaySessions = (playSessions) => ({
     type: GET_PLAY_SESSIONS,
     payload: playSessions,
 });
 
-//thunks
+// const getOnePlaySession = (playSession) => ({
+//     type: GET_ONE_PLAY_SESSION,
+//     payload: playSession
+// })
+
+// thunk action creators
 
 export const fetchAllPlaySessions = () => async (dispatch) => {
-    console.log('gabba');
+    //console.log('gabba');
     const response = await fetch('/api/play_sessions', {
         headers: {
             'Content-Type': 'application/json'
@@ -30,6 +36,11 @@ export const fetchAllPlaySessions = () => async (dispatch) => {
     }
 }
 
+export const fetchOnePlaySession = (playSessionId) => async (dispatch) => {
+
+}
+
+// reducer
 const initialState = {};
 
 export default function playSessionsReducer(state = initialState, action) {

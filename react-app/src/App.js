@@ -50,7 +50,7 @@ function App() {
         <ProtectedRoute path='/boards' exact={true} >
           <TableDisplay />
         </ProtectedRoute>
-        <ProtectedRoute path='/play_session/:playSessionId(\d+)'>
+        <ProtectedRoute path='/playsession/:playSessionId(\d+)'>
           <PlaySessionDetails />
         </ProtectedRoute>
         <Route>

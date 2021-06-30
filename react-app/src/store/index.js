@@ -3,11 +3,13 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 // Internal imports
 import boardsReducer from './board';
+import commentsReducer from './comment';
 import playSessionsReducer from './playsession';
 import session from './session'
 
 const rootReducer = combineReducers({
   boards: boardsReducer,
+  comments: commentsReducer,
   playSessions: playSessionsReducer,
   session,
 });
