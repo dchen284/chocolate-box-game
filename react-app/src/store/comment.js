@@ -1,6 +1,7 @@
 //constants
 
 const ADD_OR_UPDATE_COMMENT = 'comments/ADD_OR_UPDATE_COMMENT';
+const DELETE_COMMENT = 'comments/DELETE_COMMENT';
 const GET_COMMENTS_OF_PLAY_SESSION = 'comments/GET_COMMENTS_OF_PLAY_SESSION';
 
 // action creators
@@ -10,11 +11,15 @@ const addOrUpdateComment = (comment) => ({
     payload: comment,
 });
 
+const deleteComment = (commentId) => ({
+    type: DELETE_COMMENT,
+    payload: commentId,
+})
+
 const getCommentsOfPlaySession = (comments) => ({
     type: GET_COMMENTS_OF_PLAY_SESSION,
     payload: comments,
 });
-
 
 // thunk action creators
 
@@ -82,6 +87,23 @@ export const fetchUpdateComment = (comment) => async (dispatch) => {
     }
 }
 
+export const fetchDeleteComment = (comment) => async (dispatch) => {
+    const response = await fetch(`/api/play_sessions/${comment.play_session_id}/comments/${comment.id}`, {
+        method: "DELETE",
+    });
+    if (response.ok) {
+        dispatch(deleteComment(comment.id))
+        return;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ['An error occured. Please try again.']
+    }
+}
+
 // reducer
 const initialState = {};
 
@@ -97,6 +119,11 @@ export default function playSessionsReducer(state = initialState, action) {
             newState = {};
             const comments = action.payload;
             comments.forEach(comment => newState[comment.id] = comment)
+            return newState;
+        case DELETE_COMMENT:
+            newState = {...state}
+            const commentIdToDelete = action.payload;
+            delete newState[commentIdToDelete];
             return newState;
         default:
             return state;

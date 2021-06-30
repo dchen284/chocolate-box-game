@@ -46,3 +46,11 @@ def put_comment(play_session_id, comment_id):
         db.session.commit()
         return comment_to_update.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@play_session_routes.route('/<int:play_session_id>/comments/<int:comment_id>', methods=["DELETE"])
+@login_required
+def delete_comment(play_session_id, comment_id):
+    comment_to_delete = Comment.query.get(comment_id)
+    db.session.delete(comment_to_delete)
+    db.session.commit()
+    return {'success': 'success'}

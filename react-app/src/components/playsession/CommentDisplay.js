@@ -1,12 +1,14 @@
 // External imports
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // Internal imports
+import * as commentActions from '../../store/comment';
 import CommentForm from './CommentForm';
 
 const CommentDisplay = ({comment}) => {
 
     //hooks and state variables
+    const dispatch = useDispatch();
     const [isEditing, setIsEditing] = useState(false);
     const user = useSelector(state => state.session.user);
 
@@ -16,7 +18,7 @@ const CommentDisplay = ({comment}) => {
     }
 
     const deleteComment = (e) => {
-        console.log('deleting')
+        dispatch(commentActions.fetchDeleteComment(comment));
     }
 
     const showComment = () => {
