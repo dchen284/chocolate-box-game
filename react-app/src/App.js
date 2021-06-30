@@ -1,8 +1,12 @@
+// External imports
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+// Internal imports
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
+import TableDisplay from './components/datadisplay/TableDisplay';
+import PlaySessionDetails from './components/playsession/PlaySessionDetails';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
@@ -43,6 +47,15 @@ function App() {
         <ProtectedRoute path='/' exact={true} >
           <h1>My Home Page</h1>
         </ProtectedRoute>
+        <ProtectedRoute path='/boards' exact={true} >
+          <TableDisplay />
+        </ProtectedRoute>
+        <ProtectedRoute path='/play_session/:playSessionId(\d+)'>
+          <PlaySessionDetails />
+        </ProtectedRoute>
+        <Route>
+          404: Geez.
+        </Route>
       </Switch>
     </BrowserRouter>
   );

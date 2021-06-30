@@ -1,0 +1,14 @@
+.tabledisplay_container {
+    display: grid;
+    grid-template-areas:
+        "a b";
+
+}
+
+.tabledisplay_text {
+    grid-area: a;
+}
+
+.pure_table {
+    grid-area: b;
+}
