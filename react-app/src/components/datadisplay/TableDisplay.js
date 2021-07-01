@@ -39,11 +39,17 @@ const TableDisplay = () => {
         dispatch(favoritePlayerActions.fetchDeleteFavorite(userId, favoriteId))
     }
 
+    const addFavorite = (userId, favoriteId) => {
+        dispatch(favoritePlayerActions.fetchAddFavorite(userId, favoriteId))
+    }
+
     return (
         <div className="tabledisplay_container">
             <div className="tabledisplay_text">
                 <h1>TableDisplay</h1>
-                <button>Add Marnie as Favorite</button>
+                <button
+                onClick={() => addFavorite(user.id, 2)}
+                >Add Marnie as Favorite</button>
                 <table className="pure-table">
                     <thead>
                         <tr>

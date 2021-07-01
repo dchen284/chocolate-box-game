@@ -41,3 +41,18 @@ def delete_favorite_player(favorite_id, user_id):
     # print(user.favorite_players.all())
     db.session.commit()
     return {'success': 'success'}
+
+@user_routes.route('/<int:user_id>/favorite_players/', methods=['POST'])
+@login_required
+def add_favorite_player(user_id):
+    print('addaddadd')
+    favorite_id = request.get_json()
+    user = User.query.get(user_id)
+    favorite = User.query.get(favorite_id)
+    # print(user.favorite_players.all())
+    # print('++++++++++++++++++', dir(user.favorite_players))
+    if user.favorite_players.all().count(favorite) == 0:
+        user.favorite_players.append(favorite)
+    # print(user.favorite_players.all())
+    db.session.commit()
+    return favorite.to_dict()
