@@ -1,4 +1,4 @@
-//constants
+// constants
 
 const ADD_OR_UPDATE_COMMENT = 'comments/ADD_OR_UPDATE_COMMENT';
 const DELETE_COMMENT = 'comments/DELETE_COMMENT';
@@ -43,6 +43,13 @@ export const fetchCommentsOfPlaySession = (playSessionId) => async (dispatch) =>
     }
 }
 
+
+
+
+
+
+
+
 export const fetchAddComment = (comment) => async (dispatch) => {
     const response = await fetch(`/api/play_sessions/${comment.play_session_id}/comments`, {
         method: "POST",
@@ -64,6 +71,11 @@ export const fetchAddComment = (comment) => async (dispatch) => {
         return ['An error occured. Please try again.']
     }
 }
+
+
+
+
+
 
 export const fetchUpdateComment = (comment) => async (dispatch) => {
     const response = await fetch(`/api/play_sessions/${comment.play_session_id}/comments/${comment.id}`, {

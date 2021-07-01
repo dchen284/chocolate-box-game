@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 //Internal Imports
 import * as boardActions from '../../store/board';
+import * as favoritePlayerActions from '../../store/favorite_player';
 import * as playSessionActions from '../../store/playsession';
 import './TableDisplay.css';
 
@@ -12,18 +13,37 @@ const TableDisplay = () => {
     const dispatch = useDispatch();
     const boards = useSelector((state) => state.boards);
     const boardsValues = Object.values(boards);
+    const favoritePlayers = useSelector((state) => state.favoritePlayers);
+    const favoritePlayersValues = Object.values(favoritePlayers);
     const playSessions = useSelector((state) => state.playSessions);
     const playSessionsValues = Object.values(playSessions);
+    const user = useSelector((state) => state.session.user);
 
     useEffect(() => {
         dispatch(boardActions.fetchAllBoards());
+        dispatch(favoritePlayerActions.fetchAllFavoritesOfUser(user.id));
         dispatch(playSessionActions.fetchAllPlaySessions());
-    }, [dispatch]);
+    }, [dispatch, user.id]);
+
+    // useEffect( () => {
+    //     async function blah() {
+    //         console.log('testing here')
+    //         const res = await fetch(`/api/users/1/favorite_players`)
+    //         const data = await res.json();
+    //         console.log('testing again', data)
+    //     }
+    //     blah();
+    // }, [])
+
+    const deleteFavorite = (userId, favoriteId) => {
+        dispatch(favoritePlayerActions.fetchDeleteFavorite(userId, favoriteId))
+    }
 
     return (
         <div className="tabledisplay_container">
             <div className="tabledisplay_text">
                 <h1>TableDisplay</h1>
+                <button>Add Marnie as Favorite</button>
                 <table className="pure-table">
                     <thead>
                         <tr>
@@ -43,7 +63,32 @@ const TableDisplay = () => {
                     })}
                     </tbody>
                 </table>
-
+                <table className="pure-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Unfavorite</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {favoritePlayersValues?.map( favoritePlayer => {
+                        return (
+                            <tr key={favoritePlayer.id}>
+                                <td>{favoritePlayer.id}</td>
+                                <td>{favoritePlayer.username}</td>
+                                <td>
+                                    <button>
+                                        <i
+                                        className="fas fa-heart"
+                                        onClick={()=> deleteFavorite(user.id, favoritePlayer.id)}></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        )
+                    })}
+                    </tbody>
+                </table>
                 {playSessionsValues ? <div>{playSessionsValues}</div> : null}
             </div>
             <table className="right-pure-table pure-table">

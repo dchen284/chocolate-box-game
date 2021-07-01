@@ -3,8 +3,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
 # Implemented from example at https://hackmd.io/@jpshafto/H1VbmP3yO
-favorite_players = db.Table(
-    "favorite_players",
+favorited_by = db.Table(
+    "favorited_by",
     db.Column("owner_id", db.Integer, db.ForeignKey("users.id")),
     db.Column("favorite_id", db.Integer, db.ForeignKey("users.id"))
 )
@@ -23,11 +23,11 @@ class User(db.Model, UserMixin):
     play_sessions = db.relationship("PlaySession", back_populates="user")
 
     # Implemented from example at https://hackmd.io/@jpshafto/H1VbmP3yO
-    followers = db.relationship(
+    favorite_players = db.relationship(
         "User",
-        secondary=favorite_players,
-        primaryjoin=(favorite_players.c.owner_id == id),
-        secondaryjoin=(favorite_players.c.favorite_id == id),
+        secondary=favorited_by,
+        primaryjoin=(favorited_by.c.owner_id == id),
+        secondaryjoin=(favorited_by.c.favorite_id == id),
         backref=db.backref("follows", lazy="dynamic"),
         lazy="dynamic"
     )
