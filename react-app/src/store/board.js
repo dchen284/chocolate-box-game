@@ -16,8 +16,8 @@ export const fetchAllBoards = () => async (dispatch) => {
     });
     if (response.ok) {
         const data = await response.json();
-        dispatch(getAllBoards(data));
-        return data;
+        dispatch(getAllBoards(data.boards));
+        return data.boards;
     } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {
@@ -33,9 +33,13 @@ export const fetchAllBoards = () => async (dispatch) => {
 const initialState = {};
 
 export default function boardsReducer(state = initialState, action) {
+    let newState;
     switch (action.type) {
         case GET_BOARDS:
-            return { temp: action.payload }
+        newState = {};
+        const boards = action.payload;
+        boards.forEach( board => newState[board.id] = board);
+        return newState;
         default:
             return state;
     }

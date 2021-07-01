@@ -24,10 +24,29 @@ const TableDisplay = () => {
         <div className="tabledisplay_container">
             <div className="tabledisplay_text">
                 <h1>TableDisplay</h1>
-                {boardsValues ? <div>{boardsValues}</div> : null}
+                <table className="pure-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Board Data</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {boardsValues?.map( board => {
+                        return (
+                            <tr key={board.id}>
+                                <td>{board.id}</td>
+                                <td>{board.initialBoardSetup}</td>
+                            </tr>
+
+                        )
+                    })}
+                    </tbody>
+                </table>
+
                 {playSessionsValues ? <div>{playSessionsValues}</div> : null}
             </div>
-            <table className="pure-table">
+            <table className="right-pure-table pure-table">
                 <thead>
                     <tr>
                         <th>#</th>

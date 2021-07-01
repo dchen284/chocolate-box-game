@@ -28,6 +28,11 @@ const NavBar = () => {
           </NavLink>
         </li>
         <li>
+          <NavLink to='/boards' exact={true} activeClassName='active'>
+            Boards
+          </NavLink>
+        </li>
+        <li>
           <NavLink to='/playsession/1' exact={true} activeClassName='active'>
             Play Session 1
           </NavLink>

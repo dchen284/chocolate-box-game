@@ -11,5 +11,5 @@ board_routes = Blueprint('boards', __name__)
 @login_required
 def get_boards():
     boards = Board.query.all()
-    return jsonify("them boards yanno")
-    # return jsonify({'boards': [board.to_dict() for board in boards]})
+    # return jsonify("them boards yanno")
+    return {'boards': [board.to_dict() for board in boards]}
