@@ -18,8 +18,8 @@ const TablePlaySessions = () => {
 
     console.log('boardId', boardId);
     console.log('userId', userId);
+    console.log('playSessionsofBoardValues', playSessionsOfBoardValues);
     console.log('playSessionsofUserValues', playSessionsOfUserValues);
-
     useEffect(() => {
         if (boardId) {
             dispatch(playSessionActions.fetchPlaySessionsOfBoard(boardId));
@@ -57,13 +57,13 @@ const TablePlaySessions = () => {
                             <th>Play Session Score</th>
                         </tr>
                     </thead>
-                    { playSessionsOfBoardValues ?
+                    { boardId ?
                     <tbody>
                         {playSessionsOfBoardValues.map( (playSession, index) => {
                         return (
                             <tr key={playSession.id} className={isIndexOdd(index)}>
                                 <td>{playSession.id}</td>
-                                <td>{playSession.user_id}</td>
+                                <td>{playSession.username}</td>
                                 <td>{playSession.score}</td>
                             </tr>
 
@@ -71,7 +71,7 @@ const TablePlaySessions = () => {
                     })}
                     </tbody>
                     : null}
-                    { playSessionsOfUserValues ?
+                    { userId ?
                     <tbody>
                         {playSessionsOfUserValues.map( (playSession, index) => {
                         return (

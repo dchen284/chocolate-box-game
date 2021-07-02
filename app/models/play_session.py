@@ -29,4 +29,5 @@ class PlaySession(db.Model):
             'user_id': self.user_id,
             'board_id': self.board_id,
             'timestamp': self.timestamp,
+            'username': self.user.username,
         }
