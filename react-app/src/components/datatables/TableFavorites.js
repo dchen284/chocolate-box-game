@@ -3,10 +3,11 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 //Internal Imports
 import * as favoritePlayerActions from '../../store/favorite_player';
+import FavoriteButton from '../utils/FavoriteButton';
 
 const TableFavorites = () => {
 
-    //hooks and state variables
+    // hooks and state variables
     const dispatch = useDispatch();
     const favoritePlayers = useSelector((state) => state.favoritePlayers);
     const favoritePlayersValues = Object.values(favoritePlayers);
@@ -26,9 +27,9 @@ const TableFavorites = () => {
     //     blah();
     // }, [])
 
-    const deleteFavorite = (userId, favoriteId) => {
-        dispatch(favoritePlayerActions.fetchDeleteFavorite(userId, favoriteId))
-    }
+    // const deleteFavorite = (userId, favoriteId) => {
+    //     dispatch(favoritePlayerActions.fetchDeleteFavorite(userId, favoriteId))
+    // }
 
     const addFavorite = (userId, favoriteId) => {
         dispatch(favoritePlayerActions.fetchAddFavorite(userId, favoriteId))
@@ -59,11 +60,12 @@ const TableFavorites = () => {
                             <tr key={favoritePlayer.id} className={isIndexOdd(index)}>
                                 <td>{favoritePlayer.username}</td>
                                 <td>
-                                    <div>
+                                    <FavoriteButton loggedInUserId={user.id} favoriteId={favoritePlayer.id} />
+                                    {/* <div>
                                         <i
                                         className="fas fa-heart"
                                         onClick={()=> deleteFavorite(user.id, favoritePlayer.id)}></i>
-                                    </div>
+                                    </div> */}
                                 </td>
                             </tr>
                         )
