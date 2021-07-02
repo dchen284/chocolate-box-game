@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 //Internal Imports
 import * as boardActions from '../../store/board';
 import * as favoritePlayerActions from '../../store/favorite_player';
-import * as playSessionActions from '../../store/playsession';
+// import * as playSessionActions from '../../store/playsession';
 import './TableDisplay.css';
 
 const TableDisplay = () => {
@@ -15,14 +15,14 @@ const TableDisplay = () => {
     const boardsValues = Object.values(boards);
     const favoritePlayers = useSelector((state) => state.favoritePlayers);
     const favoritePlayersValues = Object.values(favoritePlayers);
-    const playSessions = useSelector((state) => state.playSessions);
-    const playSessionsValues = Object.values(playSessions);
+    // const playSessions = useSelector((state) => state.playSessions);
+    // const playSessionsValues = Object.values(playSessions);
     const user = useSelector((state) => state.session.user);
 
     useEffect(() => {
         dispatch(boardActions.fetchAllBoards());
         dispatch(favoritePlayerActions.fetchAllFavoritesOfUser(user.id));
-        dispatch(playSessionActions.fetchAllPlaySessions());
+        // dispatch(playSessionActions.fetchAllPlaySessions());
     }, [dispatch, user.id]);
 
     // useEffect( () => {
@@ -43,6 +43,11 @@ const TableDisplay = () => {
         dispatch(favoritePlayerActions.fetchAddFavorite(userId, favoriteId))
     }
 
+    const isIndexOdd = (index) => {
+        if (index % 2 === 1) {return 'pure-table-odd'}
+        else {return 'pure-table-even'}
+    }
+
     return (
         <div className="tabledisplay_container">
             <div className="tabledisplay_text">
@@ -58,9 +63,9 @@ const TableDisplay = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {boardsValues?.map( board => {
+                        {boardsValues?.map( (board, index) => {
                         return (
-                            <tr key={board.id}>
+                            <tr key={board.id} className={isIndexOdd(index)}>
                                 <td>{board.id}</td>
                                 <td>{board.initialBoardSetup}</td>
                             </tr>
@@ -78,9 +83,9 @@ const TableDisplay = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {favoritePlayersValues?.map( favoritePlayer => {
+                        {favoritePlayersValues?.map( (favoritePlayer, index) => {
                         return (
-                            <tr key={favoritePlayer.id}>
+                            <tr key={favoritePlayer.id} className={isIndexOdd(index)}>
                                 <td>{favoritePlayer.id}</td>
                                 <td>{favoritePlayer.username}</td>
                                 <td>
@@ -95,7 +100,7 @@ const TableDisplay = () => {
                     })}
                     </tbody>
                 </table>
-                {playSessionsValues ? <div>{playSessionsValues}</div> : null}
+                {/* {playSessionsValues ? <div>{playSessionsValues}</div> : null} */}
             </div>
             <table className="right-pure-table pure-table">
                 <thead>
