@@ -1,4 +1,4 @@
-.tabledisplay_container {
+/* .tabledisplay_container {
     display: grid;
     grid-template-areas:
         "a b";
@@ -11,4 +11,4 @@
 
 .right-pure_table {
     grid-area: b;
-}
+} */

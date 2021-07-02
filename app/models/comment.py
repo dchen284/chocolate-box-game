@@ -26,4 +26,5 @@ class Comment(db.Model):
             'play_session_id': self.play_session_id,
             'body': self.body,
             'timestamp': self.timestamp,
+            'username': self.user.username,
         }

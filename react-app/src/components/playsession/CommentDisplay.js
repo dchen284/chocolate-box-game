@@ -1,6 +1,7 @@
 // External imports
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 // Internal imports
 import * as commentActions from '../../store/comment';
 import CommentForm from './CommentForm';
@@ -24,9 +25,13 @@ const CommentDisplay = ({comment}) => {
     const showComment = () => {
         return (
             <>
-                <div>{comment.id}</div>
+                <div>Comment #{comment.id}</div>
                 <div>{comment.body}</div>
-                <div>{comment.user_id}</div>
+                <div>
+                    <Link to={`/users/${comment.user_id}/playsessions`}>
+                        {comment.username}
+                    </Link>
+                </div>
                 { comment.user_id === user?.id ?
                 <>
                     <button

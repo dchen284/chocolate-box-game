@@ -1,6 +1,7 @@
 //External Imports
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 //Internal Imports
 import * as favoritePlayerActions from '../../store/favorite_player';
 import FavoriteButton from '../utils/FavoriteButton';
@@ -31,9 +32,9 @@ const TableFavorites = () => {
     //     dispatch(favoritePlayerActions.fetchDeleteFavorite(userId, favoriteId))
     // }
 
-    const addFavorite = (userId, favoriteId) => {
-        dispatch(favoritePlayerActions.fetchAddFavorite(userId, favoriteId))
-    }
+    // const addFavorite = (userId, favoriteId) => {
+    //     dispatch(favoritePlayerActions.fetchAddFavorite(userId, favoriteId))
+    // }
 
     const isIndexOdd = (index) => {
         if (index % 2 === 1) {return 'pure-table-odd'}
@@ -43,10 +44,10 @@ const TableFavorites = () => {
     return (
         <div className="tabledisplay_container">
             <div className="tabledisplay_text">
-                <h1>Favorites</h1>
-                <button
+                <h1>Your Favorite Players</h1>
+                {/* <button
                 onClick={() => addFavorite(user.id, 2)}
-                >Add Marnie as Favorite</button>
+                >Add Marnie as Favorite</button> */}
                 <table className="pure-table">
                     <thead>
                         <tr>
@@ -58,7 +59,11 @@ const TableFavorites = () => {
                         {favoritePlayersValues?.map( (favoritePlayer, index) => {
                         return (
                             <tr key={favoritePlayer.id} className={isIndexOdd(index)}>
-                                <td>{favoritePlayer.username}</td>
+                                <td>
+                                    <Link to={`/users/${favoritePlayer.id}/playsessions`}>
+                                        {favoritePlayer.username}
+                                    </Link>
+                                </td>
                                 <td>
                                     <FavoriteButton loggedInUserId={user.id} favoriteId={favoritePlayer.id} />
                                     {/* <div>

@@ -55,11 +55,11 @@ const NavBar = () => {
             Your Play Sessions
           </NavLink>
         </li>
-        <li>
+        {/* <li>
           <NavLink to='/playsession/1' exact={true} activeClassName='active'>
             Play Session 1
           </NavLink>
-        </li>
+        </li> */}
         <li>
           <LogoutButton />
         </li>

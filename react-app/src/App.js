@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 // Internal imports
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
-import TableDisplay from './components/datatables/TableDisplay';
+// import TableDisplay from './components/datatables/TableDisplay';
 import TableBoards from './components/datatables/TableBoards';
 import TableFavorites from './components/datatables/TableFavorites';
 import TablePlaySessions from './components/datatables/TablePlaySessions';
@@ -50,9 +50,9 @@ function App() {
         <ProtectedRoute path='/' exact={true} >
           <h1>My Home Page</h1>
         </ProtectedRoute>
-        <ProtectedRoute path='/tables' exact={true} >
+        {/* <ProtectedRoute path='/tables' exact={true} >
           <TableDisplay />
-        </ProtectedRoute>
+        </ProtectedRoute> */}
         <ProtectedRoute path='/boards' exact={true} >
           <TableBoards />
         </ProtectedRoute>

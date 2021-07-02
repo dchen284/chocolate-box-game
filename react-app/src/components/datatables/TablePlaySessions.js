@@ -1,7 +1,7 @@
 //External Imports
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 //Internal Imports
 import * as favoritePlayerActions from '../../store/favorite_player';
 import * as playSessionActions from '../../store/playsession';
@@ -47,8 +47,9 @@ const TablePlaySessions = () => {
                     <table className="pure-table">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Board #</th>
+                                <th>Play Session #</th>
+                                <th>Username</th>
+                                <th>Favorite Player?</th>
                                 <th>Play Session Score</th>
                             </tr>
                         </thead>
@@ -56,10 +57,17 @@ const TablePlaySessions = () => {
                             {playSessionsOfBoardValues.map( (playSession, index) => {
                             return (
                                 <tr key={playSession.id} className={isIndexOdd(index)}>
-                                    <td>{playSession.id}</td>
-                                    <td>{playSession.username}
-                                        <FavoriteButton loggedInUserId={loggedInUser.id} favoriteId={playSession.user_id}/>
+                                    <td>
+                                        <Link to={`/playsession/${playSession.id}`}>
+                                            Session #{playSession.id}
+                                        </Link>
                                     </td>
+                                    <td>
+                                        <Link to={`/users/${playSession.user_id}/playsessions`}>
+                                            {playSession.username}
+                                        </Link>
+                                    </td>
+                                    <td><FavoriteButton loggedInUserId={loggedInUser.id} favoriteId={playSession.user_id}/></td>
                                     <td>{playSession.score}</td>
                                 </tr>
                             )
@@ -84,7 +92,7 @@ const TablePlaySessions = () => {
                     <table className="pure-table">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th>Play Session #</th>
                                 <th>Board #</th>
                                 <th>Play Session Score</th>
                             </tr>
@@ -93,7 +101,11 @@ const TablePlaySessions = () => {
                             {playSessionsOfUserValues.map( (playSession, index) => {
                             return (
                                 <tr key={playSession.id} className={isIndexOdd(index)}>
-                                    <td>{playSession.id}</td>
+                                    <td>
+                                        <Link to={`/playsession/${playSession.id}`}>
+                                            Session #{playSession.id}
+                                        </Link>
+                                    </td>
                                     <td>{playSession.board_id}</td>
                                     <td>{playSession.score}</td>
                                 </tr>
