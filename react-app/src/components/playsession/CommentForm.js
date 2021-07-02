@@ -1,18 +1,22 @@
 // External imports
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 // Internal imports
 import * as commentActions from '../../store/comment';
+import * as errorsActions from '../../store/error';
 
 const CommentForm = ({ comment, setIsEditing }) => {
 
     // hooks and state variables
     const dispatch = useDispatch();
     const { playSessionId } = useParams();
-    const [errors, setErrors] = useState([])
     const [bodyText, setBodyText] = useState(comment?.body);
-    const user = useSelector(state => state.session.user)
+    const [errors, setErrors] = useState([])
+    const [inputHolder, setInputHolder] = useState({body: ''})
+    const errorsFromStore = useSelector(state => state.errors);
+    const user = useSelector(state => state.session.user);
+
 
     // functions
     const commentSubmit = async (e) => {
@@ -26,29 +30,59 @@ const CommentForm = ({ comment, setIsEditing }) => {
 
         if (comment) { // this is editing an existing comment
             const commentToEdit = { ...commentToAdd, id: comment.id }
-            const errorsFromBackend = await dispatch(commentActions.fetchUpdateComment(commentToEdit));
-            if (errorsFromBackend.length) {
-                setErrors(errorsFromBackend)
-            }
-            else {setIsEditing(false)}
+            dispatch(commentActions.fetchUpdateComment(commentToEdit));
+            setInputHolder(commentToEdit);
+            setIsEditing(false);
         }
         else { // this is not editing an existing comment, it is adding a new comment
-            const errorsFromBackend = await dispatch(commentActions.fetchAddComment(commentToAdd));
-            if (errorsFromBackend.length) {
-                setErrors(errorsFromBackend)
-            }
-            else {setBodyText('')}
+            dispatch(commentActions.fetchAddComment(commentToAdd));
+            setInputHolder(commentToAdd);
+            setBodyText('');
         }
+
+        // if (comment) { // this is editing an existing comment
+        //     const commentToEdit = { ...commentToAdd, id: comment.id }
+        //     const errorsFromBackend = await dispatch(commentActions.fetchUpdateComment(commentToEdit));
+        //     if (errorsFromBackend.length) {
+        //         setErrors(errorsFromBackend)
+        //     }
+        //     else {setIsEditing(false)}
+        // }
+        // else { // this is not editing an existing comment, it is adding a new comment
+        //     const errorsFromBackend = await dispatch(commentActions.fetchAddComment(commentToAdd));
+        //     if (errorsFromBackend.length) {
+        //         setErrors(errorsFromBackend)
+        //     }
+        //     else {setBodyText('')}
+        // }
 
     }
 
     // useEffects
 
+    useEffect(() => {
+        if (errorsFromStore.length) {
+            // if (comment) {
+            //     setIsEditing(true);
+            // }
+            setBodyText(inputHolder.body);
+            setErrors(errorsFromStore);
+            dispatch(errorsActions.clearErrors());
+        }
+    }, [comment, dispatch, errorsFromStore, inputHolder, setIsEditing]);
+
 
     // JSX
     return (
         <>
-            {errors.length ?
+            <ul>
+            {errors.map(error => {
+                return (
+                    <li key={error}>{error}</li>
+                )
+            })}
+            </ul>
+            {/* {errors.length ?
                 <ul>
                 {errors.map(error => {
                     return (
@@ -57,7 +91,7 @@ const CommentForm = ({ comment, setIsEditing }) => {
                 })}
                 </ul>
                 : null
-            }
+            } */}
             <form>
                 <label htmlFor="comment_text">Comment Here:</label>
                 <textarea

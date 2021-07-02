@@ -1,3 +1,5 @@
+import * as errorsActions from '../store/error';
+
 // constants
 
 const ADD_OR_UPDATE_COMMENT = 'comments/ADD_OR_UPDATE_COMMENT';
@@ -43,13 +45,6 @@ export const fetchCommentsOfPlaySession = (playSessionId) => async (dispatch) =>
     }
 }
 
-
-
-
-
-
-
-
 export const fetchAddComment = (comment) => async (dispatch) => {
     const response = await fetch(`/api/play_sessions/${comment.play_session_id}/comments`, {
         method: "POST",
@@ -61,21 +56,19 @@ export const fetchAddComment = (comment) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         dispatch(addOrUpdateComment(data))
-        return data;
+        return;
     } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {
-            return data.errors;
+            dispatch(errorsActions.clearErrors());
+            dispatch(errorsActions.addErrors(data.errors));
+            return;
         }
     } else {
-        return ['An error occured. Please try again.']
+        dispatch(errorsActions.addErrors(['An error occured. Please try again.']));
+        return;
     }
 }
-
-
-
-
-
 
 export const fetchUpdateComment = (comment) => async (dispatch) => {
     const response = await fetch(`/api/play_sessions/${comment.play_session_id}/comments/${comment.id}`, {
@@ -88,14 +81,17 @@ export const fetchUpdateComment = (comment) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         dispatch(addOrUpdateComment(data))
-        return data;
+        return;
     } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {
-            return data.errors;
+            dispatch(errorsActions.clearErrors());
+            dispatch(errorsActions.addErrors(data.errors));
+            return;
         }
     } else {
-        return ['An error occured. Please try again.']
+        dispatch(errorsActions.addErrors(['An error occured. Please try again.']));
+        return;
     }
 }
 

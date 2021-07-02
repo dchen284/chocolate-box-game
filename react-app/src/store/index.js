@@ -4,6 +4,7 @@ import thunk from 'redux-thunk';
 // Internal imports
 import boardsReducer from './board';
 import commentsReducer from './comment';
+import errorsReducer from './error';
 import favoritesReducer from './favorite_player';
 import playSessionsReducer from './playsession';
 import session from './session'
@@ -11,6 +12,7 @@ import session from './session'
 const rootReducer = combineReducers({
   boards: boardsReducer,
   comments: commentsReducer,
+  errors: errorsReducer,
   favoritePlayers: favoritesReducer,
   playSessions: playSessionsReducer,
   session,

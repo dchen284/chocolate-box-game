@@ -38,7 +38,8 @@ const TablePlaySessions = () => {
         else {return 'pure-table-even'}
     }
 
-
+    // JSX
+    
     if (boardId) { //Display for play sessions of board
         return (
             <div className="tabledisplay_container">
