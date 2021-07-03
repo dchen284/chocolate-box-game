@@ -1,8 +1,9 @@
 //External Imports
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 //Internal Imports
+import * as errorsActions from '../../store/error';
 import * as favoritePlayerActions from '../../store/favorite_player';
 import * as playSessionActions from '../../store/playsession';
 import FavoriteButton from '../utils/FavoriteButton';
@@ -17,8 +18,12 @@ const TablePlaySessions = () => {
     const playSessionsOfUser = useSelector((state) => state.playSessions.userSessions);
     const playSessionsOfUserValues = Object.values(playSessionsOfUser).sort((a, b) => b.score - a.score);
     const loggedInUser = useSelector((state) => state.session.user);
+    // const [isLoaded, setIsLoaded] = useState(false);
+
     const { boardId, userId } = useParams();
 
+    const [errors, setErrors] = useState([]);
+    const errorsFromStore = useSelector(state => state.errors);
 
     useEffect(() => {
         if (boardId) {
@@ -27,11 +32,34 @@ const TablePlaySessions = () => {
         if (userId) {
             dispatch(playSessionActions.fetchPlaySessionsOfUser(userId));
         }
+        // setIsLoaded(true)
     }, [dispatch, boardId, userId]);
 
     useEffect(() => {
         dispatch(favoritePlayerActions.fetchAllFavoritesOfUser(loggedInUser.id));
-    }, [dispatch, loggedInUser.id]);
+    }, [dispatch, loggedInUser]);
+
+    useEffect(() => {
+        if (errorsFromStore.length) {
+            console.log('got here');
+            setErrors(errorsFromStore);
+            dispatch(errorsActions.clearErrors());
+        }
+    }, [dispatch, errorsFromStore, setErrors]);
+
+    // useEffect(() => {
+    //     setIsLoaded(false);
+    //     if (boardId) {
+    //         dispatch(playSessionActions.fetchPlaySessionsOfBoard(boardId));
+    //     }
+    //     if (userId) {
+    //         dispatch(playSessionActions.fetchPlaySessionsOfUser(userId));
+    //     }
+    //     if (!isLoaded) {
+    //         dispatch(favoritePlayerActions.fetchAllFavoritesOfUser(loggedInUser.id));
+    //     }
+    //     setIsLoaded(true);
+    // }, [dispatch, boardId, userId, loggedInUser]);
 
     const isIndexOdd = (index) => {
         if (index % 2 === 1) {return 'pure-table-odd'}
@@ -39,7 +67,22 @@ const TablePlaySessions = () => {
     }
 
     // JSX
-    
+
+    // if (!isLoaded) {
+    //     return null;
+    // }
+
+    if (errors.length) {
+        return (
+        <ul>
+            {errors.map(error => {
+                return (
+                    <li key={error}>{error}</li>
+                )
+            })}
+        </ul>)
+    }
+
     if (boardId) { //Display for play sessions of board
         return (
             <div className="tabledisplay_container">
@@ -119,6 +162,18 @@ const TablePlaySessions = () => {
             </div>
         )
     }
+
+    // if (isLoaded && boardId && !playSessionsOfBoardValues.length) {
+    //     return (
+    //         <div>404: This Board ID doesn't exist, please select Boards from the navigation bar.</div>
+    //     )
+    // }
+
+    // if (isLoaded && userId && !playSessionsOfUserValues.length) {
+    //     return (
+    //         <div>404: This Player ID doesn't exist, please select Players from Favorites or Leaderboard.</div>
+    //     )
+    // }
 }
 
 export default TablePlaySessions;

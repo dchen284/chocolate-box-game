@@ -43,6 +43,7 @@ def post_comment(play_session_id):
 def put_comment(play_session_id, comment_id):
     form = CommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    # print('+++++++++', form.data)
     if form.validate_on_submit():
         comment_to_update = Comment.query.get(comment_id)
         form.populate_obj(comment_to_update)

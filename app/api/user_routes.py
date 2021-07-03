@@ -48,4 +48,7 @@ def add_favorite_player(user_id):
 @login_required
 def get_play_sessions_of_user(user_id):
     play_sessions = PlaySession.query.filter_by(user_id=user_id).all()
-    return {'play_sessions': [play_session.to_dict() for play_session in play_sessions]}
+    if play_sessions:
+        return {'play_sessions': [play_session.to_dict() for play_session in play_sessions]}
+    else:
+        return {'errors': ['404: This Player ID does not exist, please select Players from Favorites or Leaderboard']}, 404

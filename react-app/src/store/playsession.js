@@ -1,3 +1,5 @@
+import * as errorsActions from '../store/error';
+
 // constants
 // const GET_ONE_PLAY_SESSION = 'playsession/GET_ONE_PLAY_SESSION';
 const GET_PLAY_SESSIONS_OF_BOARD = 'playsession/GET_PLAY_SESSIONS_OF_BOARD';
@@ -31,14 +33,17 @@ export const fetchPlaySessionsOfUser = (userId) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         dispatch(getPlaySessionsOfUser(data.play_sessions));
-        return data.play_sessions;
+        return;
     } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {
-            return data.errors;
+            dispatch(errorsActions.clearErrors());
+            dispatch(errorsActions.addErrors(data.errors));
+            return;
         }
     } else {
-        return ['An error occured. Please try again.']
+        dispatch(errorsActions.addErrors(['An error occured. Please try again.']));
+        return;
     }
 }
 
@@ -51,14 +56,17 @@ export const fetchPlaySessionsOfBoard = (boardId) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         dispatch(getPlaySessionsOfBoard(data.play_sessions));
-        return data.play_sessions;
+        return;
     } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {
-            return data.errors;
+            dispatch(errorsActions.clearErrors());
+            dispatch(errorsActions.addErrors(data.errors));
+            return;
         }
     } else {
-        return ['An error occured. Please try again.']
+        dispatch(errorsActions.addErrors(['An error occured. Please try again.']));
+        return;
     }
 }
 
