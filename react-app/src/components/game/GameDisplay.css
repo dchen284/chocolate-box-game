@@ -1,3 +1,4 @@
+/* 5x5 board display */
 
 .board_container {
     width: 525px;
@@ -19,6 +20,8 @@
     align-items: center;
 }
 
+/* 1x3 tiles display */
+
 .tiles_container {
     width: 325px;
     height: 125px;
@@ -38,6 +41,8 @@
     justify-content: center;
     align-items: center;
 }
+
+/* spaces used in both board display and tiles display */
 
 .game_space__edge {
     background-color: #49462E;
@@ -60,9 +65,7 @@
     align-items: center;
 }
 
-
-
-
+/* tiles */
 
 .token {
     height: 85px;
