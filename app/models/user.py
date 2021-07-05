@@ -1,4 +1,6 @@
+# from sqlalchemy import ForeignKeyConstraint
 from .db import db
+from app.models import PlaySession
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
@@ -12,15 +14,34 @@ favorited_by = db.Table(
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, autoincrement='ignore_fk', primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    # current_session_id = db.Column(db.Integer, db.ForeignKey("play_sessions.id"))
+    current_session_id = db.Column(db.Integer, nullable=False)
 
     # Relationships
 
     comments = db.relationship("Comment", back_populates="user")
-    play_sessions = db.relationship("PlaySession", back_populates="user")
+    play_sessions = db.relationship("PlaySession",
+                                #    primaryjoin=id==PlaySession.user_id,
+                                #    foreign_keys=PlaySession.user_id,
+                                   back_populates="user")
+
+    # __table_args__ = (
+    #     ForeignKeyConstraint(
+    #         ["id", "current_session_id"],
+    #         ["play_sessions.id", "play_sessions.user_id"],
+    #         name="fk_current_session"
+    #     ),
+    # )
+
+    # current_session = db.relationship("PlaySession",
+    #                                   primaryjoin=current_session_id==PlaySession.id,
+    #                                   foreign_keys=current_session_id,
+    #                                   post_update=True)
+
 
     # Implemented from example at https://hackmd.io/@jpshafto/H1VbmP3yO
     favorite_players = db.relationship(
