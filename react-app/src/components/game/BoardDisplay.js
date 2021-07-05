@@ -1,7 +1,7 @@
 import GameSpace from './GameSpace';
 import './GameDisplay.css';
 
-const BoardDisplay = () => {
+const BoardDisplay = ({boardState}) => {
 
     const numberOfRows = 5;
     const numberOfColumns = 5;
@@ -14,6 +14,7 @@ const BoardDisplay = () => {
                 <GameSpace
                     key={`${i}${j}`}
                     spaceId={`b${i}${j}`}
+                    tileInput={boardState[i][j]}
                 />;
         }
     }

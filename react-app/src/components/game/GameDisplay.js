@@ -9,23 +9,45 @@ import './GameDisplay.css';
 
 const GameDisplay = () => {
 
-    // const strTiles = 'D1,M3,W2,D4,M4,W4';
+    const [tiles, setTiles] = useState(["D1", "D1", "D1"]);
 
 
+    const numberOfRows = 5;
+    const numberOfColumns = 5;
+    const initialBoardState = new Array(numberOfRows)
 
-    const stringToTilesState = (strTiles) => {
-        return strTiles.split(",");
+    for (let i = 0; i < numberOfRows; i++) {
+        initialBoardState[i] = new Array(numberOfColumns);
+        for (let j = 0; j < numberOfColumns; j++) {
+            initialBoardState[i][j] = "00"
+        }
     }
 
-    // let arrTiles = stringToTilesState(strTiles);
+    const boardStateToString = (boardState) => {
+        let strOutput = "";
+        for (let i = 0; i < numberOfRows; i++) {
+            for (let j = 0; j < numberOfColumns; j++) {
+                strOutput += `${boardState[i][j]},`;
+            }
+        }
+        strOutput = strOutput.slice(0, strOutput.length - 1);
+        console.log('strOutput', strOutput);
+        return strOutput;
+    }
 
-    const [tiles, setTiles] = useState(["D1", "D1", "D1"]);
+    initialBoardState[1][2] = "M3";
+    boardStateToString(initialBoardState);
+
+    const [boardState, setBoardState] = useState(initialBoardState);
 
     useEffect(()=>{
         const strTiles = 'D1,M3,W2,D4,M4,W4';
-        let arrTiles = stringToTilesState(strTiles);
-        setTiles(arrTiles);
+        setTiles(strTiles.split(","));
     }, [])
+
+    const placeTile = () => {
+
+    }
 
     // JSX
 
@@ -34,11 +56,10 @@ const GameDisplay = () => {
             <h1>Game</h1>
             <div
             onClick={() => {
-                // arrTiles.shift();
                 setTiles(tiles.slice(1));
                 console.log(tiles);}}
             >
-                <BoardDisplay />
+                <BoardDisplay boardState={boardState}/>
             </div>
 
             <div
