@@ -1,51 +1,50 @@
 // External imports
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // Internal imports
-import GameSpace from './GameSpace';
+import BoardDisplay from './BoardDisplay';
+// import GameSpace from './GameSpace';
+import TilesDisplay from './TilesDisplay';
 import './GameDisplay.css';
 
 
 const GameDisplay = () => {
 
+    // const strTiles = 'D1,M3,W2,D4,M4,W4';
 
-    const numberOfRows = 5;
-    const numberOfColumns = 5;
-    const gameBoard = new Array(numberOfRows)
 
-    for (let i = 0; i < numberOfRows; i++) {
-        gameBoard[i] = new Array(numberOfColumns);
-        for (let j = 0; j < numberOfColumns; j++) {
-            gameBoard[i][j] = <GameSpace key={`${i}${j}`}/>;
-        }
+
+    const stringToTilesState = (strTiles) => {
+        return strTiles.split(",");
     }
 
-    const numberOfShownTiles = 3;
-    const gameTilesDisplay = new Array(numberOfShownTiles);
-    for (let i = 0; i < numberOfShownTiles; i++) {
-        gameTilesDisplay[i] = <GameSpace key={`piece-${i}`} />
-    }
+    // let arrTiles = stringToTilesState(strTiles);
 
-    console.log(gameBoard);
+    const [tiles, setTiles] = useState(["D1", "D1", "D1"]);
 
-    // functions
+    useEffect(()=>{
+        const strTiles = 'D1,M3,W2,D4,M4,W4';
+        let arrTiles = stringToTilesState(strTiles);
+        setTiles(arrTiles);
+    }, [])
 
     // JSX
 
     return (
         <>
             <h1>Game</h1>
-            <div className="board_container board_container--border">
-                <div className="board_container__grid">
-                    {gameBoard}
-                </div>
+            <div
+            onClick={() => {
+                // arrTiles.shift();
+                setTiles(tiles.slice(1));
+                console.log(tiles);}}
+            >
+                <BoardDisplay />
             </div>
-            <div>
-                <div>Pieces</div>
-            </div>
-            <div className="tiles_container tiles_container--border">
-                <div className="tiles_container__grid">
-                    {gameTilesDisplay}
-                </div>
+
+            <div
+            onClick={(e) => {if (e.target.id) console.log(e.target.id)}}
+            >
+                <TilesDisplay arrTiles={tiles}/>
             </div>
         </>
     )
