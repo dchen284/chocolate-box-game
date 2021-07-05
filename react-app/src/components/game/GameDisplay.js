@@ -9,39 +9,101 @@ import './GameDisplay.css';
 
 const GameDisplay = () => {
 
+    const strInitialBoardState =
+        "T00:00,00,00,00,00,00,00,M3,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,D2,00,";
+    const strInitialTiles = "D1,M3,W2";
+    const arrTileValues = [
+        "D1", "D2", "D3", "D4", "M1", "M2", "M3", "M4", "W1", "W2", "W3", "W4",
+    ]
     const numberOfRows = 5;
     const numberOfColumns = 5;
-    const initialBoardState = new Array(numberOfRows)
 
-    for (let i = 0; i < numberOfRows; i++) {
-        initialBoardState[i] = new Array(numberOfColumns);
-        for (let j = 0; j < numberOfColumns; j++) {
-            initialBoardState[i][j] = "00"
+    const stringToBoardState = (strBoardState, numberOfRows, numberOfColumns) => {
+
+        const intStartIndex = strBoardState.length - 78;
+        // console.log('intStartIndex', intStartIndex);
+        const strLastBoardState = strBoardState.slice(intStartIndex);
+        const arrBoardValues = strLastBoardState.slice(4).split(',');
+        console.log('------------', arrBoardValues);
+        let k = 0;
+
+        const loadedBoardState = new Array(numberOfRows)
+
+        for (let i = 0; i < numberOfRows; i++) {
+            loadedBoardState[i] = new Array(numberOfColumns);
+            for (let j = 0; j < numberOfColumns; j++) {
+                // console.log(loadedBoardState[i][j])
+                loadedBoardState[i][j] = arrBoardValues[k];
+                k++;
+            }
         }
+
+        return loadedBoardState;
+
     }
 
-    initialBoardState[1][2] = "M3";
-    initialBoardState[4][3] = "D2";
-
-    const [boardState, setBoardState] = useState(initialBoardState);
+    const [boardState, setBoardState] = useState(stringToBoardState(strInitialBoardState, numberOfRows, numberOfColumns));
     const [currentTile, setCurrentTile] = useState("00");
-    const [tilesRemaining, setTilesRemaining] = useState(["D1", "D1", "D1"]);
+    const [tilesRemaining, setTilesRemaining] = useState(strInitialTiles.split(","));
+    const [turn, setTurn] = useState(0);
 
 
-    // const boardStateToString = (boardState) => {
-    //     let strOutput = "";
-    //     for (let i = 0; i < numberOfRows; i++) {
-    //         for (let j = 0; j < numberOfColumns; j++) {
-    //             strOutput += `${boardState[i][j]},`;
-    //         }
+    const getRandomTileValue = () => {
+        const randomIndex = Math.floor(Math.random() * arrTileValues.length);
+        console.log('randomIndex', randomIndex);
+        return arrTileValues[randomIndex];
+    }
+
+    const boardStateToString = (boardState, turn) => {
+        let strOutput = "";
+        if (turn < 10) {
+            strOutput += `T0${turn}:`
+        }
+        else {
+            strOutput += `T${turn}:`
+        }
+        for (let i = 0; i < numberOfRows; i++) {
+            for (let j = 0; j < numberOfColumns; j++) {
+                // console.log(boardState[i][j])
+                strOutput += `${boardState[i][j]},`;
+            }
+        }
+        strOutput = strOutput.slice(0, strOutput.length - 1);
+        console.log('strOutput', strOutput); //78 characters long
+        return strOutput;
+    }
+
+    // const initialBoardState = new Array(numberOfRows)
+
+    // for (let i = 0; i < numberOfRows; i++) {
+    //     initialBoardState[i] = new Array(numberOfColumns);
+    //     for (let j = 0; j < numberOfColumns; j++) {
+    //         // console.log(initialBoardState[i][j])
+    //         initialBoardState[i][j] = "00"
     //     }
-    //     strOutput = strOutput.slice(0, strOutput.length - 1);
-    //     console.log('strOutput', strOutput);
-    //     return strOutput;
     // }
 
+    // initialBoardState[1][2] = "M3";
+    // initialBoardState[4][3] = "D2";
 
-    // boardStateToString(initialBoardState);
+
+
+
+
+
+
+
+
+    let temp = boardStateToString(boardState, turn);
+    temp = temp + temp + temp;
+    console.log('temp', temp);
+
+    //T00:00,00,00,00,00,00,00,M3,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,D2,00,
+    //D1,M3,W2
+
+
+
+    console.log('+++++++++++', stringToBoardState(temp));
 
     const createDeepCopyOfBoardState = () => {
         const copy = new Array(numberOfRows)
@@ -86,11 +148,11 @@ const GameDisplay = () => {
     //     setBoardState(copy);
     // },[])
 
-    useEffect(()=>{
-        const strTiles = 'D1,M3,W2,D4,M4,W4';
-        setTilesRemaining(strTiles.split(","));
-        // console.log('useEffect fired');
-    }, [])
+    // useEffect(()=>{
+    //     const strTiles = 'D1,M3,W2,D4,M4,W4';
+    //     setTilesRemaining(strTiles.split(","));
+    //     // console.log('useEffect fired');
+    // }, [])
 
 
     const getNeighbors = (row, col) => {
@@ -175,10 +237,12 @@ const GameDisplay = () => {
                 //create a new tiles remaining
                 const newTilesRemaining = [...tilesRemaining];
                 newTilesRemaining.splice(tilesRemaining.indexOf(currentTile), 1);
+                newTilesRemaining.push(getRandomTileValue());
                 setTilesRemaining(newTilesRemaining);
 
                 //reset the current tile to nothing
                 setCurrentTile("00");
+                setTurn(prevState => prevState + 1);
             }
         }
     }
@@ -203,6 +267,7 @@ const GameDisplay = () => {
     return (
         <>
             <h1>Game</h1>
+            <h3>Turn: {turn}</h3>
             <div
             onClick={placeTile}
             >
