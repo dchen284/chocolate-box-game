@@ -188,11 +188,13 @@ const GameDisplay = () => {
     const selectTile = (e) => {
         // console.log('tiles in selectTile', tilesRemaining);
         const targetId = e.target.id;
-        const indexOfDash = targetId.indexOf("-")
-        if (indexOfDash !== -1) {
-            const strTile = targetId.slice(indexOfDash+1, targetId.length);
-            setCurrentTile(strTile);
-            console.log('updated new tile');
+        if (targetId) {
+            const indexOfDash = targetId.indexOf("-")
+            if (indexOfDash !== -1) {
+                const strTile = targetId.slice(indexOfDash+1, targetId.length);
+                setCurrentTile(strTile);
+                console.log('updated new tile');
+            }
         }
     }
 
