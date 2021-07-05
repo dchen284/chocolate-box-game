@@ -125,7 +125,7 @@ const GameDisplay = () => {
 
         //if the space is already occupied, the move is not legal
         if (currSpace !== "00") {
-            console.log('spaces occupied')
+            // console.log('spaces occupied')
             boolIsLegal = false
         };
 
@@ -137,7 +137,7 @@ const GameDisplay = () => {
             if (neighborValue !== "00") {allNeighborsEmpty = false}
         });
         if (allNeighborsEmpty) {
-            console.log('all neighbors empty')
+            // console.log('all neighbors empty')
             boolIsLegal = false
         };
 
@@ -148,12 +148,12 @@ const GameDisplay = () => {
             const [neighborRow, neighborCol] = neighbor;
             const neighborValue = boardState[neighborRow][neighborCol];
             if (neighborValue !== "00" && currentTile[0] !== neighborValue[0] && currentTile[1] !== neighborValue[1]) {
-                console.log('did not match')
+                // console.log('did not match')
                 boolIsLegal = false;
             }
         });
 
-        console.log(boolIsLegal);
+        // console.log(boolIsLegal);
         return boolIsLegal;
     }
 
@@ -161,19 +161,25 @@ const GameDisplay = () => {
         // console.log('placeTile fired'
         console.log('currentTile', currentTile);
         const targetId = e.target.id;
-        const targetCoord = targetId.slice(1, 3);
-        const [targetRow, targetCol] = [+targetCoord[0], +targetCoord[1]]; //targetRow and targetCol are strings
-        // checkLegalSpace(targetRow, targetCol);
-        if (checkLegalSpace(targetRow, targetCol)) {
-            console.log('placing tile');
-            const newBoardState = createDeepCopyOfBoardState();
-            newBoardState[targetRow][targetCol] = currentTile;
-            setBoardState(newBoardState);
-            const newTilesRemaining = [...tilesRemaining];
-            newTilesRemaining.splice(tilesRemaining.indexOf(currentTile), 1);
-            setTilesRemaining(newTilesRemaining);
-            console.log('reset current tile');
-            setCurrentTile("00");
+        if (targetId && targetId[0] === 'b') {
+            const targetCoord = targetId.slice(1, 3);
+            const [targetRow, targetCol] = [+targetCoord[0], +targetCoord[1]]; //targetRow and targetCol are strings
+            if (checkLegalSpace(targetRow, targetCol)) {
+                // console.log('placing tile');
+
+                //create a new board state
+                const newBoardState = createDeepCopyOfBoardState();
+                newBoardState[targetRow][targetCol] = currentTile;
+                setBoardState(newBoardState);
+
+                //create a new tiles remaining
+                const newTilesRemaining = [...tilesRemaining];
+                newTilesRemaining.splice(tilesRemaining.indexOf(currentTile), 1);
+                setTilesRemaining(newTilesRemaining);
+
+                //reset the current tile to nothing
+                setCurrentTile("00");
+            }
         }
     }
 
