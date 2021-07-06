@@ -105,7 +105,7 @@ export const fetchUpdateCurrentPlaySession = (playSessionData) => async (dispatc
     if (response.ok) {
         const data = await response.json();
         dispatch(getCurrentSession(data.play_session));
-        // dispatch(sessionActions.authenticate())
+        dispatch(sessionActions.authenticate())
         return;
     } else if (response.status < 500) {
         const data = await response.json();
@@ -121,7 +121,6 @@ export const fetchUpdateCurrentPlaySession = (playSessionData) => async (dispatc
 }
 
 export const fetchPostNewPlaySession = (boardId, userId) => async (dispatch) => {
-    // console.log('goooooot here')
     const response = await fetch(`/api/users/${userId}/play_sessions`, {
         method: 'POST',
         headers: {
@@ -132,7 +131,7 @@ export const fetchPostNewPlaySession = (boardId, userId) => async (dispatch) => 
     if (response.ok) {
         const data = await response.json();
         dispatch(getCurrentSession(data.play_session));
-        // dispatch(sessionActions.authenticate())
+        dispatch(sessionActions.authenticate())
         return;
     } else if (response.status < 500) {
         const data = await response.json();

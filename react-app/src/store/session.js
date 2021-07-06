@@ -1,3 +1,5 @@
+import * as playSessionActions from '../store/playsession';
+
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
@@ -44,6 +46,7 @@ export const login = (email, password) => async (dispatch) => {
 
   if (response.ok) {
     const data = await response.json();
+    dispatch(playSessionActions.fetchCurrentSession(data.current_session_id))
     dispatch(setUser(data))
     return null;
   } else if (response.status < 500) {
@@ -69,6 +72,7 @@ export const loginDemoUser = () => async (dispatch) => {
 
   if (response.ok) {
     const data = await response.json();
+    dispatch(playSessionActions.fetchCurrentSession(data.current_session_id))
     dispatch(setUser(data))
     return null;
   } else if (response.status < 500) {
@@ -110,6 +114,7 @@ export const signUp = (username, email, password) => async (dispatch) => {
 
   if (response.ok) {
     const data = await response.json();
+    dispatch(playSessionActions.fetchCurrentSession(data.current_session_id))
     dispatch(setUser(data))
     return null;
   } else if (response.status < 500) {
@@ -125,7 +130,9 @@ export const signUp = (username, email, password) => async (dispatch) => {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
-      return { user: action.payload }
+      const newState = { user: action.payload }
+      // delete newState.user.current_session_id;
+      return newState;
     case REMOVE_USER:
       return { user: null }
     default:
