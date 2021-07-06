@@ -10,10 +10,11 @@ from app.models import db, Comment, PlaySession
 play_session_routes = Blueprint('play_sessions', __name__)
 
 
-# @play_session_routes.route('')
-# @login_required
-# def get_play_sessions():
-#     return jsonify('get 7777777 play sessions here')
+@play_session_routes.route('/<int:play_session_id>')
+@login_required
+def get_play_session_by_id(play_session_id):
+    play_session = PlaySession.query.get(play_session_id)
+    return {'play_session': play_session.to_dict()}
 
 
 @play_session_routes.route('/<int:play_session_id>/comments')

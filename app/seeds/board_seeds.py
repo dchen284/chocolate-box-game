@@ -4,10 +4,12 @@ from app.models import db, Board
 def seed_boards():
     boards = [
         Board(
-            initialBoardSetup="1st2nd3rd4th"
+            initialBoardSetup=
+            "T00:00,00,00,00,00,00,00,M3,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,D2,00"
         ),
         Board(
-            initialBoardSetup="5th6th7th8th"
+            initialBoardSetup=
+            "T00:00,00,W4,00,00,00,00,00,00,00,00,00,00,00,00,D1,00,00,00,00,00,00,00,00,00"
         ),
     ]
 

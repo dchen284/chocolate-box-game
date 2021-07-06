@@ -4,27 +4,32 @@ from app.models import db, PlaySession
 def seed_play_sessions():
     play_sessions = [
         PlaySession(score=100,
-                    moves="abcdefgh",
+                    moves=
+                    "T00:00,00,00,00,00,00,00,M3,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,D2,00",
                     tiles="D1,M3,W2",
                     user_id=1,
                     board_id=1),
         PlaySession(score=200,
-                    moves="ijklmnop",
-                    tiles="D1,M3,W2",
+                    moves=
+                    "T00:00,00,W4,00,00,00,00,00,00,00,00,00,00,00,00,D1,00,00,00,00,00,00,00,00,00",
+                    tiles="W1,D4,M1",
                     user_id=1,
                     board_id=2),
         PlaySession(score=300,
-                    moves="qrstuvwx",
+                    moves=
+                    "T00:00,00,00,00,00,00,00,M3,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,D2,00",
                     tiles="D1,M3,W2",
                     user_id=2,
                     board_id=1),
         PlaySession(score=400,
-                    moves="yz123456",
-                    tiles="D1,M3,W2",
+                    moves=
+                    "T00:00,00,W4,00,00,00,00,00,00,00,00,00,00,00,00,D1,00,00,00,00,00,00,00,00,00",
+                    tiles="W1,D4,M1",
                     user_id=2,
                     board_id=2),
         PlaySession(score=400,
-                    moves="yz123456",
+                    moves=
+                    "T00:00,00,00,00,00,00,00,M3,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,D2,00",
                     tiles="D1,M3,W2",
                     user_id=3,
                     board_id=1),
