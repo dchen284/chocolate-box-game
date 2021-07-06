@@ -60,6 +60,7 @@ const TablePlaySessions = () => {
         history.push('/');
     }
 
+
     // JSX
 
     // if (!isLoaded) {

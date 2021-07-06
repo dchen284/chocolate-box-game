@@ -5,7 +5,7 @@ from flask_login import login_required
 # Internal Imports
 from app.api.auth_routes import validation_errors_to_error_messages
 from app.forms import CommentForm
-from app.models import db, Comment, PlaySession
+from app.models import db, Comment, PlaySession, User
 
 
 play_session_routes = Blueprint('play_sessions', __name__)
@@ -29,6 +29,10 @@ def update_play_session(play_session_id):
     play_session.moves = data['moves']
     play_session.tiles = data['tiles']
     play_session.timestamp = datetime.datetime.now(tz=None)
+
+    #get the user, update user's current play session
+    user = User.query.get(play_session.user_id)
+    user.current_session_id = play_session_id
 
     db.session.commit()
 
