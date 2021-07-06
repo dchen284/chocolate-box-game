@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from app.models import Board, PlaySession, User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -62,13 +62,37 @@ def sign_up():
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        # Get data on the default board
+        default_board = Board.query.get(1)
+
+        # Create a new play session, using the default board and temporarily the demo user.
+        new_play_session = PlaySession(
+            score=0,
+            moves=default_board.initialBoardSetup,
+            tiles="D1, D2, D3",
+            user_id=1,
+            board_id=1,
+        )
+
+        db.session.add(new_play_session)
+        db.session.commit()
+
+        # Create the new user
         user = User(
             username=form.data['username'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            current_session_id=new_play_session.id
         )
         db.session.add(user)
         db.session.commit()
+
+        # Set the new play session's user to the new user
+        new_play_session.user_id = user.id
+        db.session.add(new_play_session)
+        db.session.commit()
+
+        # Login the user
         login_user(user)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401

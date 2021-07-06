@@ -11,8 +11,8 @@ import './GameDisplay.css';
 
 const GameDisplay = () => {
 
-    const strInitialBoardState =
-        "T00:00,00,00,00,00,00,00,M3,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,D2,00";
+    // const strInitialBoardState =
+    //     "T00:00,00,00,00,00,00,00,M3,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,D2,00";
     const strInitialTiles = "D1,M3,W2";
     const arrTileValues = [
         "D1", "D2", "D3", "D4", "M1", "M2", "M3", "M4", "W1", "W2", "W3", "W4",
