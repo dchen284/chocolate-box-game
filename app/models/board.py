@@ -6,6 +6,7 @@ class Board(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     initialBoardSetup = db.Column(db.String(255), nullable=False, unique=True)
+    initialTiles = db.Column(db.String, nullable=False)
     timestamp = db.Column(db.DateTime(timezone=False),
                           nullable=False,
                           default=datetime.datetime.now(tz=None))

@@ -29,6 +29,25 @@ class PlaySession(db.Model):
 
     # Methods
 
+    # @property
+    # def score(self):
+    #     return self._score
+
+    # @score.setter
+    # def score(self, value):
+    #     self.score = value
+
+    # @property
+    # def score(self):
+    #     return self.score
+
+    # @score.setter
+    # def score(self, value):
+    #     self.score = value
+
+    # def set_score(self, value):
+    #     self.score = value
+
     def to_dict(self):
         return {
             'id': self.id,

@@ -13,7 +13,7 @@ const GameDisplay = () => {
 
     // const strInitialBoardState =
     //     "T00:00,00,00,00,00,00,00,M3,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,D2,00";
-    const strInitialTiles = "D1,M3,W2";
+    // const strInitialTiles = "D1,M3,W2";
     const arrTileValues = [
         "D1", "D2", "D3", "D4", "M1", "M2", "M3", "M4", "W1", "W2", "W3", "W4",
     ]
@@ -42,7 +42,6 @@ const GameDisplay = () => {
             setBoardState(newBoardState);
 
             const newTilesRemaining = currentPlaySession.tiles.split(",");
-            console.log('**********', newTilesRemaining);
             setTilesRemaining(newTilesRemaining);
 
             setIsLoaded(true);
@@ -54,7 +53,15 @@ const GameDisplay = () => {
 
     function stringToBoardState(strBoardState, numberOfRows, numberOfColumns) {
         if (strBoardState) {
-            const intStartIndex = strBoardState.length - 78;
+            const lengthOfOneTurn = numberOfRows * numberOfColumns * 3 + 4 - 1;
+            //string format:
+            //T00:00,00,00,00,00,00,00,M3,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,D2,00
+            //T01:00,00,00,00,00,00,00,M3,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,D2,D1
+            //number of entries is numberOfRows * numberOfColumns
+            //each entry needs 3 characters (except the last one doesn't need a ,)
+            //the string starts with 4 characters: `T##:`, then -1 to remove the last comma
+
+            const intStartIndex = strBoardState.length - lengthOfOneTurn;
             // console.log('intStartIndex', intStartIndex);
             const strLastBoardState = strBoardState.slice(intStartIndex);
             const arrBoardValues = strLastBoardState.slice(4).split(',');
@@ -81,57 +88,28 @@ const GameDisplay = () => {
 
     const getRandomTileValue = () => {
         const randomIndex = Math.floor(Math.random() * arrTileValues.length);
-        console.log('randomIndex', randomIndex);
+        // console.log('randomIndex', randomIndex);
         return arrTileValues[randomIndex];
     }
 
-    // const boardStateToString = (boardState, turn) => {
-    //     let strOutput = "";
-    //     if (turn < 10) {
-    //         strOutput += `T0${turn}:`
-    //     }
-    //     else {
-    //         strOutput += `T${turn}:`
-    //     }
-    //     for (let i = 0; i < numberOfRows; i++) {
-    //         for (let j = 0; j < numberOfColumns; j++) {
-    //             // console.log(boardState[i][j])
-    //             strOutput += `${boardState[i][j]},`;
-    //         }
-    //     }
-    //     strOutput = strOutput.slice(0, strOutput.length - 1);
-    //     console.log('strOutput', strOutput); //78 characters long
-    //     return strOutput;
-    // }
-
-    // const initialBoardState = new Array(numberOfRows)
-
-    // for (let i = 0; i < numberOfRows; i++) {
-    //     initialBoardState[i] = new Array(numberOfColumns);
-    //     for (let j = 0; j < numberOfColumns; j++) {
-    //         // console.log(initialBoardState[i][j])
-    //         initialBoardState[i][j] = "00"
-    //     }
-    // }
-
-    // initialBoardState[1][2] = "M3";
-    // initialBoardState[4][3] = "D2";
-
-
-
-
-
-
-
-
-
-    // let temp = boardStateToString(boardState, turn);
-    // temp = temp + temp + temp;
-    // console.log('temp', temp);
-
-    //T00:00,00,00,00,00,00,00,M3,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,D2,00,
-    //D1,M3,W2
-
+    const boardStateToString = (boardState, turn) => {
+        let strOutput = "";
+        if (turn < 10) {
+            strOutput += `T0${turn}:`
+        }
+        else {
+            strOutput += `T${turn}:`
+        }
+        for (let i = 0; i < numberOfRows; i++) {
+            for (let j = 0; j < numberOfColumns; j++) {
+                // console.log(boardState[i][j])
+                strOutput += `${boardState[i][j]},`;
+            }
+        }
+        strOutput = strOutput.slice(0, strOutput.length - 1);
+        console.log('strOutput', strOutput); //78 characters long
+        return strOutput;
+    }
 
 
     const createDeepCopyOfBoardState = () => {
@@ -194,16 +172,6 @@ const GameDisplay = () => {
         if (col+1 < numberOfColumns) {neighbors.push([row, col+1])}
 
         return neighbors;
-        // const currSpace = boardState[row][col];
-        // const legalNeighbors = neighborSpaces.filter(neighbor => {
-        //     if (neighbor !== "00") {
-        //         if (currSpace[0] === neighbor[0] || currSpace[1] === neighbor[1]) {
-        //             return true;
-        //         }
-        //     }
-        //     return false;
-        // })
-
 
     }
 
@@ -272,6 +240,17 @@ const GameDisplay = () => {
                 //reset the current tile to nothing
                 setCurrentTile("00");
                 setTurn(prevState => prevState + 1);
+
+                //create the new string for the board and tiles
+                const newTileString = newTilesRemaining.join(",");
+                const newBoardStateString = currentPlaySession.moves + boardStateToString(newBoardState, (turn+1));
+
+                //update the play_session
+                const updatedSession = { ...currentPlaySession };
+                updatedSession.moves = newBoardStateString;
+                updatedSession.tiles = newTileString;
+                console.log('########', updatedSession)
+                dispatch(playSessionActions.updateCurrentSession(updatedSession))
             }
         }
     }
@@ -286,12 +265,12 @@ const GameDisplay = () => {
             if (indexOfDash !== -1) {
                 const strTile = targetId.slice(indexOfDash+1, targetId.length);
                 setCurrentTile(strTile);
-                console.log('updated new tile');
+                // console.log('updated new tile');
             }
         }
     }
 
-    console.log('boardState', boardState);
+    // console.log('boardState', boardState);
 
     // JSX
 

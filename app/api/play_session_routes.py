@@ -1,4 +1,5 @@
 # External Imports
+import datetime
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 # Internal Imports
@@ -14,6 +15,23 @@ play_session_routes = Blueprint('play_sessions', __name__)
 @login_required
 def get_play_session_by_id(play_session_id):
     play_session = PlaySession.query.get(play_session_id)
+    return {'play_session': play_session.to_dict()}
+
+@play_session_routes.route('/<int:play_session_id>', methods=["PUT"])
+@login_required
+def update_play_session(play_session_id):
+    data = request.get_json()
+    # print('data', data)
+    play_session = PlaySession.query.get(play_session_id)
+
+    #update the session
+    play_session.score = data['score']
+    play_session.moves = data['moves']
+    play_session.tiles = data['tiles']
+    play_session.timestamp = datetime.datetime.now(tz=None)
+
+    db.session.commit()
+
     return {'play_session': play_session.to_dict()}
 
 
