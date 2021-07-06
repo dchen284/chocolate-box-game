@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import db, PlaySession, User
+from app.models import db, Board, PlaySession, User
 
 user_routes = Blueprint('users', __name__)
 
@@ -52,3 +52,29 @@ def get_play_sessions_of_user(user_id):
         return {'play_sessions': [play_session.to_dict() for play_session in play_sessions]}
     else:
         return {'errors': ['404: This Player ID does not exist, please select Players from Favorites or Leaderboard']}, 404
+
+@user_routes.route('/<int:user_id>/play_sessions', methods=["POST"])
+@login_required
+def post_new_play_session_of_user(user_id):
+
+    board_id = request.get_json()
+
+    # Get the Board for the new PlaySession
+    board = Board.query.get(board_id)
+
+    # Make the new PlaySession and add to database
+    new_play_session = PlaySession(
+        moves=board.initialBoardSetup,
+        tiles=board.initialTiles,
+        user_id=user_id,
+        board_id=board_id,
+    )
+    db.session.add(new_play_session)
+    db.session.commit()
+
+    # Get the current user, set the user's current session to the new session's id
+    current_user = User.query.get(user_id)
+    current_user.current_session_id = new_play_session.id
+
+    # return the new session
+    return {'play_session': new_play_session.to_dict()}

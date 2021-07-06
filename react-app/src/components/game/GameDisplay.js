@@ -1,6 +1,7 @@
 // External imports
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 // Internal imports
 import BoardDisplay from './BoardDisplay';
 // import GameSpace from './GameSpace';
@@ -21,6 +22,7 @@ const GameDisplay = () => {
     const numberOfColumns = 5;
 
     // const [boardState, setBoardState] = useState(stringToBoardState(strInitialBoardState, numberOfRows, numberOfColumns));
+
     const [boardState, setBoardState] = useState([]);
     const [currentTile, setCurrentTile] = useState("00");
     const [isLoaded, setIsLoaded] = useState(false);
@@ -32,7 +34,9 @@ const GameDisplay = () => {
     const loggedInUser = useSelector(state => state.session.user);
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
+    // sets the current session, using the logged in user's data
     useEffect( () => {
         dispatch(playSessionActions.fetchCurrentSession(loggedInUser.current_session_id));
     }, [dispatch, loggedInUser]);
@@ -259,11 +263,11 @@ const GameDisplay = () => {
 
                 //increase the turn count
                 const newTurn = turn + 1;
-                setTurn(prevState => newTurn);
+                setTurn(newTurn);
 
                 //increase the score
                 const newScore = score + 4;
-                setScore(prevState => newScore);
+                setScore(newScore);
 
                 //create the new string for the board and tiles
                 const newTileString = newTilesRemaining.join(",");
@@ -275,7 +279,7 @@ const GameDisplay = () => {
                 updatedSession.moves = newBoardStateString;
                 updatedSession.tiles = newTileString;
                 // console.log('########', updatedSession)
-                dispatch(playSessionActions.updateCurrentSession(updatedSession))
+                dispatch(playSessionActions.fetchUpdateCurrentPlaySession(updatedSession))
             }
         }
     }
@@ -295,6 +299,12 @@ const GameDisplay = () => {
         }
     }
 
+    const postNewPlaySession = (boardId, userId) => {
+        // console.log('iiiiiin here')
+        dispatch(playSessionActions.fetchPostNewPlaySession(boardId, userId));
+        history.push('/');
+    }
+
     // console.log('boardState', boardState);
 
     // JSX
@@ -306,6 +316,9 @@ const GameDisplay = () => {
     return (
         <>
             <h1>Game</h1>
+            <button onClick={()=>postNewPlaySession(currentPlaySession.board_id, currentPlaySession.user_id)}>
+                Start a New Session with this Board
+            </button>
             <h3>Turn: {turn}</h3>
             <h3>Score: {score}</h3>
             <div

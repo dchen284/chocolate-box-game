@@ -93,13 +93,39 @@ export const fetchCurrentSession = (playSessionId) => async (dispatch) => {
     }
 }
 
-export const updateCurrentSession = (playSessionData) => async (dispatch) => {
+export const fetchUpdateCurrentPlaySession = (playSessionData) => async (dispatch) => {
     const response = await fetch(`/api/play_sessions/${playSessionData.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
           },
         body: JSON.stringify(playSessionData),
+    });
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(getCurrentSession(data.play_session));
+        return;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            dispatch(errorsActions.clearErrors());
+            dispatch(errorsActions.addErrors(data.errors));
+            return;
+        }
+    } else {
+        dispatch(errorsActions.addErrors(['An error occured. Please try again.']));
+        return;
+    }
+}
+
+export const fetchPostNewPlaySession = (boardId, userId) => async (dispatch) => {
+    // console.log('goooooot here')
+    const response = await fetch(`/api/users/${userId}/play_sessions`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+          },
+        body: JSON.stringify(boardId),
     });
     if (response.ok) {
         const data = await response.json();

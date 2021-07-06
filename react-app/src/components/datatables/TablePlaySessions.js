@@ -1,7 +1,7 @@
 //External Imports
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 //Internal Imports
 import * as errorsActions from '../../store/error';
 import * as favoritePlayerActions from '../../store/favorite_player';
@@ -12,11 +12,12 @@ const TablePlaySessions = () => {
 
     //hooks and state variables
     const dispatch = useDispatch();
+    const history = useHistory();
     // const favoritePlayers = useSelector(state => state.favoritePlayers);
     const playSessionsOfBoard = useSelector((state) => state.playSessions.boardSessions);
     const playSessionsOfBoardValues = Object.values(playSessionsOfBoard).sort((a, b) => b.score - a.score);
     const playSessionsOfUser = useSelector((state) => state.playSessions.userSessions);
-    const playSessionsOfUserValues = Object.values(playSessionsOfUser).sort((a, b) => b.score - a.score);
+    const playSessionsOfUserValues = Object.values(playSessionsOfUser).sort((a, b) => a.board_id - b.board_id);
     const loggedInUser = useSelector((state) => state.session.user);
     // const [isLoaded, setIsLoaded] = useState(false);
 
@@ -47,23 +48,16 @@ const TablePlaySessions = () => {
         }
     }, [dispatch, errorsFromStore, setErrors]);
 
-    // useEffect(() => {
-    //     setIsLoaded(false);
-    //     if (boardId) {
-    //         dispatch(playSessionActions.fetchPlaySessionsOfBoard(boardId));
-    //     }
-    //     if (userId) {
-    //         dispatch(playSessionActions.fetchPlaySessionsOfUser(userId));
-    //     }
-    //     if (!isLoaded) {
-    //         dispatch(favoritePlayerActions.fetchAllFavoritesOfUser(loggedInUser.id));
-    //     }
-    //     setIsLoaded(true);
-    // }, [dispatch, boardId, userId, loggedInUser]);
 
     const isIndexOdd = (index) => {
         if (index % 2 === 1) {return 'pure-table-odd'}
         else {return 'pure-table-even'}
+    }
+
+    const loadSession = (playSessionId) => {
+        const updatedSession = playSessionsOfUser[playSessionId];
+        dispatch(playSessionActions.fetchUpdateCurrentPlaySession(updatedSession));
+        history.push('/');
     }
 
     // JSX
@@ -180,6 +174,7 @@ const TablePlaySessions = () => {
                                 <th>Board #</th>
                                 <th>Play Session Score</th>
                                 <th>Load Session</th>
+                                <th>Timestamp</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -193,7 +188,12 @@ const TablePlaySessions = () => {
                                     </td>
                                     <td>{playSession.board_id}</td>
                                     <td>{playSession.score}</td>
-                                    <td>Link to Load Session</td>
+                                    <td>
+                                        <button onClick={()=>{loadSession(playSession.id)}}>
+                                            Load Play Session
+                                        </button>
+                                    </td>
+                                    <td>{playSession.timestamp}</td>
                                 </tr>
 
                             )
