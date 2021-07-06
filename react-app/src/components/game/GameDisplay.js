@@ -12,16 +12,13 @@ import './GameDisplay.css';
 
 const GameDisplay = () => {
 
-    // const strInitialBoardState =
-    //     "T00:00,00,00,00,00,00,00,M3,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,D2,00";
-    // const strInitialTiles = "D1,M3,W2";
+    // constants, state variables, and hooks
+
     const arrTileValues = [
         "D1", "D2", "D3", "D4", "M1", "M2", "M3", "M4", "W1", "W2", "W3", "W4",
     ]
     const numberOfRows = 5;
     const numberOfColumns = 5;
-
-    // const [boardState, setBoardState] = useState(stringToBoardState(strInitialBoardState, numberOfRows, numberOfColumns));
 
     const [boardState, setBoardState] = useState([]);
     const [currentTile, setCurrentTile] = useState("00");
@@ -36,14 +33,17 @@ const GameDisplay = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    // useEffects
+
     // sets the current session, using the logged in user's data
     useEffect( () => {
         console.log('+++++++++++++++++++++', loggedInUser.current_session_id)
         dispatch(playSessionActions.fetchCurrentSession(loggedInUser.current_session_id));
     }, [dispatch, loggedInUser.current_session_id]);
 
+    // loads data from the current play session onto the browser
     useEffect( () => {
-        if (currentPlaySession.moves && currentPlaySession.tiles) {
+        if (currentPlaySession.moves) {
             const newBoardState = stringToBoardState(currentPlaySession.moves, numberOfRows, numberOfColumns);
             setBoardState(newBoardState);
 
@@ -105,9 +105,6 @@ const GameDisplay = () => {
         }
     }
 
-
-
-
     const getRandomTileValue = () => {
         const randomIndex = Math.floor(Math.random() * arrTileValues.length);
         // console.log('randomIndex', randomIndex);
@@ -152,42 +149,8 @@ const GameDisplay = () => {
         return copy;
     }
 
-    // useEffect(()=>{
-    //     const createDeepCopyOfBoardState = () => {
-    //         const copy = new Array(numberOfRows)
-
-    //         for (let i = 0; i < numberOfRows; i++) {
-    //             copy[i] = new Array(numberOfColumns);
-    //             for (let j = 0; j < numberOfColumns; j++) {
-    //                 copy[i][j] = "00"
-    //             }
-    //         }
-
-    //         for (let i = 0; i < numberOfRows; i++) {
-    //             for (let j = 0; j < numberOfColumns; j++) {
-    //                 copy[i][j] = boardState[i][j];
-    //             }
-    //         }
-    //         return copy;
-    //     }
-
-    //     const copy = createDeepCopyOfBoardState();
-    //     copy[1][2] = "M3";
-    //     copy[4][3] = "D2";
-    //     setBoardState(copy);
-    // },[])
-
-    // useEffect(()=>{
-    //     const strTiles = 'D1,M3,W2,D4,M4,W4';
-    //     setTilesRemaining(strTiles.split(","));
-    //     // console.log('useEffect fired');
-    // }, [])
-
-
     const getNeighbors = (row, col) => {
-        // console.log(coord);
         const neighbors = [];
-        // const [row, col] = [+coord[0], +coord[1]]; //row and col are numbers
         if (0 <= row - 1) {neighbors.push([row-1, col])}
         if (0 <= col - 1) {neighbors.push([row, col-1])}
         if (row+1 < numberOfRows) {neighbors.push([row+1, col])}
@@ -200,8 +163,6 @@ const GameDisplay = () => {
     const checkLegalSpace = (row, col) => {
         let boolIsLegal = true;
         const neighbors = getNeighbors(row, col);
-        // const [row, col] = [+coord[0], +coord[1]]; //row and col are numbers
-
         const currSpace = boardState[row][col];
 
         //if the space is already occupied, the move is not legal
@@ -222,31 +183,26 @@ const GameDisplay = () => {
             boolIsLegal = false
         };
 
-        //for each space's occupied neighbors, if either the letter or number do not match, the
-        //move is not legal
+        //for each space's occupied neighbors, if either the letter or number do not match, the move is not legal
 
         neighbors.forEach( neighbor => {
             const [neighborRow, neighborCol] = neighbor;
             const neighborValue = boardState[neighborRow][neighborCol];
             if (neighborValue !== "00" && currentTile[0] !== neighborValue[0] && currentTile[1] !== neighborValue[1]) {
-                // console.log('did not match')
                 boolIsLegal = false;
             }
         });
 
-        // console.log(boolIsLegal);
         return boolIsLegal;
     }
 
     const placeTile = (e) => {
-        // console.log('placeTile fired'
         console.log('currentTile', currentTile);
         const targetId = e.target.id;
         if (targetId && targetId[0] === 'b') {
             const targetCoord = targetId.slice(1, 3);
             const [targetRow, targetCol] = [+targetCoord[0], +targetCoord[1]]; //targetRow and targetCol are strings
             if (checkLegalSpace(targetRow, targetCol)) {
-                // console.log('placing tile');
 
                 //create a new board state
                 const newBoardState = createDeepCopyOfBoardState();
@@ -279,34 +235,28 @@ const GameDisplay = () => {
                 updatedSession.score = newScore;
                 updatedSession.moves = newBoardStateString;
                 updatedSession.tiles = newTileString;
-                // console.log('########', updatedSession)
                 dispatch(playSessionActions.fetchUpdateCurrentPlaySession(updatedSession))
             }
         }
     }
 
-    // console.log('tiles in base file', tilesRemaining);
 
     const selectTile = (e) => {
-        // console.log('tiles in selectTile', tilesRemaining);
         const targetId = e.target.id;
         if (targetId) {
             const indexOfDash = targetId.indexOf("-")
             if (indexOfDash !== -1) {
                 const strTile = targetId.slice(indexOfDash+1, targetId.length);
                 setCurrentTile(strTile);
-                // console.log('updated new tile');
             }
         }
     }
 
     const postNewPlaySession = (boardId, userId) => {
-        // console.log('iiiiiin here')
         dispatch(playSessionActions.fetchPostNewPlaySession(boardId, userId));
         history.push('/');
     }
 
-    // console.log('boardState', boardState);
 
     // JSX
 
