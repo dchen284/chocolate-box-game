@@ -123,7 +123,7 @@ const TablePlaySessions = () => {
         )
     }
 
-    if (userId) { //Display for play sessions of user
+    if (userId && +userId !== +loggedInUser.id) { //Display for play sessions of user
 
         let usernameOfPage = playSessionsOfUserValues.length ? playSessionsOfUserValues[0].username : null
 
@@ -163,17 +163,48 @@ const TablePlaySessions = () => {
         )
     }
 
-    // if (isLoaded && boardId && !playSessionsOfBoardValues.length) {
-    //     return (
-    //         <div>404: This Board ID doesn't exist, please select Boards from the navigation bar.</div>
-    //     )
-    // }
+    if (userId && +userId === +loggedInUser.id) { //Display for play sessions of user
 
-    // if (isLoaded && userId && !playSessionsOfUserValues.length) {
-    //     return (
-    //         <div>404: This Player ID doesn't exist, please select Players from Favorites or Leaderboard.</div>
-    //     )
-    // }
+        let usernameOfPage = playSessionsOfUserValues.length ? playSessionsOfUserValues[0].username : null
+
+        return (
+            <div className="tabledisplay_container">
+                <div className="tabledisplay_text">
+                    <h1>Play Sessions of {usernameOfPage}
+                        <FavoriteButton loggedInUserId={loggedInUser.id} favoriteId={userId}/>
+                    </h1>
+                    <table className="pure-table">
+                        <thead>
+                            <tr>
+                                <th>Play Session #</th>
+                                <th>Board #</th>
+                                <th>Play Session Score</th>
+                                <th>Load Session</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {playSessionsOfUserValues.map( (playSession, index) => {
+                            return (
+                                <tr key={playSession.id} className={isIndexOdd(index)}>
+                                    <td>
+                                        <Link to={`/playsession/${playSession.id}`}>
+                                            Session #{playSession.id}
+                                        </Link>
+                                    </td>
+                                    <td>{playSession.board_id}</td>
+                                    <td>{playSession.score}</td>
+                                    <td>Link to Load Session</td>
+                                </tr>
+
+                            )
+                        })}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        )
+    }
+
 }
 
 export default TablePlaySessions;
