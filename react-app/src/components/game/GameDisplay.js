@@ -38,8 +38,10 @@ const GameDisplay = () => {
     // sets the current session, using the logged in user's data
     useEffect( () => {
         console.log('+++++++++++++++++++++', loggedInUser.current_session_id)
-        dispatch(playSessionActions.fetchCurrentSession(loggedInUser.current_session_id));
-    }, [dispatch, loggedInUser.current_session_id]);
+        if (!currentPlaySession.id) {
+            dispatch(playSessionActions.fetchCurrentSession(loggedInUser.current_session_id));
+        }
+    }, [dispatch, currentPlaySession, loggedInUser]);
 
     // loads data from the current play session onto the browser
     useEffect( () => {
