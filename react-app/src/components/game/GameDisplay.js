@@ -24,7 +24,7 @@ const GameDisplay = () => {
     const [boardState, setBoardState] = useState([]);
     const [currentTile, setCurrentTile] = useState("00");
     const [isLoaded, setIsLoaded] = useState(false);
-    const [tilesRemaining, setTilesRemaining] = useState(strInitialTiles.split(","));
+    const [tilesRemaining, setTilesRemaining] = useState([]);
     const [turn, setTurn] = useState(0);
 
     const currentPlaySession = useSelector(state => state.playSessions.currentSession);
@@ -37,13 +37,15 @@ const GameDisplay = () => {
     }, [dispatch, loggedInUser]);
 
     useEffect( () => {
-        if (currentPlaySession) {
+        if (currentPlaySession.moves && currentPlaySession.tiles) {
             const newBoardState = stringToBoardState(currentPlaySession.moves, numberOfRows, numberOfColumns);
-            if (newBoardState) {
-                setBoardState(newBoardState);
-                // setTilesRemaining(currentPlaySession.tiles.split(","));
-                setIsLoaded(true);
-            }
+            setBoardState(newBoardState);
+
+            const newTilesRemaining = currentPlaySession.tiles.split(",");
+            console.log('**********', newTilesRemaining);
+            setTilesRemaining(newTilesRemaining);
+
+            setIsLoaded(true);
 
         }
     }, [currentPlaySession]);

@@ -69,7 +69,7 @@ def sign_up():
         new_play_session = PlaySession(
             score=0,
             moves=default_board.initialBoardSetup,
-            tiles="D1, D2, D3",
+            tiles="D1,D2,D3",
             user_id=1,
             board_id=1,
         )
