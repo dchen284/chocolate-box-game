@@ -25,6 +25,7 @@ const GameDisplay = () => {
     const [currentTile, setCurrentTile] = useState("00");
     const [isLoaded, setIsLoaded] = useState(false);
     const [tilesRemaining, setTilesRemaining] = useState([]);
+    const [score, setScore] = useState(0);
     const [turn, setTurn] = useState(0);
 
     const currentPlaySession = useSelector(state => state.playSessions.currentSession);
@@ -44,12 +45,28 @@ const GameDisplay = () => {
             const newTilesRemaining = currentPlaySession.tiles.split(",");
             setTilesRemaining(newTilesRemaining);
 
+            setScore(currentPlaySession.score);
+
+            const newTurn = getTurnNumberFromString(currentPlaySession.moves, numberOfRows, numberOfColumns);
+            setTurn(newTurn);
+
             setIsLoaded(true);
 
         }
     }, [currentPlaySession]);
 
     // functions
+
+    function getTurnNumberFromString(strBoardState, numberOfRows, numberOfColumns) {
+        if (strBoardState) {
+            const lengthOfOneTurn = numberOfRows * numberOfColumns * 3 + 4 - 1;
+            const intStartIndex = strBoardState.length - lengthOfOneTurn;
+            const strLastBoardState = strBoardState.slice(intStartIndex);
+            const strTurn = strLastBoardState.slice(1, 3)
+            const numTurn = +strTurn;
+            return numTurn;
+        }
+    }
 
     function stringToBoardState(strBoardState, numberOfRows, numberOfColumns) {
         if (strBoardState) {
@@ -239,17 +256,25 @@ const GameDisplay = () => {
 
                 //reset the current tile to nothing
                 setCurrentTile("00");
-                setTurn(prevState => prevState + 1);
+
+                //increase the turn count
+                const newTurn = turn + 1;
+                setTurn(prevState => newTurn);
+
+                //increase the score
+                const newScore = score + 4;
+                setScore(prevState => newScore);
 
                 //create the new string for the board and tiles
                 const newTileString = newTilesRemaining.join(",");
-                const newBoardStateString = currentPlaySession.moves + boardStateToString(newBoardState, (turn+1));
+                const newBoardStateString = currentPlaySession.moves + boardStateToString(newBoardState, newTurn);
 
                 //update the play_session
                 const updatedSession = { ...currentPlaySession };
+                updatedSession.score = newScore;
                 updatedSession.moves = newBoardStateString;
                 updatedSession.tiles = newTileString;
-                console.log('########', updatedSession)
+                // console.log('########', updatedSession)
                 dispatch(playSessionActions.updateCurrentSession(updatedSession))
             }
         }
@@ -282,6 +307,7 @@ const GameDisplay = () => {
         <>
             <h1>Game</h1>
             <h3>Turn: {turn}</h3>
+            <h3>Score: {score}</h3>
             <div
             onClick={placeTile}
             >
