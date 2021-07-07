@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 // Internal imports
+import Footer from './components/Footer';
 import LoginPage from './components/auth/LoginPage';
 // import LoginForm from './components/auth/LoginForm';
 // import SignUpForm from './components/auth/SignUpForm';
@@ -34,48 +35,51 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <NavBar />
-      <Switch>
-        <Route path='/login' exact={true}>
-          <LoginPage />
-        </Route>
-        {/* <Route path='/sign-up' exact={true}>
-          <SignUpForm />
-        </Route> */}
-        {/* <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
-        </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
-        </ProtectedRoute> */}
-        <ProtectedRoute path='/' exact={true} >
-          {/* <h1>My Home Page</h1> */}
-          <GameDisplay />
-        </ProtectedRoute>
-        {/* <ProtectedRoute path='/tables' exact={true} >
-          <TableDisplay />
-        </ProtectedRoute> */}
-        <ProtectedRoute path='/boards' exact={true} >
-          <TableBoards />
-        </ProtectedRoute>
-        <ProtectedRoute path='/boards/:boardId' exact={true} >
-          <TablePlaySessions />
-        </ProtectedRoute>
-        <ProtectedRoute path='/favorites' exact={true} >
-          <TableFavorites />
-        </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId/playsessions' exact={true} >
-          <TablePlaySessions />
-        </ProtectedRoute>
-        <ProtectedRoute path='/playsession/:playSessionId(\d+)'>
-          <PlaySessionDetails />
-        </ProtectedRoute>
-        <Route>
-          404: Geez.
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <div className="page-container">
+      <BrowserRouter>
+        <NavBar />
+        <Switch>
+          <Route path='/login' exact={true}>
+            <LoginPage />
+          </Route>
+          {/* <Route path='/sign-up' exact={true}>
+            <SignUpForm />
+          </Route> */}
+          {/* <ProtectedRoute path='/users' exact={true} >
+            <UsersList/>
+          </ProtectedRoute>
+          <ProtectedRoute path='/users/:userId' exact={true} >
+            <User />
+          </ProtectedRoute> */}
+          <ProtectedRoute path='/' exact={true} >
+            {/* <h1>My Home Page</h1> */}
+            <GameDisplay />
+          </ProtectedRoute>
+          {/* <ProtectedRoute path='/tables' exact={true} >
+            <TableDisplay />
+          </ProtectedRoute> */}
+          <ProtectedRoute path='/boards' exact={true} >
+            <TableBoards />
+          </ProtectedRoute>
+          <ProtectedRoute path='/boards/:boardId' exact={true} >
+            <TablePlaySessions />
+          </ProtectedRoute>
+          <ProtectedRoute path='/favorites' exact={true} >
+            <TableFavorites />
+          </ProtectedRoute>
+          <ProtectedRoute path='/users/:userId/playsessions' exact={true} >
+            <TablePlaySessions />
+          </ProtectedRoute>
+          <ProtectedRoute path='/playsession/:playSessionId(\d+)'>
+            <PlaySessionDetails />
+          </ProtectedRoute>
+          <Route>
+            404: Geez.
+          </Route>
+        </Switch>
+      </BrowserRouter>
+      <Footer />
+    </div>
   );
 }
 

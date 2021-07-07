@@ -1,9 +1,15 @@
+/* * {
+    margin: 0;
+} */
+
 .navbar-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     background-color:#582618;
     color: white;
     height: 35px;
+    justify-items: center;
+    align-items: center;
 }
 
 .navbar-container > div > a,
@@ -11,12 +17,6 @@
 {
     color: white;
     font-family: fantasy;
-}
-
-.navbar-element {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .navbar-logout {

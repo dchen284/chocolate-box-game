@@ -1,4 +1,23 @@
+.comment_form_textbox {
+    height: 100px;
+    width: 300px;
+}
+
 .details-grid {
     display: grid;
-    grid-template-columns: 100px 1fr 1fr;
+    grid-template-columns: 3fr 125px 2fr;
+    grid-template-areas:
+        "board moves comments";
+}
+
+.details-board {
+    grid-area: board;
+}
+
+.details-moves {
+    grid-area: moves;
+}
+
+.details-comments {
+    grid-area: comments;
 }

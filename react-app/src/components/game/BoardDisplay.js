@@ -28,9 +28,6 @@ const BoardDisplay = ({boardState}) => {
 
     return (
         <>
-            <h3>
-                Board
-            </h3>
             <div className="board_container board_container--border">
                 <div className="board_container__grid">
                     {gameBoard}

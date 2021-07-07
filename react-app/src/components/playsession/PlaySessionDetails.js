@@ -104,26 +104,29 @@ const PlaySessionDetails = () => {
     // JSX
     return (
         <div className="details-grid">
-            <div>
+            <div className="details-moves">
                 <h3>
                     Moves
                 </h3>
                 {turnsArray?.map( turn => {
                     return (
                         <div key={turn}>
-                            <button onClick={()=>updateDisplayedTurn(turn)}>
+                            <button
+                            onClick={()=>updateDisplayedTurn(turn)}
+                            className='pure-button'
+                            >
                                 {turn.slice(0, 3)}
                             </button>
                         </div>
                     )
                 })}
             </div>
-            <div>
+            <div className="details-board">
                 <h3>Showing Turn #{displayedTurn}</h3>
                 <BoardDisplay boardState={boardState}/>
             </div>
 
-            <div>
+            <div className="details-comments">
                 <h1>Comments</h1>
                 <CommentForm />
                 {commentValues?.map( comment => {

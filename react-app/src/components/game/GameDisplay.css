@@ -1,3 +1,38 @@
+/* overall layout of GameDisplay*/
+.game-display-container {
+    display: grid;
+    grid-template-areas:
+    "board board tiles"
+    "board board info"
+    "board board info"
+    "board board info"
+    "board board info";
+}
+
+.game-display-board {
+    grid-area: board;
+    margin: 20px;
+}
+
+.game-display-board > h3 > span {
+    font-size: 20px;
+    margin: 0px 20px;
+}
+
+.game-display-info {
+    grid-area: info;
+    margin: 20px;
+}
+
+/* .game-display-rules {
+    margin: 20px;
+} */
+
+.game-display-tiles {
+    grid-area: tiles;
+    margin: 20px;
+}
+
 /* 5x5 board display */
 
 .board_container {

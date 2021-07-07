@@ -1,0 +1,25 @@
+.footer {
+    background-color:#582618;
+    color: white;
+    height: 40px;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    /* font-size: 30px; */
+    font-family: fantasy;
+    display: flex;
+    align-items: center;
+}
+
+.footer > div > span {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.fa-github-square,
+.fa-linkedin,
+.fa-envelope-square {
+    font-size: 30px;
+    color: white;
+    margin: 5px;
+}

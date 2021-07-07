@@ -267,25 +267,77 @@ const GameDisplay = () => {
     }
 
     return (
-        <>
-            <h1>Game: Session #{currentPlaySession.id}</h1>
-            <button onClick={()=>postNewPlaySession(currentPlaySession.board_id, currentPlaySession.user_id)}>
-                Start a New Session with this Board
-            </button>
-            <h3>Turn: {turn}</h3>
-            <h3>Score: {score}</h3>
-            <div
-            onClick={placeTile}
-            >
-                <BoardDisplay boardState={boardState}/>
-            </div>
+        <div className='game-display-container'>
+            <div className='game-display-info'>
+                <h2>Game: Session #{currentPlaySession.id}</h2>
+                <h3>Turn: {turn} - Score: {score}</h3>
 
-            <div
-            onClick={selectTile}
-            >
-                <TilesDisplay arrTiles={tilesRemaining}/>
+                <div className='game-display-rules'>
+                    <div>Rules:</div>
+                    <ul>
+                        <li>
+                            Click on one of the tiles in the Tiles section, to select
+                            that tile to place.  To choose a different tile without placing,
+                            click a new tile from the Tiles section.
+                        </li>
+                        <li>
+                            After selecting a tile, click on the Board to place that tile.
+                        </li>
+                        <li>
+                            Rules for placing a new tile:
+                            <ol>
+                                <li>
+                                    The new tile must be adjacent to an existing tile.
+                                    (Adjacent is up, down, left, and right; diagonals are
+                                    not adjacent.)
+                                </li>
+                                <li>
+                                    For each adjacent tile, the new tile must match either
+                                    the color (white, milk, dark) or number (1, 2, 3, 4).
+                                </li>
+                                <li>
+                                    Place as many tiles as you can!
+                                </li>
+                                <li>
+                                    To start a new game on the same board, click the "Start a
+                                    New Session with this Board" button.
+                                </li>
+                                <li>
+                                    To start a new game on a different board, click the "Boards"
+                                    link on the navigation bar.
+                                </li>
+                            </ol>
+                        </li>
+                    </ul>
+
+                </div>
             </div>
-        </>
+            <div className='game-display-board'>
+                <h3>
+                    <span>Board</span>
+                    <span>
+                        <button
+                        onClick={()=>postNewPlaySession(currentPlaySession.board_id, currentPlaySession.user_id)}
+                        className='pure-button'
+                        >
+                            Start a New Session with this Board
+                        </button>
+                    </span>
+                </h3>
+                <div
+                onClick={placeTile}
+                >
+                    <BoardDisplay boardState={boardState}/>
+                </div>
+            </div>
+            <div className='game-display-tiles'>
+                <div
+                onClick={selectTile}
+                >
+                    <TilesDisplay arrTiles={tilesRemaining}/>
+                </div>
+            </div>
+        </div>
     )
 }
 

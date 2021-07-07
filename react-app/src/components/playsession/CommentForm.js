@@ -93,22 +93,28 @@ const CommentForm = ({ comment, setIsEditing }) => {
                 : null
             } */}
             <form>
-                <label htmlFor="comment_text">Comment Here:</label>
-                <textarea
-                    id="comment_text"
-                    placeholder="Type your comment here."
-                    value={bodyText}
-                    onChange={(e) => setBodyText(e.target.value)}
-                >
-                </textarea>
-                <button onClick={commentSubmit}>
+                <div>
+                    <label htmlFor="comment_text">Comment Here:</label>
+                </div>
+                <div>
+                    <textarea
+                        id="comment_text"
+                        placeholder="Type your comment here."
+                        value={bodyText}
+                        className="comment_form_textbox"
+                        onChange={(e) => setBodyText(e.target.value)}
+                    >
+                    </textarea>
+                </div>
+                <button className="pure-button" onClick={commentSubmit}>
                     Submit
                 </button>
                 { comment ?
-                <button onClick={() => setIsEditing(false)}>
+                <button className="pure-button" onClick={() => setIsEditing(false)}>
                     Cancel
                 </button>
                 : null }
+                <hr></hr>
             </form>
         </>
     )

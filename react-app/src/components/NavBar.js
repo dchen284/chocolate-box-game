@@ -24,7 +24,7 @@ const NavBar = () => {
   return (
     <nav>
       <div className="navbar-container">
-        <div className="navbar-element">
+        <div>
           <NavLink to='/' exact={true} activeClassName='active'>
             Home
           </NavLink>
@@ -44,17 +44,17 @@ const NavBar = () => {
             Users
           </NavLink>
         </li> */}
-        <div className="navbar-element">
+        <div>
           <NavLink to='/boards' exact={true} activeClassName='active'>
             Boards
           </NavLink>
         </div>
-        <div className="navbar-element">
+        <div>
           <NavLink to='/favorites' exact={true} activeClassName='active'>
             Favorite Players
           </NavLink>
         </div>
-        <div className="navbar-element">
+        <div>
           <NavLink to={`/users/${user?.id}/playsessions`} exact={true} activeClassName='active'>
             Your Play Sessions
           </NavLink>
@@ -64,7 +64,7 @@ const NavBar = () => {
             Play Session 1
           </NavLink>
         </li> */}
-        <div className="navbar-element">
+        <div>
           <div onClick={onLogout} className="navbar-logout">
             Logout
           </div>

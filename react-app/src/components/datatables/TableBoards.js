@@ -5,6 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 //Internal Imports
 import * as boardActions from '../../store/board';
 import * as playSessionActions from '../../store/playsession';
+import './TableDisplay.css'
 
 const TableBoards = () => {
 

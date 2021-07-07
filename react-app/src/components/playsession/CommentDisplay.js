@@ -28,6 +28,7 @@ const CommentDisplay = ({comment}) => {
                 <div>Comment #{comment.id}</div>
                 <div>{comment.body}</div>
                 <div>
+                    - 
                     <Link to={`/users/${comment.user_id}/playsessions`}>
                         {comment.username}
                     </Link>
@@ -35,16 +36,19 @@ const CommentDisplay = ({comment}) => {
                 { comment.user_id === user?.id ?
                 <>
                     <button
+                        className="pure-button"
                         onClick={editComment}>
                         Edit
                     </button>
                     <button
+                        className="pure-button"
                         onClick={deleteComment}>
                         Delete
                     </button>
                 </>
                 : null
                 }
+                <hr></hr>
             </>
         )
     }
