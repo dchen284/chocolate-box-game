@@ -24,15 +24,13 @@ const PlaySessionDetails = () => {
     const commentValues = Object.values(comments).reverse();
     const [boardState, setBoardState] = useState([]);
     const [turnsArray, setTurnsArray] = useState([]);
+    const [displayedTurn, setDisplayedTurn] = useState("00");
 
     // useEffects
     useEffect(() => {
         dispatch(playSessionActions.fetchSessionForDetails(playSessionId));
-    }, [dispatch, playSessionId]);
-
-    useEffect(()=>{
         dispatch(commentActions.fetchCommentsOfPlaySession(playSessionId));
-    }, [dispatch, playSessionId])
+    }, [dispatch, playSessionId]);
 
     useEffect(()=>{
         const newTurnsArray = createTurnsArray(detailsSession?.moves);
@@ -58,7 +56,9 @@ const PlaySessionDetails = () => {
     }
 
     function updateDisplayedTurn(turn) {
-        console.log('++++', turn);
+        // console.log('++++', turn);
+        const turnNumber = turn.slice(1, 3);
+        setDisplayedTurn(turnNumber);
         setBoardState(stringToBoardState(turn, numberOfRows, numberOfColumns));
     }
 
@@ -104,22 +104,32 @@ const PlaySessionDetails = () => {
     return (
         <div>
             <h1>Comments</h1>
-            {turnsArray?.map( turn => {
-                return (
-                    <div key={turn}>
-                        <button onClick={()=>updateDisplayedTurn(turn)}>
-                            {turn.slice(0, 3)}
-                        </button>
-                    </div>
-                )
-            })}
-            <BoardDisplay boardState={boardState}/>
-            <CommentForm />
-            {commentValues?.map( comment => {
-                return (
-                    <CommentDisplay comment={comment} key={comment.id}/>
-                )
-            })}
+            <div>
+                <h3>Moves</h3>
+
+                {turnsArray?.map( turn => {
+                    return (
+                        <div key={turn}>
+                            <button onClick={()=>updateDisplayedTurn(turn)}>
+                                {turn.slice(0, 3)}
+                            </button>
+                        </div>
+                    )
+                })}
+            </div>
+            <div>
+                <h3>Showing Turn #{displayedTurn}</h3>
+                <BoardDisplay boardState={boardState}/>
+            </div>
+
+            <div>
+                <CommentForm />
+                {commentValues?.map( comment => {
+                    return (
+                        <CommentDisplay comment={comment} key={comment.id}/>
+                    )
+                })}
+            </div>
         </div>
     );
 }
