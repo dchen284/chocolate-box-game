@@ -87,7 +87,7 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div className='form-line'>
-        <button type='submit'>Sign Up</button>
+        <button className="pure-button button-login-form" type='submit'>Sign Up</button>
       </div>
     </form>
   );

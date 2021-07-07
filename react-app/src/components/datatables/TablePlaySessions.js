@@ -201,7 +201,7 @@ const TablePlaySessions = () => {
                                     <td>{playSession.board_id}</td>
                                     <td>{playSession.score}</td>
                                     <td>
-                                        <button onClick={()=>{loadSession(playSession.id)}}>
+                                        <button className="pure-button" onClick={()=>{loadSession(playSession.id)}}>
                                             Load Play Session
                                         </button>
                                     </td>

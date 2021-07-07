@@ -72,7 +72,10 @@ const TableBoards = () => {
                             <tr key={board.id} className={oddIndexForPureTable(index)}>
                                 <td>{board.id}</td>
                                 <td>
-                                    <button onClick={() => postNewPlaySession(board.id, loggedInUser.id)}>
+                                    <button
+                                    className="pure-button"
+                                    onClick={() => postNewPlaySession(board.id, loggedInUser.id)}
+                                    >
                                         Start New Play Session
                                     </button>
                                 </td>

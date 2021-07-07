@@ -314,7 +314,7 @@ const GameDisplay = () => {
             </div>
             <div className='game-display-board'>
                 <h3>
-                    <span>Board</span>
+                    <span>Board #{currentPlaySession.board_id}</span>
                     <span>
                         <button
                         onClick={()=>postNewPlaySession(currentPlaySession.board_id, currentPlaySession.user_id)}

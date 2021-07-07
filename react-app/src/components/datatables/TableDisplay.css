@@ -4,4 +4,9 @@
 
 .pure-table {
     margin: 20px;
+    /* color: blue; */
+}
+
+.pure-table-even {
+    /* background-color: rgb(236, 213, 182); */
 }
