@@ -34,6 +34,7 @@ const TableBoards = () => {
     }
 
     const formatDate = (timestamp) => {
+        // return Date.parse(timestamp);
         return timestamp.slice(timestamp.indexOf(",")+2, timestamp.indexOf(",") + 13);
     }
 
@@ -75,6 +76,7 @@ const TableBoards = () => {
                                     </button>
                                 </td>
                                 <td>{formatDate(board.timestamp)}</td>
+                                {/* <td>{board.timestamp}</td> */}
                                 <td><Link to={`/boards/${board.id}`}>Leaderboard</Link></td>
                             </tr>
 

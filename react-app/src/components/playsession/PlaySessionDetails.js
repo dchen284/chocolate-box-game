@@ -8,6 +8,7 @@ import * as playSessionActions from '../../store/playsession';
 import BoardDisplay from '../game/BoardDisplay';
 import CommentDisplay from './CommentDisplay';
 import CommentForm from './CommentForm';
+import './PlaySessionDetails.css';
 
 
 const PlaySessionDetails = () => {
@@ -102,11 +103,11 @@ const PlaySessionDetails = () => {
 
     // JSX
     return (
-        <div>
-            <h1>Comments</h1>
+        <div className="details-grid">
             <div>
-                <h3>Moves</h3>
-
+                <h3>
+                    Moves
+                </h3>
                 {turnsArray?.map( turn => {
                     return (
                         <div key={turn}>
@@ -123,6 +124,7 @@ const PlaySessionDetails = () => {
             </div>
 
             <div>
+                <h1>Comments</h1>
                 <CommentForm />
                 {commentValues?.map( comment => {
                     return (

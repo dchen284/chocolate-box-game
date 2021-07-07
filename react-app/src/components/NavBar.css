@@ -1,0 +1,24 @@
+.navbar-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    background-color:#582618;
+    color: white;
+    height: 35px;
+}
+
+.navbar-container > div > a,
+.navbar-container > div > div
+{
+    color: white;
+    font-family: fantasy;
+}
+
+.navbar-element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-logout {
+    text-decoration-line: underline;
+}

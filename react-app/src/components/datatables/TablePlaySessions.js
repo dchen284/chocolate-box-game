@@ -17,7 +17,8 @@ const TablePlaySessions = () => {
     const playSessionsOfBoard = useSelector((state) => state.playSessions.boardSessions);
     const playSessionsOfBoardValues = Object.values(playSessionsOfBoard).sort((a, b) => b.score - a.score);
     const playSessionsOfUser = useSelector((state) => state.playSessions.userSessions);
-    const playSessionsOfUserValues = Object.values(playSessionsOfUser).sort((a, b) => a.board_id - b.board_id);
+    // const playSessionsOfUserValues = Object.values(playSessionsOfUser).sort((a, b) => a.board_id - b.board_id);
+    const playSessionsOfUserValues = Object.values(playSessionsOfUser).sort((a, b) => Date.parse(b.timestamp) - Date.parse(a.timestamp));
     const loggedInUser = useSelector((state) => state.session.user);
     // const [isLoaded, setIsLoaded] = useState(false);
 
@@ -60,6 +61,10 @@ const TablePlaySessions = () => {
         history.push('/');
     }
 
+    const formatDate = (timestamp) => {
+        return timestamp.slice(timestamp.indexOf(",")+2, timestamp.indexOf(",") + 13);
+        // return Date.parse(timestamp);
+    }
 
     // JSX
 
@@ -200,7 +205,7 @@ const TablePlaySessions = () => {
                                             Load Play Session
                                         </button>
                                     </td>
-                                    <td>{playSession.timestamp}</td>
+                                    <td>{formatDate(playSession.timestamp)}</td>
                                 </tr>
 
                             )

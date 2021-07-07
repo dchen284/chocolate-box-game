@@ -3,8 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 // Internal imports
-import LoginForm from './components/auth/LoginForm';
-import SignUpForm from './components/auth/SignUpForm';
+import LoginPage from './components/auth/LoginPage';
+// import LoginForm from './components/auth/LoginForm';
+// import SignUpForm from './components/auth/SignUpForm';
 // import TableDisplay from './components/datatables/TableDisplay';
 import TableBoards from './components/datatables/TableBoards';
 import TableFavorites from './components/datatables/TableFavorites';
@@ -37,11 +38,11 @@ function App() {
       <NavBar />
       <Switch>
         <Route path='/login' exact={true}>
-          <LoginForm />
+          <LoginPage />
         </Route>
-        <Route path='/sign-up' exact={true}>
+        {/* <Route path='/sign-up' exact={true}>
           <SignUpForm />
-        </Route>
+        </Route> */}
         {/* <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>

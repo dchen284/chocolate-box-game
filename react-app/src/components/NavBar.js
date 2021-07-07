@@ -1,69 +1,75 @@
 
 // External imports
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import LogoutButton from './auth/LogoutButton';
+// import LogoutButton from './auth/LogoutButton';
 // Internal imports
 // import * as sessionActions from '../store/session';
+import { logout } from '../store/session';
+import './NavBar.css';
 
 const NavBar = () => {
 
   // hooks and state variables
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const user = useSelector(state => state.session.user)
 
-  // useEffects
-
+  // functions
+  const onLogout = async (e) => {
+    await dispatch(logout());
+  };
 
   // JSX
   return (
     <nav>
-      <ul>
-        <li>
+      <div className="navbar-container">
+        <div className="navbar-element">
           <NavLink to='/' exact={true} activeClassName='active'>
             Home
           </NavLink>
-        </li>
-        <li>
+        </div>
+        {/* <div className="navbar-element">
           <NavLink to='/login' exact={true} activeClassName='active'>
             Login
           </NavLink>
-        </li>
-        <li>
+        </div> */}
+        {/* <div>
           <NavLink to='/sign-up' exact={true} activeClassName='active'>
             Sign Up
           </NavLink>
-        </li>
+        </div> */}
         {/* <li>
           <NavLink to='/users' exact={true} activeClassName='active'>
             Users
           </NavLink>
         </li> */}
-        <li>
+        <div className="navbar-element">
           <NavLink to='/boards' exact={true} activeClassName='active'>
             Boards
           </NavLink>
-        </li>
-        <li>
+        </div>
+        <div className="navbar-element">
           <NavLink to='/favorites' exact={true} activeClassName='active'>
             Favorite Players
           </NavLink>
-        </li>
-        <li>
+        </div>
+        <div className="navbar-element">
           <NavLink to={`/users/${user?.id}/playsessions`} exact={true} activeClassName='active'>
             Your Play Sessions
           </NavLink>
-        </li>
+        </div>
         {/* <li>
           <NavLink to='/playsession/1' exact={true} activeClassName='active'>
             Play Session 1
           </NavLink>
         </li> */}
-        <li>
-          <LogoutButton />
-        </li>
-      </ul>
+        <div className="navbar-element">
+          <div onClick={onLogout} className="navbar-logout">
+            Logout
+          </div>
+        </div>
+      </div>
     </nav>
   );
 }

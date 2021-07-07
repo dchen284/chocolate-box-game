@@ -43,13 +43,13 @@ const SignUpForm = () => {
   }
 
   return (
-    <form onSubmit={onSignUp}>
+    <form onSubmit={onSignUp} className="form-container">
       <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
       </div>
-      <div>
+      <div className='form-line'>
         <label>User Name</label>
         <input
           type='text'
@@ -58,7 +58,7 @@ const SignUpForm = () => {
           value={username}
         ></input>
       </div>
-      <div>
+      <div className='form-line'>
         <label>Email</label>
         <input
           type='text'
@@ -67,7 +67,7 @@ const SignUpForm = () => {
           value={email}
         ></input>
       </div>
-      <div>
+      <div className='form-line'>
         <label>Password</label>
         <input
           type='password'
@@ -76,7 +76,7 @@ const SignUpForm = () => {
           value={password}
         ></input>
       </div>
-      <div>
+      <div className='form-line'>
         <label>Repeat Password</label>
         <input
           type='password'
@@ -86,7 +86,9 @@ const SignUpForm = () => {
           required={true}
         ></input>
       </div>
-      <button type='submit'>Sign Up</button>
+      <div className='form-line'>
+        <button type='submit'>Sign Up</button>
+      </div>
     </form>
   );
 };

@@ -1,0 +1,22 @@
+.login-container {
+    display: grid;
+    grid-template-columns: 1fr 75px 1fr;
+}
+
+.login-element-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0px;
+}
+
+.form-container {
+    margin: 20px 0px;
+    width: 350px;
+}
