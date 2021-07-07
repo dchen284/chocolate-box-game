@@ -14,7 +14,8 @@ favorited_by = db.Table(
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
-    id = db.Column(db.Integer, autoincrement='ignore_fk', primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    # id = db.Column(db.Integer, autoincrement='ignore_fk', primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
@@ -26,8 +27,12 @@ class User(db.Model, UserMixin):
     comments = db.relationship("Comment", back_populates="user")
     play_sessions = db.relationship("PlaySession",
                                 #    primaryjoin=id==PlaySession.user_id,
-                                #    foreign_keys=PlaySession.user_id,
+                                #    foreign_keys=[PlaySession.user_id],
                                    back_populates="user")
+
+    # current_session = db.relationship("PlaySession",
+    #                                 #    back_populates="current_user",
+    #                                    foreign_keys=[current_session_id])
 
     # __table_args__ = (
     #     ForeignKeyConstraint(

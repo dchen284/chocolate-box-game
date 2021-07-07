@@ -87,6 +87,7 @@ const TablePlaySessions = () => {
                         <thead>
                             <tr>
                                 <th>Play Session #</th>
+                                <th>Move History/Comments</th>
                                 <th>Username</th>
                                 <th>Favorite Player?</th>
                                 <th>Play Session Score</th>
@@ -96,9 +97,10 @@ const TablePlaySessions = () => {
                             {playSessionsOfBoardValues.map( (playSession, index) => {
                             return (
                                 <tr key={playSession.id} className={isIndexOdd(index)}>
+                                    <td>Session #{playSession.id}</td>
                                     <td>
                                         <Link to={`/playsession/${playSession.id}`}>
-                                            Session #{playSession.id}
+                                            Move History/Comments
                                         </Link>
                                     </td>
                                     <td>
@@ -132,6 +134,7 @@ const TablePlaySessions = () => {
                         <thead>
                             <tr>
                                 <th>Play Session #</th>
+                                <th>Move History/Comments</th>
                                 <th>Board #</th>
                                 <th>Play Session Score</th>
                             </tr>
@@ -140,9 +143,10 @@ const TablePlaySessions = () => {
                             {playSessionsOfUserValues.map( (playSession, index) => {
                             return (
                                 <tr key={playSession.id} className={isIndexOdd(index)}>
+                                    <td>Session #{playSession.id}</td>
                                     <td>
                                         <Link to={`/playsession/${playSession.id}`}>
-                                            Session #{playSession.id}
+                                            Move History/Comments
                                         </Link>
                                     </td>
                                     <td>{playSession.board_id}</td>
@@ -172,6 +176,7 @@ const TablePlaySessions = () => {
                         <thead>
                             <tr>
                                 <th>Play Session #</th>
+                                <th>Move History/Comments</th>
                                 <th>Board #</th>
                                 <th>Play Session Score</th>
                                 <th>Load Session</th>
@@ -182,9 +187,10 @@ const TablePlaySessions = () => {
                             {playSessionsOfUserValues.map( (playSession, index) => {
                             return (
                                 <tr key={playSession.id} className={isIndexOdd(index)}>
+                                    <td>Session #{playSession.id}</td>
                                     <td>
                                         <Link to={`/playsession/${playSession.id}`}>
-                                            Session #{playSession.id}
+                                            Move History/Comments
                                         </Link>
                                     </td>
                                     <td>{playSession.board_id}</td>

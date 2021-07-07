@@ -268,7 +268,7 @@ const GameDisplay = () => {
 
     return (
         <>
-            <h1>Game</h1>
+            <h1>Game: Session #{currentPlaySession.id}</h1>
             <button onClick={()=>postNewPlaySession(currentPlaySession.board_id, currentPlaySession.user_id)}>
                 Start a New Session with this Board
             </button>

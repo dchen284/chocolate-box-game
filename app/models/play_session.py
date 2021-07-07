@@ -20,8 +20,11 @@ class PlaySession(db.Model):
     board = db.relationship("Board", back_populates="play_sessions")
     comments = db.relationship("Comment", back_populates="play_session")
     user = db.relationship("User", back_populates="play_sessions")
+    # user = db.relationship("User", back_populates="play_sessions", foreign_keys=[user_id])
 
     # current_user = db.relationship("User", uselist="false", back_populates="current_session")
+    # current_user = db.relationship("User",
+    #                                back_populates="current_session")
 
     # __table_args__ = (
     #     UniqueConstraint("id", "user_id"),

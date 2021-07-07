@@ -7,16 +7,23 @@ const BoardDisplay = ({boardState}) => {
     const numberOfColumns = 5;
     const gameBoard = new Array(numberOfRows)
 
-    for (let i = 0; i < numberOfRows; i++) {
-        gameBoard[i] = new Array(numberOfColumns);
-        for (let j = 0; j < numberOfColumns; j++) {
-            gameBoard[i][j] =
-                <GameSpace
-                    key={`${i}${j}`}
-                    spaceId={`b${i}${j}`}
-                    tileInput={boardState[i][j]}
-                />;
+    if (boardState.length) {
+        for (let i = 0; i < numberOfRows; i++) {
+            gameBoard[i] = new Array(numberOfColumns);
+            for (let j = 0; j < numberOfColumns; j++) {
+                gameBoard[i][j] =
+                    <GameSpace
+                        key={`${i}${j}`}
+                        spaceId={`b${i}${j}`}
+                        tileInput={boardState[i][j]}
+                    />;
+            }
         }
+    }
+
+
+    if(!boardState.length) {
+        return null;
     }
 
     return (
