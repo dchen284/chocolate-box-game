@@ -38,26 +38,30 @@ const FavoriteButton = ({loggedInUserId, favoriteId}) => {
     if (isFavorite) {
         return (
             <span>
-                <i
-                className="fas fa-heart"
-                onClick={()=> {
-                    deleteFavorite(loggedInUserId, favoriteId);
-                    setIsFavorite(false);
-                }}
-                ></i>
+                <button className="button-favorite">
+                    <i
+                    className="fas fa-heart"
+                    onClick={()=> {
+                        deleteFavorite(loggedInUserId, favoriteId);
+                        setIsFavorite(false);
+                    }}
+                    ></i>
+                </button>
             </span>
         )
     }
     else {
         return (
             <span>
-                <i
-                className="far fa-heart"
-                onClick={()=> {
-                    addFavorite(loggedInUserId, favoriteId)
-                    setIsFavorite(true);
-                }}
-                ></i>
+                <button className="button-favorite">
+                    <i
+                    className="far fa-heart"
+                    onClick={()=> {
+                        addFavorite(loggedInUserId, favoriteId)
+                        setIsFavorite(true);
+                    }}
+                    ></i>
+                </button>
             </span>
         )
     }

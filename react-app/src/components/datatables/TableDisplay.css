@@ -1,3 +1,5 @@
+@import '../index.css';
+
 .tabledisplay_container {
     display: grid;
     /* background-color: gold; */
@@ -20,11 +22,11 @@ a {
     color: black;
 } */
 
-.button-tables {
+/* .button-tables {
     box-shadow:
     0 0 0 3px #B36638,
     0 0 0 5px #481E0F;
     color: #EDDDBD;
     background-color: #8e4a22;
     margin: 10px;
-}
+} */

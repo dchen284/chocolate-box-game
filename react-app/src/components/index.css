@@ -1,11 +1,8 @@
-.page-container {
-    background-color: #A05344
+.button-chocolate {
+    box-shadow:
+    0 0 0 3px #B36638,
+    0 0 0 5px #481E0F;
+    color: #EDDDBD;
+    background-color: #8e4a22;
+    margin: 10px;
 }
-
-/* .pure-button {
-    background-color: gold;
-} */
-
-/* a {
-    color: #582618;
-} */

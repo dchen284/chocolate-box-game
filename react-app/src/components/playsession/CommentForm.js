@@ -1,5 +1,5 @@
 // External imports
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 // Internal imports
@@ -12,15 +12,18 @@ const CommentForm = ({ comment, setIsEditing }) => {
     const dispatch = useDispatch();
     const { playSessionId } = useParams();
     const [bodyText, setBodyText] = useState(comment?.body);
-    const [errors, setErrors] = useState([])
-    const [inputHolder, setInputHolder] = useState({body: ''})
-    const errorsFromStore = useSelector(state => state.errors);
+    // const [errors, setErrors] = useState([])
+    // const [inputHolder, setInputHolder] = useState({body: ''})
+    // const errorsFromStore = useSelector(state => state.errors);
     const user = useSelector(state => state.session.user);
 
 
     // functions
     const commentSubmit = async (e) => {
         e.preventDefault();
+
+        // dispatch(errorsActions.clearErrors());
+        // setErrors([]);
 
         const commentToAdd = {
             user_id: user.id,
@@ -31,13 +34,16 @@ const CommentForm = ({ comment, setIsEditing }) => {
         if (comment) { // this is editing an existing comment
             const commentToEdit = { ...commentToAdd, id: comment.id }
             dispatch(commentActions.fetchUpdateComment(commentToEdit));
-            setInputHolder(commentToEdit);
+            // setInputHolder(commentToEdit);
             setIsEditing(false);
+            dispatch(errorsActions.clearErrors());
+            // setErrors(['reset']);
         }
         else { // this is not editing an existing comment, it is adding a new comment
             dispatch(commentActions.fetchAddComment(commentToAdd));
-            setInputHolder(commentToAdd);
+            // setInputHolder(commentToAdd);
             setBodyText('');
+            dispatch(errorsActions.clearErrors());
         }
 
         // if (comment) { // this is editing an existing comment
@@ -60,28 +66,28 @@ const CommentForm = ({ comment, setIsEditing }) => {
 
     // useEffects
 
-    useEffect(() => {
-        if (errorsFromStore.length) {
-            // if (comment) {
-            //     setIsEditing(true);
-            // }
-            setBodyText(inputHolder.body);
-            setErrors(errorsFromStore);
-            dispatch(errorsActions.clearErrors());
-        }
-    }, [comment, dispatch, errorsFromStore, inputHolder, setIsEditing]);
+    // useEffect(() => {
+    //     if (errorsFromStore.length) {
+    //         // if (comment) {
+    //         //     setIsEditing(true);
+    //         // }
+    //         // setBodyText(inputHolder.body);
+    //         setErrors(errorsFromStore);
+    //         dispatch(errorsActions.clearErrors());
+    //     }
+    // }, [comment, dispatch, errorsFromStore]);
 
 
     // JSX
     return (
         <>
-            <div>
+            {/* <div>
             {errors.map(error => {
                 return (
                     <div className="error-display" key={error}>{error}</div>
                 )
             })}
-            </div>
+            </div> */}
             {/* {errors.length ?
                 <ul>
                 {errors.map(error => {
@@ -106,11 +112,11 @@ const CommentForm = ({ comment, setIsEditing }) => {
                     >
                     </textarea>
                 </div>
-                <button className="pure-button" onClick={commentSubmit}>
+                <button className="button-chocolate" onClick={commentSubmit}>
                     Submit
                 </button>
                 { comment ?
-                <button className="pure-button" onClick={() => setIsEditing(false)}>
+                <button className="button-chocolate" onClick={() => setIsEditing(false)}>
                     Cancel
                 </button>
                 : null }

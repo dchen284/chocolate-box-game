@@ -19,6 +19,16 @@
     font-family: fantasy;
 }
 
+.navbar-name {
+    display: grid;
+    height: 25px;
+    background-color:#582618;
+    color: white;
+    font-family: fantasy;
+    justify-items: center;
+    align-items: center;
+}
+
 .navbar-logout {
     text-decoration-line: underline;
 }

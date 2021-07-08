@@ -1,13 +1,24 @@
+@import '../index.css';
 /* overall layout of GameDisplay*/
 
 .button-new-session-for-board {
     width: 350px;
-    box-shadow:
+    /* box-shadow:
     0 0 0 3px #B36638,
     0 0 0 5px #481E0F;
     color: #EDDDBD;
     background-color: #8e4a22;
-    margin: 10px;
+    margin: 10px; */
+}
+
+.game-display-border {
+    margin: 20px;
+    background-color: white;
+    box-shadow:
+        0 0 0 3px #481E0F,
+        0 0 0 7px #EDDDBD,
+        0 0 0 8px #481E0F;
+    padding: 10px;
 }
 
 .game-display-container {
@@ -22,7 +33,13 @@
 
 .game-display-board {
     grid-area: board;
-    margin: 20px;
+    /* margin: 20px;
+    background-color: white;
+    box-shadow:
+        0 0 0 3px #481E0F,
+        0 0 0 7px #EDDDBD,
+        0 0 0 8px #481E0F;
+    padding: 10px; */
 }
 
 .game-display-board > h3 > span {
@@ -32,7 +49,13 @@
 
 .game-display-info {
     grid-area: info;
-    margin: 20px;
+    /* margin: 20px;
+    background-color: white;
+    box-shadow:
+        0 0 0 3px #481E0F,
+        0 0 0 7px #EDDDBD,
+        0 0 0 8px #481E0F;
+    padding: 10px; */
 }
 
 /* .game-display-rules {
@@ -41,7 +64,13 @@
 
 .game-display-tiles {
     grid-area: tiles;
-    margin: 20px;
+    /* margin: 20px;
+    background-color: white;
+    box-shadow:
+        0 0 0 3px #481E0F,
+        0 0 0 7px #EDDDBD,
+        0 0 0 8px #481E0F;
+    padding: 10px; */
 }
 
 /* 5x5 board display */

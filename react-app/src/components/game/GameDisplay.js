@@ -268,7 +268,35 @@ const GameDisplay = () => {
 
     return (
         <div className='game-display-container'>
-            <div className='game-display-info'>
+
+            <div className='game-display-board game-display-border'>
+                <h3>
+                    <span>Board #{currentPlaySession.board_id}</span>
+                    <span>
+                        <button
+                        onClick={()=>postNewPlaySession(currentPlaySession.board_id, currentPlaySession.user_id)}
+                        className='button-new-session-for-board button-chocolate'
+                        >
+                            Start a New Session with this Board
+                        </button>
+                    </span>
+                </h3>
+                <div
+                onClick={placeTile}
+                >
+                    <BoardDisplay boardState={boardState}/>
+                </div>
+            </div>
+
+            <div className='game-display-tiles game-display-border'>
+                <div
+                onClick={selectTile}
+                >
+                    <TilesDisplay arrTiles={tilesRemaining}/>
+                </div>
+            </div>
+
+            <div className='game-display-info game-display-border'>
                 <h2>Game: Session #{currentPlaySession.id}</h2>
                 <h3>Turn: {turn} - Score: {score}</h3>
 
@@ -310,31 +338,6 @@ const GameDisplay = () => {
                         </li>
                     </ul>
 
-                </div>
-            </div>
-            <div className='game-display-board'>
-                <h3>
-                    <span>Board #{currentPlaySession.board_id}</span>
-                    <span>
-                        <button
-                        onClick={()=>postNewPlaySession(currentPlaySession.board_id, currentPlaySession.user_id)}
-                        className='button-new-session-for-board'
-                        >
-                            Start a New Session with this Board
-                        </button>
-                    </span>
-                </h3>
-                <div
-                onClick={placeTile}
-                >
-                    <BoardDisplay boardState={boardState}/>
-                </div>
-            </div>
-            <div className='game-display-tiles'>
-                <div
-                onClick={selectTile}
-                >
-                    <TilesDisplay arrTiles={tilesRemaining}/>
                 </div>
             </div>
         </div>

@@ -92,10 +92,10 @@ const TablePlaySessions = () => {
                         <thead>
                             <tr>
                                 <th>Play Session #</th>
-                                <th>Move History/Comments</th>
                                 <th>Username</th>
                                 <th>Favorite Player?</th>
-                                <th>Play Session Score</th>
+                                <th>Score</th>
+                                <th>Move History/Comments</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -104,17 +104,19 @@ const TablePlaySessions = () => {
                                 <tr key={playSession.id} className={isIndexOdd(index)}>
                                     <td>Session #{playSession.id}</td>
                                     <td>
-                                        <Link to={`/playsession/${playSession.id}`}>
-                                            Move History/Comments
-                                        </Link>
-                                    </td>
-                                    <td>
                                         <Link to={`/users/${playSession.user_id}/playsessions`}>
                                             {playSession.username}
                                         </Link>
                                     </td>
                                     <td><FavoriteButton loggedInUserId={loggedInUser.id} favoriteId={playSession.user_id}/></td>
                                     <td>{playSession.score}</td>
+                                    <td>
+                                        <Link to={`/playsession/${playSession.id}`}>
+                                            <button className="button-chocolate">
+                                                Move History/Comments
+                                            </button>
+                                        </Link>
+                                    </td>
                                 </tr>
                             )
                         })}
@@ -153,7 +155,7 @@ const TablePlaySessions = () => {
                                     <td>{playSession.score}</td>
                                     <td>
                                         <Link to={`/playsession/${playSession.id}`}>
-                                            <button className="button-tables">
+                                            <button className="button-chocolate">
                                                 Move History/Comments
                                             </button>
                                         </Link>
@@ -198,13 +200,13 @@ const TablePlaySessions = () => {
                                     <td>{playSession.board_id}</td>
                                     <td>{playSession.score}</td>
                                     <td>
-                                        <button className="button-tables" onClick={()=>{loadSession(playSession.id)}}>
+                                        <button className="button-chocolate" onClick={()=>{loadSession(playSession.id)}}>
                                             Load Play Session
                                         </button>
                                     </td>
                                     <td>
                                         <Link to={`/playsession/${playSession.id}`}>
-                                            <button className="button-tables">
+                                            <button className="button-chocolate">
                                                 Move History/Comments
                                             </button>
                                         </Link>

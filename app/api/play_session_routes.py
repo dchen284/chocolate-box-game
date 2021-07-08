@@ -70,6 +70,7 @@ def put_comment(play_session_id, comment_id):
     if form.validate_on_submit():
         comment_to_update = Comment.query.get(comment_id)
         form.populate_obj(comment_to_update)
+        comment_to_update.timestamp = datetime.datetime.now(tz=None)
         db.session.add(comment_to_update)
         db.session.commit()
         return comment_to_update.to_dict()

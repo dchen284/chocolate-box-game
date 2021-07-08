@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 // Internal imports
 import * as commentActions from '../../store/comment';
 import * as playSessionActions from '../../store/playsession';
+import * as errorsActions from '../../store/error';
 import BoardDisplay from '../game/BoardDisplay';
 import CommentDisplay from './CommentDisplay';
 import CommentForm from './CommentForm';
@@ -26,6 +27,8 @@ const PlaySessionDetails = () => {
     const [boardState, setBoardState] = useState([]);
     const [turnsArray, setTurnsArray] = useState([]);
     const [displayedTurn, setDisplayedTurn] = useState("00");
+    const [errors, setErrors] = useState([])
+    const errorsFromStore = useSelector(state => state.errors);
 
     // useEffects
     useEffect(() => {
@@ -56,8 +59,9 @@ const PlaySessionDetails = () => {
         }
     }
 
+
     function updateDisplayedTurn(turn) {
-        // console.log('++++', turn);
+        console.log('++++', turn, displayedTurn);
         const turnNumber = turn.slice(1, 3);
         setDisplayedTurn(turnNumber);
         setBoardState(stringToBoardState(turn, numberOfRows, numberOfColumns));
@@ -100,34 +104,67 @@ const PlaySessionDetails = () => {
     //     setTurnsArray(newTurnsArray);
     // }
 
+    useEffect(() => {
+        if (errorsFromStore.length) {
+            // if (comment) {
+            //     setIsEditing(true);
+            // }
+            // setBodyText(inputHolder.body);
+            setErrors(errorsFromStore);
+            dispatch(errorsActions.clearErrors());
+        }
+    }, [dispatch, errorsFromStore]);
+
+    useEffect(()=>{
+        if (comments) {
+            setErrors([]);
+            // dispatch(errorsActions.clearErrors());
+        }
+    }, [dispatch, comments])
 
     // JSX
     return (
         <div className="details-grid">
+
+            <div className="details-board">
+                <h3>Showing Play Session #{playSessionId}, Turn #{displayedTurn}</h3>
+                <BoardDisplay boardState={boardState}/>
+            </div>
+
             <div className="details-moves">
                 <h3>
                     Moves
                 </h3>
-                {turnsArray?.map( turn => {
-                    return (
-                        <div key={turn}>
-                            <button
-                            onClick={()=>updateDisplayedTurn(turn)}
-                            className='pure-button'
-                            >
-                                {turn.slice(0, 3)}
-                            </button>
-                        </div>
-                    )
-                })}
-            </div>
-            <div className="details-board">
-                <h3>Showing Turn #{displayedTurn}</h3>
-                <BoardDisplay boardState={boardState}/>
+                <div className="details-moves-grid">
+                    {turnsArray?.map( turn => {
+                        return (
+                            // <div className="details-moves-grid-item" key={turn}>
+                                <button
+                                key={turn}
+                                onClick={()=>updateDisplayedTurn(turn)}
+                                className=
+                                {turn.slice(1, 3) === displayedTurn ?
+                                    "button-chocolate button-highlighted" :
+                                    "button-chocolate"
+                                }
+                                >
+                                    {turn.slice(0, 3)}
+                                </button>
+                            // </div>
+                        )
+                    })}
+                </div>
             </div>
 
             <div className="details-comments">
                 <h1>Comments</h1>
+                <div>
+                    {errors.map(error => {
+                        return (
+                            <div className="error-display" key={error}>{error}</div>
+                        )
+                    })}
+                </div>
                 <CommentForm />
                 {commentValues?.map( comment => {
                     return (

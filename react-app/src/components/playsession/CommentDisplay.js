@@ -13,6 +13,8 @@ const CommentDisplay = ({comment}) => {
     const [isEditing, setIsEditing] = useState(false);
     const user = useSelector(state => state.session.user);
 
+
+
     //functions
     const editComment = (e) => {
         setIsEditing(true);
@@ -25,23 +27,27 @@ const CommentDisplay = ({comment}) => {
     const showComment = () => {
         return (
             <>
-                <div>Comment #{comment.id}</div>
+                {/* <div>Comment #{comment.id}</div> */}
                 <div>{comment.body}</div>
-                <div>
-                    - 
-                    <Link to={`/users/${comment.user_id}/playsessions`}>
-                        {comment.username}
-                    </Link>
+                <div className="comment-owner-data">
+                    <span>From </span>
+                    <span>
+                        <Link to={`/users/${comment.user_id}/playsessions`}>
+                            {comment.username}
+                        </Link>
+                    </span>
+                    <span> on </span>
+                    <span>{comment.timestamp}</span>
                 </div>
                 { comment.user_id === user?.id ?
                 <>
                     <button
-                        className="pure-button"
+                        className='button-chocolate'
                         onClick={editComment}>
                         Edit
                     </button>
                     <button
-                        className="pure-button"
+                        className='button-chocolate'
                         onClick={deleteComment}>
                         Delete
                     </button>
@@ -60,7 +66,11 @@ const CommentDisplay = ({comment}) => {
     }
 
     //JSX
-    return isEditing ? showForm() : showComment()
+    return (
+        <>
+            {isEditing ? showForm() : showComment()}
+        </>
+    )
 }
 
 export default CommentDisplay;

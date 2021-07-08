@@ -73,7 +73,7 @@ const TableBoards = () => {
                                 <td>{board.id}</td>
                                 <td>
                                     <button
-                                    className="button-tables"
+                                    className="button-chocolate"
                                     onClick={() => postNewPlaySession(board.id, loggedInUser.id)}
                                     >
                                         Start New Play Session
@@ -82,7 +82,7 @@ const TableBoards = () => {
                                 {/* <td>{board.timestamp}</td> */}
                                 <td>
                                     <Link to={`/boards/${board.id}`}>
-                                        <button className="button-tables">
+                                        <button className="button-chocolate">
                                             Leaderboard
                                         </button>
                                     </Link>

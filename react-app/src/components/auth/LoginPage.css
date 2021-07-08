@@ -1,6 +1,4 @@
-/* body {
-    background-color: pink;
-} */
+@import '../index.css';
 
 .login-container {
     display: grid;
@@ -8,7 +6,7 @@
     height: 97vh;
     /* background-color: tan; */
     background-image:
-        
+        linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
         url('../../images/backgrounds/chocolate-candy-clipart-cropped.png');
     background-repeat: repeat;
     background-position: center;
@@ -45,12 +43,12 @@
 .button-login-form,
 .button-signup-form {
     width: 150px;
-    box-shadow:
+    /* box-shadow:
     0 0 0 3px #B36638,
     0 0 0 5px #481E0F;
     color: #EDDDBD;
     background-color: #8e4a22;
-    margin: 10px;
+    margin: 10px; */
 
 }
 

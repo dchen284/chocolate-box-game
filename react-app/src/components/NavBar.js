@@ -23,6 +23,9 @@ const NavBar = () => {
   // JSX
   return (
     <nav>
+      <div className="navbar-name">
+        Welcome, {user.username}!
+      </div>
       <div className="navbar-container">
         <div>
           <NavLink to='/' exact={true} activeClassName='active'>

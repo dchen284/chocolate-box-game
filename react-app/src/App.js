@@ -18,7 +18,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 // import User from './components/User';
 import GameDisplay from './components/game/GameDisplay';
 import { authenticate } from './store/session';
-import './index.css';
+// import './index.css';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
