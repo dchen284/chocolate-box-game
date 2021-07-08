@@ -50,6 +50,7 @@ const SignUpForm = () => {
           <div className="error-display" key={ind}>{error}</div>
         ))}
       </div>
+      <h2>Sign Up For a New Account!</h2>
       <div className='form-line'>
         <label>User Name</label>
         <input

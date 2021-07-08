@@ -8,20 +8,20 @@ const LoginPage = () => {
         <div className="login-container">
             <div className="login-element-container">
                 <div>
-                    <h2>
+                    {/* <h2>
                         Log In To Play!
-                    </h2>
+                    </h2> */}
                     <LoginForm />
                 </div>
             </div>
-            <div className="login-element-container">
+            <div className="login-element-container or-container">
                 <h2>- or -</h2>
             </div>
             <div className="login-element-container">
                 <div>
-                    <h2>
+                    {/* <h2>
                         Sign Up For a New Account!
-                    </h2>
+                    </h2> */}
                     <SignUpForm />
                 </div>
             </div>

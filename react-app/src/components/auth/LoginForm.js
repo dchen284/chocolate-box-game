@@ -46,6 +46,7 @@ const LoginForm = () => {
           <div className="error-display" key={ind}>{error}</div>
         ))}
       </div>
+      <h2>Log In To Play!</h2>
       <div className='form-line'>
         <label htmlFor='email'>Email</label>
         <input
