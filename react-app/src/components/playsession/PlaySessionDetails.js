@@ -126,12 +126,12 @@ const PlaySessionDetails = () => {
     return (
         <div className="details-grid">
 
-            <div className="details-board">
+            <div className="details-board details-border">
                 <h3>Showing Play Session #{playSessionId}, Turn #{displayedTurn}</h3>
                 <BoardDisplay boardState={boardState}/>
             </div>
 
-            <div className="details-moves">
+            <div className="details-moves details-border">
                 <h3>
                     Moves
                 </h3>
@@ -156,7 +156,7 @@ const PlaySessionDetails = () => {
                 </div>
             </div>
 
-            <div className="details-comments">
+            <div className="details-comments details-border">
                 <h1>Comments</h1>
                 <div>
                     {errors.map(error => {

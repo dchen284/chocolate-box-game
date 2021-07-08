@@ -31,6 +31,7 @@
 
 .navbar-logout {
     text-decoration-line: underline;
+    cursor: pointer;
 }
 
 /* .pure-button {

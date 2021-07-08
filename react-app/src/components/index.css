@@ -6,3 +6,23 @@
     background-color: #8e4a22;
     margin: 10px;
 }
+
+.page-container {
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: auto 1fr auto;
+}
+
+/* #root {
+    min-height: 100vh;
+    min-width: 100vw;
+} */
+
+.button-chocolate:hover {
+    box-shadow:
+    0 0 0 3px #EDDDBD,
+    0 0 0 5px #481E0F;
+    color: #481E0F;
+    background-color: #EDDDBD;
+    /* margin: 10px; */
+}

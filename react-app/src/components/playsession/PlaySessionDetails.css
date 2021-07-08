@@ -2,27 +2,29 @@
 
 .comment_form_textbox {
     height: 100px;
-    width: 300px;
+    width: 100%;
 }
 
 .comment-owner-data {
+    margin-top: 10px;
     font-size: smaller;
 }
 
 .details-grid {
     display: grid;
-    grid-template-columns: 550px 180px 1fr;
+    grid-template-columns: 590px 180px 1fr;
     grid-template-areas:
         "board moves comments";
 }
 
 .details-board {
     grid-area: board;
+    height: 600px;
 }
 
 .details-moves {
     grid-area: moves;
-    height: 85vh;
+    height: 600px;
     /* margin: 50px; */
 }
 
@@ -36,13 +38,24 @@
     grid-column-gap: 0; */
 }
 
+.details-border {
+    margin: 20px;
+    background-color: white;
+    box-shadow:
+        0 0 0 3px #481E0F,
+        0 0 0 7px #EDDDBD,
+        0 0 0 8px #481E0F;
+    padding: 10px;
+}
+
 .details-moves-grid > .button-chocolate {
     margin: 5px;
 }
 
 .details-comments {
     grid-area: comments;
-    margin-left: 50px;
+    height: 600px;
+    overflow: auto;
 }
 
 .button-highlighted {

@@ -23,9 +23,10 @@ const NavBar = () => {
   // JSX
   return (
     <nav>
-      <div className="navbar-name">
-        Welcome, {user.username}!
-      </div>
+      {user ?
+        <div className="navbar-name">Welcome, {user.username}!</div> :
+        <div className="navbar-name"></div>
+      }
       <div className="navbar-container">
         <div>
           <NavLink to='/' exact={true} activeClassName='active'>
@@ -68,9 +69,11 @@ const NavBar = () => {
           </NavLink>
         </li> */}
         <div>
-          <div onClick={onLogout} className="navbar-logout">
-            Logout
-          </div>
+          {/* <NavLink to="javascript:;"> */}
+            <div onClick={onLogout} className="navbar-logout">
+              Logout
+            </div>
+          {/* </NavLink> */}
         </div>
       </div>
     </nav>
