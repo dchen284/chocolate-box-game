@@ -78,8 +78,8 @@ function App() {
             404: Geez.
           </Route>
         </Switch>
+        <Footer />
       </BrowserRouter>
-      <Footer />
     </div>
   );
 }

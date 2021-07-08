@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import './LoginPage.css';
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -14,12 +15,12 @@ const SignUpForm = () => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
-    if (password === repeatPassword) {
+    // if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
       if (data) {
         setErrors(data)
       }
-    }
+    // }
   };
 
   const updateUsername = (e) => {
@@ -46,7 +47,7 @@ const SignUpForm = () => {
     <form onSubmit={onSignUp} className="form-container">
       <div>
         {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
+          <div className="error-display" key={ind}>{error}</div>
         ))}
       </div>
       <div className='form-line'>
@@ -83,7 +84,7 @@ const SignUpForm = () => {
           name='repeat_password'
           onChange={updateRepeatPassword}
           value={repeatPassword}
-          required={true}
+          // required={true}
         ></input>
       </div>
       <div className='form-line'>

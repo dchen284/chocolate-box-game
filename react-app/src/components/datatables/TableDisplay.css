@@ -1,5 +1,6 @@
 .tabledisplay_container {
     display: grid;
+    /* background-color: gold; */
 }
 
 .pure-table {
@@ -7,6 +8,14 @@
     /* color: blue; */
 }
 
-.pure-table-even {
-    /* background-color: rgb(236, 213, 182); */
+/* .pure-table-even {
+    background-color: rgb(236, 213, 182);
+} */
+
+a {
+    color: #582618;
 }
+
+/* a:visited {
+    color: black;
+} */

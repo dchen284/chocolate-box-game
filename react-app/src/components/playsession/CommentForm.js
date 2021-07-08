@@ -75,13 +75,13 @@ const CommentForm = ({ comment, setIsEditing }) => {
     // JSX
     return (
         <>
-            <ul>
+            <div>
             {errors.map(error => {
                 return (
-                    <li key={error}>{error}</li>
+                    <div className="error-display" key={error}>{error}</div>
                 )
             })}
-            </ul>
+            </div>
             {/* {errors.length ?
                 <ul>
                 {errors.map(error => {

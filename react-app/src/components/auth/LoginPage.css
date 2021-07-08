@@ -1,7 +1,13 @@
+/* body {
+    background-color: pink;
+} */
+
 .login-container {
     display: grid;
     grid-template-columns: 1fr 75px 1fr;
+    /* background-color: tan; */
 }
+
 
 .login-element-container {
     width: 100%;
@@ -23,4 +29,12 @@
 
 .button-login-form {
     width: 150px;
+}
+
+.pure-button {
+    background-color: tan;
+}
+
+.error-display {
+    color: red;
 }
