@@ -1,7 +1,7 @@
 // External imports
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // Internal imports
 import Footer from './components/Footer';
 import LoginPage from './components/auth/LoginPage';
@@ -31,6 +31,8 @@ function App() {
     })();
   }, [dispatch]);
 
+  const user = useSelector((state) => state.session.user);
+
   if (!loaded) {
     return null;
   }
@@ -38,7 +40,7 @@ function App() {
   return (
     <div className="page-container">
       <BrowserRouter>
-        <NavBar />
+        {user ? <NavBar /> : null}
         <Switch>
           <Route path='/login' exact={true}>
             <LoginPage />

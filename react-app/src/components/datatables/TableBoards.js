@@ -62,8 +62,8 @@ const TableBoards = () => {
                         <tr>
                             <th>#</th>
                             <th>Start a New Game With This Board</th>
-                            <th>Date Released</th>
                             <th>Leaderboard</th>
+                            <th>Date Released</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -73,15 +73,21 @@ const TableBoards = () => {
                                 <td>{board.id}</td>
                                 <td>
                                     <button
-                                    className="pure-button"
+                                    className="button-tables"
                                     onClick={() => postNewPlaySession(board.id, loggedInUser.id)}
                                     >
                                         Start New Play Session
                                     </button>
                                 </td>
-                                <td>{formatDate(board.timestamp)}</td>
                                 {/* <td>{board.timestamp}</td> */}
-                                <td><Link to={`/boards/${board.id}`}>Leaderboard</Link></td>
+                                <td>
+                                    <Link to={`/boards/${board.id}`}>
+                                        <button className="button-tables">
+                                            Leaderboard
+                                        </button>
+                                    </Link>
+                                </td>
+                                <td>{formatDate(board.timestamp)}</td>
                             </tr>
 
                         )

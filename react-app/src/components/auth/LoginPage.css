@@ -5,9 +5,10 @@
 .login-container {
     display: grid;
     grid-template-columns: 1fr 75px 1fr;
-    height: 90vh;
+    height: 97vh;
     /* background-color: tan; */
     background-image:
+        
         url('../../images/backgrounds/chocolate-candy-clipart-cropped.png');
     background-repeat: repeat;
     background-position: center;
@@ -29,9 +30,11 @@
 }
 
 .form-container {
+    /* font-family: fantasy; */
     padding: 30px;
     margin: 20px 0px;
     width: 350px;
+    height: 280px;
     background-color: white;
     box-shadow:
         0 0 0 3px #481E0F,
@@ -39,13 +42,21 @@
         0 0 0 11px #481E0F;
 }
 
-.button-login-form {
+.button-login-form,
+.button-signup-form {
     width: 150px;
+    box-shadow:
+    0 0 0 3px #B36638,
+    0 0 0 5px #481E0F;
+    color: #EDDDBD;
+    background-color: #8e4a22;
+    margin: 10px;
+
 }
 
-.pure-button {
+/* .pure-button {
     background-color: tan;
-}
+} */
 
 .error-display {
     color: red;

@@ -318,7 +318,7 @@ const GameDisplay = () => {
                     <span>
                         <button
                         onClick={()=>postNewPlaySession(currentPlaySession.board_id, currentPlaySession.user_id)}
-                        className='pure-button'
+                        className='button-new-session-for-board'
                         >
                             Start a New Session with this Board
                         </button>

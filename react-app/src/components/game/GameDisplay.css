@@ -1,4 +1,15 @@
 /* overall layout of GameDisplay*/
+
+.button-new-session-for-board {
+    width: 350px;
+    box-shadow:
+    0 0 0 3px #B36638,
+    0 0 0 5px #481E0F;
+    color: #EDDDBD;
+    background-color: #8e4a22;
+    margin: 10px;
+}
+
 .game-display-container {
     display: grid;
     grid-template-areas:

@@ -139,9 +139,9 @@ const TablePlaySessions = () => {
                         <thead>
                             <tr>
                                 <th>Play Session #</th>
-                                <th>Move History/Comments</th>
                                 <th>Board #</th>
-                                <th>Play Session Score</th>
+                                <th>Score</th>
+                                <th>Move History/Comments</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -149,13 +149,15 @@ const TablePlaySessions = () => {
                             return (
                                 <tr key={playSession.id} className={isIndexOdd(index)}>
                                     <td>Session #{playSession.id}</td>
-                                    <td>
-                                        <Link to={`/playsession/${playSession.id}`}>
-                                            Move History/Comments
-                                        </Link>
-                                    </td>
                                     <td>{playSession.board_id}</td>
                                     <td>{playSession.score}</td>
+                                    <td>
+                                        <Link to={`/playsession/${playSession.id}`}>
+                                            <button className="button-tables">
+                                                Move History/Comments
+                                            </button>
+                                        </Link>
+                                    </td>
                                 </tr>
 
                             )
@@ -181,11 +183,11 @@ const TablePlaySessions = () => {
                         <thead>
                             <tr>
                                 <th>Play Session #</th>
-                                <th>Move History/Comments</th>
                                 <th>Board #</th>
-                                <th>Play Session Score</th>
+                                <th>Score</th>
                                 <th>Load Session</th>
-                                <th>Timestamp</th>
+                                <th>Move History/Comments</th>
+                                <th>Last Played</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -193,17 +195,19 @@ const TablePlaySessions = () => {
                             return (
                                 <tr key={playSession.id} className={isIndexOdd(index)}>
                                     <td>Session #{playSession.id}</td>
-                                    <td>
-                                        <Link to={`/playsession/${playSession.id}`}>
-                                            Move History/Comments
-                                        </Link>
-                                    </td>
                                     <td>{playSession.board_id}</td>
                                     <td>{playSession.score}</td>
                                     <td>
-                                        <button className="pure-button" onClick={()=>{loadSession(playSession.id)}}>
+                                        <button className="button-tables" onClick={()=>{loadSession(playSession.id)}}>
                                             Load Play Session
                                         </button>
+                                    </td>
+                                    <td>
+                                        <Link to={`/playsession/${playSession.id}`}>
+                                            <button className="button-tables">
+                                                Move History/Comments
+                                            </button>
+                                        </Link>
                                     </td>
                                     <td>{formatDate(playSession.timestamp)}</td>
                                 </tr>
