@@ -57,7 +57,55 @@ The user can leave comments on a Play Session.
 
 ### Saving Data
 To reduce the number of database entries, moves for a Play Session are saved as a string, then placed as a column in the Play Session table.
-Functions in the front-end convert the moves between string for storage, and 2D array for rendering in React.  Below 
+Functions in the front-end convert the moves between string for storage, and 2D array for rendering in React.  Some examples of these functions are provided below.
+```js
+    function createTurnsArray(strMoves) {
+        if (strMoves) {
+            const arrNew = strMoves.split("T");
+            arrNew.shift();
+            const arrNew2 = arrNew.map( el => "T" + el);
+            return arrNew2;
+        }
+    }
+
+
+    function updateDisplayedTurn(turn) {
+        const turnNumber = turn.slice(1, 3);
+        setDisplayedTurn(turnNumber);
+        setBoardState(stringToBoardState(turn, numberOfRows, numberOfColumns));
+    }
+
+    function stringToBoardState(strBoardState, numberOfRows, numberOfColumns) {
+        if (strBoardState) {
+            const lengthOfOneTurn = numberOfRows * numberOfColumns * 3 + 4 - 1;
+            //string format:
+            //T00:00,00,00,00,00,00,00,M3,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,D2,00
+            //T01:00,00,00,00,00,00,00,M3,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,D2,D1
+            //number of entries is numberOfRows * numberOfColumns
+            //each entry needs 3 characters (except the last one doesn't need a ,)
+            //the string starts with 4 characters: `T##:`, then -1 to remove the last comma
+
+            const intStartIndex = strBoardState.length - lengthOfOneTurn;
+            const strLastBoardState = strBoardState.slice(intStartIndex);
+            const arrBoardValues = strLastBoardState.slice(4).split(',');
+            let k = 0;
+
+            const loadedBoardState = new Array(numberOfRows)
+
+            for (let i = 0; i < numberOfRows; i++) {
+                loadedBoardState[i] = new Array(numberOfColumns);
+                for (let j = 0; j < numberOfColumns; j++) {
+                    loadedBoardState[i][j] = arrBoardValues[k];
+                    k++;
+                }
+            }
+
+            return loadedBoardState;
+        }
+    }
+```
+
+
 
 ### Favorites
 Because the Favorites button appears in multiple places, all code is placed in a FavoriteButton component.  The Favorites button also contains logic to not render for the user's name, when that user is logged in.  The component subscribes to the Redux store, so any changes can be read elsewhere on the app.
