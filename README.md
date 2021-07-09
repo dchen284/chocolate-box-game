@@ -49,3 +49,72 @@ The user can leave comments on a Play Session.
 * After a "Move History/Comments" button, comments of that Play Session are loaded.
 * The user can create a new comment with the provided form.
 * The user can edit or delete comments that were created by that user.
+
+## Database Schema
+(input database schema here)
+
+## Code Snippets for Features
+
+### Saving Data
+To reduce the number of database entries, moves for a Play Session are saved as a string, then placed as a column in the Play Session table.
+Functions in the front-end convert the moves between string for storage, and 2D array for rendering in React.  Below 
+
+### Favorites
+Because the Favorites button appears in multiple places, all code is placed in a FavoriteButton component.  The Favorites button also contains logic to not render for the user's name, when that user is logged in.  The component subscribes to the Redux store, so any changes can be read elsewhere on the app.
+```js
+const FavoriteButton = ({loggedInUserId, favoriteId}) => {
+
+    // hooks and state variables
+    const dispatch = useDispatch();
+    const [isSelf, setIsSelf] = useState(false);
+    const [isFavorite, setIsFavorite] = useState(false);
+    const favoritePlayers = useSelector(state => state.favoritePlayers);
+
+    // useEffects
+    useEffect(() => {
+        if (favoritePlayers[favoriteId]) {setIsFavorite(true)}
+        else {setIsFavorite(false)}
+        if (+loggedInUserId === +favoriteId) {setIsSelf(true)}
+        else {setIsSelf(false)}
+    }, [favoriteId, favoritePlayers, loggedInUserId]);
+
+    // functions
+    const deleteFavorite = (userId, favoriteId) => {
+        dispatch(favoritePlayerActions.fetchDeleteFavorite(userId, favoriteId));
+    }
+
+    const addFavorite = (userId, favoriteId) => {
+        dispatch(favoritePlayerActions.fetchAddFavorite(userId, favoriteId));
+    }
+
+    // JSX
+
+    if (isSelf) {
+        return null;
+    }
+
+
+    return (
+        <span>
+            <button
+            className="button-favorite"
+            onClick={()=> {
+                if (isFavorite) {
+                    deleteFavorite(loggedInUserId, favoriteId);
+                    setIsFavorite(false);
+                }
+                else {
+                    addFavorite(loggedInUserId, favoriteId)
+                    setIsFavorite(true);
+                }
+            }}
+            >
+                <i className={isFavorite ? "fas fa-heart" : "far fa-heart"}></i>
+            </button>
+        </span>
+    )
+```
+
+## Future Features
+* Add extra bonus scoring goals (for example, +5 points for each milk tile 3 spaces away from a white tile)
+* Be able to drag tiles to the board
