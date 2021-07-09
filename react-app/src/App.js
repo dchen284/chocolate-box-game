@@ -78,7 +78,11 @@ function App() {
               <PlaySessionDetails />
             </ProtectedRoute>
             <Route>
-              404: Geez.
+              <h1>404: Not Found</h1>
+              <h3>You seem to have wandered off, away from the Wonka tour.</h3>
+              <h3>You do remember what happens if you don't follow the tour, yes?</h3>
+              <h3>Hit Refresh if you think you're in the right place,</h3>
+              <h3>or hit Back to return where you came from.</h3>
             </Route>
           </Switch>
           <Footer />
