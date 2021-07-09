@@ -3,4 +3,4 @@
 
 ## Live Site
 https://chocolate-box-game.herokuapp.com/
-![Home Page](https://i.imgur.com/uL7kYdV.png)
+![Home Page](https://i.imgur.com/Av0Sh0U.png)
