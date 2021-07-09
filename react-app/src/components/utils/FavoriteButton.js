@@ -17,16 +17,22 @@ const FavoriteButton = ({loggedInUserId, favoriteId}) => {
     // useEffects
     useEffect(() => {
         if (favoritePlayers[favoriteId]) {setIsFavorite(true)}
+        else {setIsFavorite(false)}
         if (+loggedInUserId === +favoriteId) {setIsSelf(true)}
+        else {setIsSelf(false)}
     }, [favoriteId, favoritePlayers, loggedInUserId]);
+
+    // useEffect(() => {
+    //     dispatch(favoritePlayerActions.fetchAllFavoritesOfUser(loggedInUserId));
+    // }, [dispatch, loggedInUserId]);
 
     // functions
     const deleteFavorite = (userId, favoriteId) => {
-        dispatch(favoritePlayerActions.fetchDeleteFavorite(userId, favoriteId))
+        dispatch(favoritePlayerActions.fetchDeleteFavorite(userId, favoriteId));
     }
 
     const addFavorite = (userId, favoriteId) => {
-        dispatch(favoritePlayerActions.fetchAddFavorite(userId, favoriteId))
+        dispatch(favoritePlayerActions.fetchAddFavorite(userId, favoriteId));
     }
 
     // JSX
