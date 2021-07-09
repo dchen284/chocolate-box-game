@@ -51,7 +51,7 @@ The user can leave comments on a Play Session.
 * The user can edit or delete comments that were created by that user.
 
 ## Database Schema
-(input database schema here)
+![Database Schema](https://i.imgur.com/KDj0P68.png)
 
 ## Code Snippets for Features
 
