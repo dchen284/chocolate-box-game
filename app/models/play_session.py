@@ -6,7 +6,7 @@ class PlaySession(db.Model):
     __tablename__ = 'play_sessions'
 
     id = db.Column(db.Integer, primary_key=True)
-    score = db.Column(db.Integer, nullable=False, default=0)
+    score = db.Column(db.Integer, nullable=False, default=8)
     moves = db.Column(db.String, nullable=False)
     tiles = db.Column(db.String, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))

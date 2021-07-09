@@ -36,10 +36,10 @@ const TableFavorites = () => {
     //     dispatch(favoritePlayerActions.fetchAddFavorite(userId, favoriteId))
     // }
 
-    const isIndexOdd = (index) => {
-        if (index % 2 === 1) {return 'pure-table-odd'}
-        else {return 'pure-table-even'}
-    }
+    // const isIndexOdd = (index) => {
+    //     if (index % 2 === 1) {return 'pure-table-odd'}
+    //     else {return 'pure-table-even'}
+    // }
 
     return (
         <div className="tabledisplay_container">
@@ -48,7 +48,7 @@ const TableFavorites = () => {
                 {/* <button
                 onClick={() => addFavorite(user.id, 2)}
                 >Add Marnie as Favorite</button> */}
-                <table className="pure-table">
+                <table>
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -58,7 +58,7 @@ const TableFavorites = () => {
                     <tbody>
                         {favoritePlayersValues?.map( (favoritePlayer, index) => {
                         return (
-                            <tr key={favoritePlayer.id} className={isIndexOdd(index)}>
+                            <tr key={favoritePlayer.id}>
                                 <td>
                                     <Link to={`/users/${favoritePlayer.id}/playsessions`}>
                                         {favoritePlayer.username}
