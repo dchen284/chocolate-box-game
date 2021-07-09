@@ -35,36 +35,42 @@ const FavoriteButton = ({loggedInUserId, favoriteId}) => {
         return null;
     }
 
-    if (isFavorite) {
+    // if (isFavorite) {
         return (
             <span>
                 <button
                 className="button-favorite"
                 onClick={()=> {
-                    deleteFavorite(loggedInUserId, favoriteId);
-                    setIsFavorite(false);
-                }}
-                >
-                    <i className="fas fa-heart"></i>
-                </button>
-            </span>
-        )
-    }
-    else {
-        return (
-            <span>
-                <button className="button-favorite">
-                    <i
-                    className="far fa-heart"
-                    onClick={()=> {
+                    if (isFavorite) {
+                        deleteFavorite(loggedInUserId, favoriteId);
+                        setIsFavorite(false);
+                    }
+                    else {
                         addFavorite(loggedInUserId, favoriteId)
                         setIsFavorite(true);
-                    }}
-                    ></i>
+                    }
+                }}
+                >
+                    <i className={isFavorite ? "fas fa-heart" : "far fa-heart"}></i>
                 </button>
             </span>
         )
-    }
+    // }
+    // else {
+    //     return (
+    //         <span>
+    //             <button className="button-favorite">
+    //                 <i
+    //                 className="far fa-heart"
+    //                 onClick={()=> {
+    //                     addFavorite(loggedInUserId, favoriteId)
+    //                     setIsFavorite(true);
+    //                 }}
+    //                 ></i>
+    //             </button>
+    //         </span>
+    //     )
+    // }
 
 
 }
