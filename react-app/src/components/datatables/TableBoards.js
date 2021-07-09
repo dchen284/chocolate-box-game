@@ -29,10 +29,10 @@ const TableBoards = () => {
     // }, [boards, boardsValues]);
 
     //functions
-    const oddIndexForPureTable = (index) => {
-        if (index % 2 === 1) {return 'pure-table-odd'}
-        else {return 'pure-table-even'}
-    }
+    // const oddIndexForPureTable = (index) => {
+    //     if (index % 2 === 1) {return 'pure-table-odd-blah'}
+    //     else {return 'pure-table-even'}
+    // }
 
     const formatDate = (timestamp) => {
         // return Date.parse(timestamp);
@@ -57,7 +57,7 @@ const TableBoards = () => {
         <div className="tabledisplay_container">
             <div className="tabledisplay_text">
                 <h1>Boards</h1>
-                <table className="pure-table">
+                <table>
                     <thead>
                         <tr>
                             <th>#</th>
@@ -69,7 +69,7 @@ const TableBoards = () => {
                     <tbody>
                         {boardsValues?.map( (board, index) => {
                         return (
-                            <tr key={board.id} className={oddIndexForPureTable(index)}>
+                            <tr key={board.id}>
                                 <td>{board.id}</td>
                                 <td>
                                     <button

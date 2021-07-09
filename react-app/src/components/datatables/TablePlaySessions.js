@@ -50,10 +50,10 @@ const TablePlaySessions = () => {
     }, [dispatch, errorsFromStore, setErrors]);
 
 
-    const isIndexOdd = (index) => {
-        if (index % 2 === 1) {return 'pure-table-odd'}
-        else {return 'pure-table-even'}
-    }
+    // const isIndexOdd = (index) => {
+    //     if (index % 2 === 1) {return 'pure-table-odd'}
+    //     else {return 'pure-table-even'}
+    // }
 
     const loadSession = (playSessionId) => {
         const updatedSession = playSessionsOfUser[playSessionId];
@@ -88,7 +88,7 @@ const TablePlaySessions = () => {
             <div className="tabledisplay_container">
                 <div className="tabledisplay_text">
                     <h1>Play Sessions of Board #{boardId}</h1>
-                    <table className="pure-table">
+                    <table>
                         <thead>
                             <tr>
                                 <th>Play Session #</th>
@@ -101,7 +101,7 @@ const TablePlaySessions = () => {
                         <tbody>
                             {playSessionsOfBoardValues.map( (playSession, index) => {
                             return (
-                                <tr key={playSession.id} className={isIndexOdd(index)}>
+                                <tr key={playSession.id}>
                                     <td>Session #{playSession.id}</td>
                                     <td>
                                         <Link to={`/users/${playSession.user_id}/playsessions`}>
@@ -137,7 +137,7 @@ const TablePlaySessions = () => {
                     <h1>Play Sessions of {usernameOfPage}
                         <FavoriteButton loggedInUserId={loggedInUser.id} favoriteId={userId}/>
                     </h1>
-                    <table className="pure-table">
+                    <table>
                         <thead>
                             <tr>
                                 <th>Play Session #</th>
@@ -149,7 +149,7 @@ const TablePlaySessions = () => {
                         <tbody>
                             {playSessionsOfUserValues.map( (playSession, index) => {
                             return (
-                                <tr key={playSession.id} className={isIndexOdd(index)}>
+                                <tr key={playSession.id}>
                                     <td>Session #{playSession.id}</td>
                                     <td>{playSession.board_id}</td>
                                     <td>{playSession.score}</td>
@@ -181,7 +181,7 @@ const TablePlaySessions = () => {
                     <h1>Play Sessions of {usernameOfPage}
                         <FavoriteButton loggedInUserId={loggedInUser.id} favoriteId={userId}/>
                     </h1>
-                    <table className="pure-table">
+                    <table>
                         <thead>
                             <tr>
                                 <th>Play Session #</th>
@@ -195,7 +195,7 @@ const TablePlaySessions = () => {
                         <tbody>
                             {playSessionsOfUserValues.map( (playSession, index) => {
                             return (
-                                <tr key={playSession.id} className={isIndexOdd(index)}>
+                                <tr key={playSession.id}>
                                     <td>Session #{playSession.id}</td>
                                     <td>{playSession.board_id}</td>
                                     <td>{playSession.score}</td>
