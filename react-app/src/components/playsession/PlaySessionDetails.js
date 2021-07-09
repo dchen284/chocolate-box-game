@@ -61,7 +61,7 @@ const PlaySessionDetails = () => {
 
 
     function updateDisplayedTurn(turn) {
-        console.log('++++', turn, displayedTurn);
+        // console.log('++++', turn, displayedTurn);
         const turnNumber = turn.slice(1, 3);
         setDisplayedTurn(turnNumber);
         setBoardState(stringToBoardState(turn, numberOfRows, numberOfColumns));

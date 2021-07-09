@@ -48,7 +48,7 @@ export const fetchAllFavoritesOfUser = (userId) => async (dispatch) => {
 }
 
 export const fetchAddFavorite = (userId, favoriteId) => async (dispatch) => {
-    console.log('here')
+    // console.log('here')
     const response = await fetch(`/api/users/${userId}/favorite_players/`, {
         method: "POST",
         headers: {
@@ -71,7 +71,7 @@ export const fetchAddFavorite = (userId, favoriteId) => async (dispatch) => {
 }
 
 export const fetchDeleteFavorite = (userId, favoriteId) => async (dispatch) => {
-    console.log('here')
+    // console.log('here')
     const response = await fetch(`/api/users/${userId}/favorite_players/${favoriteId}`, {
         method: "DELETE",
         headers: {
