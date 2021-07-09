@@ -38,14 +38,14 @@ const FavoriteButton = ({loggedInUserId, favoriteId}) => {
     if (isFavorite) {
         return (
             <span>
-                <button className="button-favorite">
-                    <i
-                    className="fas fa-heart"
-                    onClick={()=> {
-                        deleteFavorite(loggedInUserId, favoriteId);
-                        setIsFavorite(false);
-                    }}
-                    ></i>
+                <button
+                className="button-favorite"
+                onClick={()=> {
+                    deleteFavorite(loggedInUserId, favoriteId);
+                    setIsFavorite(false);
+                }}
+                >
+                    <i className="fas fa-heart"></i>
                 </button>
             </span>
         )
