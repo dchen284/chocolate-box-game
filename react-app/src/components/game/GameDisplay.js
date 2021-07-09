@@ -128,7 +128,7 @@ const GameDisplay = () => {
             }
         }
         strOutput = strOutput.slice(0, strOutput.length - 1);
-        console.log('strOutput', strOutput); //78 characters long
+        // console.log('strOutput', strOutput); //78 characters long
         return strOutput;
     }
 
@@ -199,7 +199,7 @@ const GameDisplay = () => {
     }
 
     const placeTile = (e) => {
-        console.log('currentTile', currentTile);
+        // console.log('currentTile', currentTile);
         const targetId = e.target.id;
         if (targetId && targetId[0] === 'b') {
             const targetCoord = targetId.slice(1, 3);

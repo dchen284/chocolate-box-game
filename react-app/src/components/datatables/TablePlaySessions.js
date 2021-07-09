@@ -43,7 +43,7 @@ const TablePlaySessions = () => {
 
     useEffect(() => {
         if (errorsFromStore.length) {
-            console.log('got here');
+            // console.log('got here');
             setErrors(errorsFromStore);
             dispatch(errorsActions.clearErrors());
         }
