@@ -7,81 +7,81 @@ def seed_boards():
     boards = [
         #1x
         Board(
-            initialBoardSetup=
+            initial_board_setup=
             "T00:00,00,00,00,00,00,00,M3,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,D2,00",
-            initialTiles=
+            initial_tiles=
             "D1,M3,W2",
             timestamp=datetime.datetime(2021, 7, 1, 12, 30),
         ),
         #2x
         Board(
-            initialBoardSetup=
+            initial_board_setup=
             "T00:00,00,W4,00,00,00,00,00,00,00,00,00,00,00,00,D1,00,00,00,00,00,00,00,00,00",
-            initialTiles=
+            initial_tiles=
             "W1,D4,M1",
             timestamp=datetime.datetime(2021, 6, 2, 12, 30),
         ),
         #3x
         Board(
-            initialBoardSetup=
+            initial_board_setup=
             "T00:00,00,00,00,00,00,D3,00,00,00,00,00,00,00,00,00,00,00,00,00,W2,00,00,00,00",
-            initialTiles=
+            initial_tiles=
             "M4,D2,W3",
             timestamp=datetime.datetime(2021, 5, 3, 12, 30),
         ),
         #4x
         Board(
-            initialBoardSetup=
+            initial_board_setup=
             "T00:00,D1,00,00,00,00,00,00,00,00,00,00,M3,00,00,00,00,00,00,00,00,00,00,00,00",
-            initialTiles=
+            initial_tiles=
             "D3,W3,D1",
             timestamp=datetime.datetime(2021, 4, 4, 12, 30),
         ),
         #5x
         Board(
-            initialBoardSetup=
+            initial_board_setup=
             "T00:00,00,00,00,00,00,00,00,W2,00,00,00,00,00,00,00,00,00,00,00,00,00,00,D4,00",
-            initialTiles=
+            initial_tiles=
             "W4,M2,D2",
             timestamp=datetime.datetime(2021, 3, 5, 12, 30),
         ),
         #6x
         Board(
-            initialBoardSetup=
+            initial_board_setup=
             "T00:00,00,00,00,M1,00,00,00,00,00,00,00,W3,00,00,00,00,00,00,00,00,00,00,00,00",
-            initialTiles=
+            initial_tiles=
             "M3,W4,D1",
             timestamp=datetime.datetime(2021, 2, 6, 12, 30),
         ),
         #7x
         Board(
-            initialBoardSetup=
+            initial_board_setup=
             "T00:00,00,W4,00,00,00,00,00,00,00,M1,00,00,00,00,00,00,00,00,00,00,00,D1,00,00",
-            initialTiles=
+            initial_tiles=
             "D1,D4,W1",
             timestamp=datetime.datetime(2021, 1, 7, 12, 30),
         ),
         #8x
         Board(
-            initialBoardSetup=
+            initial_board_setup=
             "T00:00,00,00,00,00,00,M2,00,00,00,00,00,00,00,D4,00,00,00,00,00,00,00,00,00,00",
-            initialTiles=
+            initial_tiles=
             "W2,M3,M4",
             timestamp=datetime.datetime(2020, 12, 8, 12, 30),
         ),
         #9x
         Board(
-            initialBoardSetup=
+            initial_board_setup=
             "T00:00,00,00,00,00,00,00,00,00,00,00,W2,00,00,00,00,00,00,00,00,00,W3,00,00,00",
-            initialTiles=
+            initial_tiles=
             "W4,D4,W1",
             timestamp=datetime.datetime(2020, 11, 11, 12, 30),
         ),
         #10x
         Board(
-            initialBoardSetup=
+            initial_board_setup=
             "T00:00,00,W3,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,M3,00,00,00",
-            initialTiles=
+            initial_tiles=
             "D1,D2,D3",
             timestamp=datetime.datetime(2020, 10, 23, 12, 30),
         ),

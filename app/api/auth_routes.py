@@ -68,8 +68,8 @@ def sign_up():
         # Create a new play session, using the default board and temporarily the demo user.
         new_play_session = PlaySession(
             score=0,
-            moves=default_board.initialBoardSetup,
-            tiles="D1,D2,D3",
+            moves=default_board.initial_board_setup,
+            tiles=default_board.initial_tiles,
             user_id=1,
             board_id=1,
         )

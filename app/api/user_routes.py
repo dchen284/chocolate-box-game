@@ -64,8 +64,8 @@ def post_new_play_session_of_user(user_id):
 
     # Make the new PlaySession and add to database
     new_play_session = PlaySession(
-        moves=board.initialBoardSetup,
-        tiles=board.initialTiles,
+        moves=board.initial_board_setup,
+        tiles=board.initial_tiles,
         user_id=user_id,
         board_id=board_id,
     )

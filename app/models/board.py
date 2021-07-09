@@ -5,8 +5,8 @@ class Board(db.Model):
     __tablename__ = 'boards'
 
     id = db.Column(db.Integer, primary_key=True)
-    initialBoardSetup = db.Column(db.String(255), nullable=False, unique=True)
-    initialTiles = db.Column(db.String, nullable=False)
+    initial_board_setup = db.Column(db.String(255), nullable=False, unique=True)
+    initial_tiles = db.Column(db.String, nullable=False)
     timestamp = db.Column(db.DateTime(timezone=False),
                           nullable=False,
                           default=datetime.datetime.now(tz=None))
@@ -17,6 +17,6 @@ class Board(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'initialBoardSetup': self.initialBoardSetup,
+            'initial_board_setup': self.initial_board_setup,
             'timestamp': self.timestamp,
         }
