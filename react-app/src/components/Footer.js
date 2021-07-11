@@ -5,7 +5,7 @@ const Footer = () => {
         <div className="footer">
             <div>
                 <span>Built by Danny Chen</span>
-                <a href="https://github.com/dchen284">
+                <a href="https://github.com/dchen284/chocolate-box-game">
                     <i className="fab fa-github-square" />
                 </a>
                 <a href="https://www.linkedin.com/in/danny-chen-b2963110b">
