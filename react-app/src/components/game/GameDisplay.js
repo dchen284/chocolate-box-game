@@ -101,7 +101,7 @@ const GameDisplay = () => {
                     arrLegalSpaces[i] = new Array(numberOfColumns);
                     for (let j = 0; j < numberOfColumns; j++) {
                         if (checkLegalSpace(i, j, tile)) {
-                            console.log('tile has legal move:', tile)
+                            // console.log('tile has legal move:', tile)
                             isThereALegalMove = true;
                         }
                     }
