@@ -122,7 +122,7 @@ const GameDisplay = () => {
                 }
             }
             setLegalMoves(arrLegalSpaces);
-            console.log('in useeffect');
+            console.log('in useeffect', arrLegalSpaces);
         }
 
     }, [boardState, currentTile]);
