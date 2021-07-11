@@ -19,7 +19,7 @@ import tileW4 from '../../images/tiles/tile-white-4.png';
 
 import './GameDisplay.css';
 
-const GameSpace = ({spaceId, tileInput}) => {
+const GameSpace = ({spaceId, tileInput, legalMove}) => {
 
     // state variables
 
@@ -70,6 +70,48 @@ const GameSpace = ({spaceId, tileInput}) => {
             srcInput = null;
     }
 
+    let srcLegalMove;
+    switch (legalMove) {
+        case 'D1':
+            srcLegalMove = tileD1;
+            break;
+        case 'D2':
+            srcLegalMove = tileD2;
+            break;
+        case 'D3':
+            srcLegalMove = tileD3;
+            break;
+        case 'D4':
+            srcLegalMove = tileD4;
+            break;
+        case 'M1':
+            srcLegalMove = tileM1;
+            break;
+        case 'M2':
+            srcLegalMove = tileM2;
+            break;
+        case 'M3':
+            srcLegalMove = tileM3;
+            break;
+        case 'M4':
+            srcLegalMove = tileM4;
+            break;
+        case 'W1':
+            srcLegalMove = tileW1;
+            break;
+        case 'W2':
+            srcLegalMove = tileW2;
+            break;
+        case 'W3':
+            srcLegalMove = tileW3;
+            break;
+        case 'W4':
+            srcLegalMove = tileW4;
+            break;
+        default:
+            srcLegalMove = null;
+    }
+
     // JSX
 
     return (
@@ -86,6 +128,14 @@ const GameSpace = ({spaceId, tileInput}) => {
                     src={srcInput}
                     alt={`${srcInput}`}
                     id={`${spaceId}-${tileInput}`}
+                    />
+                    : null}
+                    {srcLegalMove ?
+                    <img
+                    className="token token-legal-move"
+                    src={srcLegalMove}
+                    alt={`${srcLegalMove}`}
+                    id={`${spaceId}-${srcLegalMove}`}
                     />
                     : null}
                 </div>

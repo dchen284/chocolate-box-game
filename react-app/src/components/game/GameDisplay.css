@@ -155,3 +155,7 @@
     width: 85px;
     margin: 5px;
 }
+
+.token-legal-move {
+    opacity: 50%;
+}

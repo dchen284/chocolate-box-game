@@ -1,13 +1,13 @@
 import GameSpace from './GameSpace';
 import './GameDisplay.css';
 
-const BoardDisplay = ({boardState}) => {
+const BoardDisplay = ({boardState, legalMoves}) => {
 
     const numberOfRows = 5;
     const numberOfColumns = 5;
     const gameBoard = new Array(numberOfRows)
 
-    if (boardState.length) {
+    if (boardState.length && legalMoves.length) {
         for (let i = 0; i < numberOfRows; i++) {
             gameBoard[i] = new Array(numberOfColumns);
             for (let j = 0; j < numberOfColumns; j++) {
@@ -16,6 +16,7 @@ const BoardDisplay = ({boardState}) => {
                         key={`${i}${j}`}
                         spaceId={`b${i}${j}`}
                         tileInput={boardState[i][j]}
+                        legalMove={legalMoves[i][j]}
                     />;
             }
         }
