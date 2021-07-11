@@ -23,7 +23,7 @@ const GameDisplay = () => {
 
     const [boardState, setBoardState] = useState([]);
     const [currentTile, setCurrentTile] = useState("00");
-    // const [gameIsDone, setGameIsDone] = useState(false);
+    const [gameIsDone, setGameIsDone] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
     const [legalMoves, setLegalMoves] = useState([]);
     const [tilesRemaining, setTilesRemaining] = useState([]);
@@ -77,7 +77,7 @@ const GameDisplay = () => {
             for (let i = 0; i < numberOfRows; i++) {
                 arrLegalSpaces[i] = new Array(numberOfColumns);
                 for (let j = 0; j < numberOfColumns; j++) {
-                    if (checkLegalSpace(i, j)) {arrLegalSpaces[i][j] = currentTile}
+                    if (checkLegalSpace(i, j, currentTile)) {arrLegalSpaces[i][j] = currentTile}
                     else {arrLegalSpaces[i][j] = "00"}
                 }
             }
@@ -87,26 +87,31 @@ const GameDisplay = () => {
     }, [boardState, currentTile]);
 
     // triggers when game is done
-    // useEffect(()=> {
-    //     let isThereALegalMove = false;
+    useEffect(()=> {
+        let isThereALegalMove = false;
 
-    //     for (let i = 0; i < tilesRemaining.length; i++) {
-    //         const tile = tilesRemaining[i];
+        for (let i = 0; i < tilesRemaining.length; i++) {
+            const tile = tilesRemaining[i];
 
-    //         if (boardState.length) {
-    //             // start with a new 2D array for the board state
-    //             const arrLegalSpaces = new Array(numberOfRows)
+            if (boardState.length) {
+                // start with a new 2D array for the board state
+                const arrLegalSpaces = new Array(numberOfRows)
 
-    //             for (let i = 0; i < numberOfRows; i++) {
-    //                 arrLegalSpaces[i] = new Array(numberOfColumns);
-    //                 for (let j = 0; j < numberOfColumns; j++) {
-    //                     if (checkLegalSpace(i, j)) {isThereALegalMove = true}
-    //                 }
-    //             }
-    //         }
+                for (let i = 0; i < numberOfRows; i++) {
+                    arrLegalSpaces[i] = new Array(numberOfColumns);
+                    for (let j = 0; j < numberOfColumns; j++) {
+                        if (checkLegalSpace(i, j, tile)) {
+                            console.log('tile has legal move:', tile)
+                            isThereALegalMove = true;
+                        }
+                    }
+                }
+            }
+        }
+        if (!boardState.length) {isThereALegalMove = true}
+        if (!isThereALegalMove) {setGameIsDone(true)}
 
-    //     }
-    // }, [boardState, currentTile, tilesRemaining]);
+    }, [boardState, currentTile, tilesRemaining]);
 
     // functions
 
@@ -208,7 +213,7 @@ const GameDisplay = () => {
 
     }
 
-    function checkLegalSpace(row, col) {
+    function checkLegalSpace(row, col, tileToPlace) {
         let boolIsLegal = true;
         const neighbors = getNeighbors(row, col);
         const currSpace = boardState[row][col];
@@ -236,7 +241,7 @@ const GameDisplay = () => {
         neighbors.forEach( neighbor => {
             const [neighborRow, neighborCol] = neighbor;
             const neighborValue = boardState[neighborRow][neighborCol];
-            if (neighborValue !== "00" && currentTile[0] !== neighborValue[0] && currentTile[1] !== neighborValue[1]) {
+            if (neighborValue !== "00" && tileToPlace[0] !== neighborValue[0] && tileToPlace[1] !== neighborValue[1]) {
                 boolIsLegal = false;
             }
         });
@@ -250,7 +255,7 @@ const GameDisplay = () => {
         if (targetId && targetId[0] === 'b') {
             const targetCoord = targetId.slice(1, 3);
             const [targetRow, targetCol] = [+targetCoord[0], +targetCoord[1]]; //targetRow and targetCol are strings
-            if (checkLegalSpace(targetRow, targetCol)) {
+            if (checkLegalSpace(targetRow, targetCol, currentTile)) {
 
                 //create a new board state
                 const newBoardState = createDeepCopyOfBoardState();
@@ -303,6 +308,8 @@ const GameDisplay = () => {
 
     const postNewPlaySession = (boardId, userId) => {
         dispatch(playSessionActions.fetchPostNewPlaySession(boardId, userId));
+        setCurrentTile("00");
+        setGameIsDone(false);
         history.push('/');
     }
 
@@ -349,6 +356,7 @@ const GameDisplay = () => {
             <div className='game-display-info game-display-border'>
                 <h2>Game: Session #{currentPlaySession.id}</h2>
                 <h3>Turn: {turn} - Score: {score}</h3>
+                {/* {gameIsDone ? <h3>Game Is Over!</h3> : null} */}
 
                 <div className='game-display-rules'>
                     <div>Rules:</div>

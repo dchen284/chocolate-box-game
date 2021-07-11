@@ -75,6 +75,7 @@ def post_new_play_session_of_user(user_id):
     # Get the current user, set the user's current session to the new session's id
     current_user = User.query.get(user_id)
     current_user.current_session_id = new_play_session.id
+    db.session.commit()
 
     # return the new session
     return {'play_session': new_play_session.to_dict()}

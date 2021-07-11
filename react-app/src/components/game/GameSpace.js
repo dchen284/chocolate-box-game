@@ -70,7 +70,7 @@ const GameSpace = ({spaceId, tileInput, legalMove}) => {
             srcInput = null;
     }
 
-    let srcLegalMove;
+    let srcLegalMove = null;
     switch (legalMove) {
         case 'D1':
             srcLegalMove = tileD1;

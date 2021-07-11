@@ -122,13 +122,29 @@ const PlaySessionDetails = () => {
         }
     }, [dispatch, comments])
 
+    const createDummyLegalMovesArray = () => {
+        // This generates a legal moves array with no valid moves, that can be fed into
+        // the BoardDisplay here.  This is needed so the BoardDisplay renders properly
+        // when displaying Play Sessions.
+        const dummy = new Array(numberOfRows)
+
+        for (let i = 0; i < numberOfRows; i++) {
+            dummy[i] = new Array(numberOfColumns);
+            for (let j = 0; j < numberOfColumns; j++) {
+                dummy[i][j] = "00"
+            }
+        }
+
+        return dummy;
+    }
+
     // JSX
     return (
         <div className="details-grid">
 
             <div className="details-board details-border">
                 <h3>Showing Play Session #{playSessionId}, Turn #{displayedTurn}</h3>
-                <BoardDisplay boardState={boardState}/>
+                <BoardDisplay boardState={boardState} legalMoves={createDummyLegalMovesArray()}/>
             </div>
 
             <div className="details-moves details-border">
