@@ -64,6 +64,8 @@
 
 .game-display-tiles {
     grid-area: tiles;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     /* margin: 20px;
     background-color: white;
     box-shadow:
@@ -115,6 +117,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* selected tile display */
+.selected-tile {
+    position: relative;
+    top: 10px;
 }
 
 /* spaces used in both board display and tiles display */

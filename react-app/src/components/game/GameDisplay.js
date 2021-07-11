@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 // Internal imports
 import BoardDisplay from './BoardDisplay';
 // import GameSpace from './GameSpace';
+import SelectedTileDisplay from './SelectedTileDisplay';
 import TilesDisplay from './TilesDisplay';
 import * as playSessionActions from '../../store/playsession';
 import './GameDisplay.css';
@@ -293,6 +294,9 @@ const GameDisplay = () => {
                 onClick={selectTile}
                 >
                     <TilesDisplay arrTiles={tilesRemaining}/>
+                </div>
+                <div>
+                    <SelectedTileDisplay tileInput={currentTile}/>
                 </div>
             </div>
 
