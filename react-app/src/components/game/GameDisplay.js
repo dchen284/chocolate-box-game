@@ -23,7 +23,7 @@ const GameDisplay = () => {
 
     const [boardState, setBoardState] = useState([]);
     const [currentTile, setCurrentTile] = useState("00");
-    // const [gameIsDone, setGameIsDone] = useState(false);
+    const [gameIsDone, setGameIsDone] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
     const [legalMoves, setLegalMoves] = useState([]);
     const [tilesRemaining, setTilesRemaining] = useState([]);
@@ -69,46 +69,6 @@ const GameDisplay = () => {
     // sets the array of legal moves
     useEffect( ()=> {
 
-        // This is a copy of a function already existing in this file.
-        // Placing this here removes the warning, and (maybe)
-        // allows it to work in production?
-
-        function checkLegalSpace2(row, col, tileToPlace) {
-            let boolIsLegal = true;
-            const neighbors = getNeighbors(row, col);
-            const currSpace = boardState[row][col];
-
-            //if the space is already occupied, the move is not legal
-            if (currSpace !== "00") {
-                // console.log('spaces occupied')
-                boolIsLegal = false
-            };
-
-            //if the space's neighbors are all empty (00), the move is not legal
-            let allNeighborsEmpty = true;
-            neighbors.forEach( neighbor => {
-                const [neighborRow, neighborCol] = neighbor;
-                const neighborValue = boardState[neighborRow][neighborCol];
-                if (neighborValue !== "00") {allNeighborsEmpty = false}
-            });
-            if (allNeighborsEmpty) {
-                // console.log('all neighbors empty')
-                boolIsLegal = false
-            };
-
-            //for each space's occupied neighbors, if either the letter or number do not match, the move is not legal
-
-            neighbors.forEach( neighbor => {
-                const [neighborRow, neighborCol] = neighbor;
-                const neighborValue = boardState[neighborRow][neighborCol];
-                if (neighborValue !== "00" && tileToPlace[0] !== neighborValue[0] && tileToPlace[1] !== neighborValue[1]) {
-                    boolIsLegal = false;
-                }
-            });
-
-            return boolIsLegal;
-        }
-
         // code for setting the legal moves
         if (boardState.length) {
             // start with a new 2D array for the board state
@@ -117,42 +77,47 @@ const GameDisplay = () => {
             for (let i = 0; i < numberOfRows; i++) {
                 arrLegalSpaces[i] = new Array(numberOfColumns);
                 for (let j = 0; j < numberOfColumns; j++) {
-                    if (checkLegalSpace2(i, j, currentTile)) {arrLegalSpaces[i][j] = currentTile}
+                    if (checkLegalSpace(i, j, currentTile)) {arrLegalSpaces[i][j] = currentTile}
                     else {arrLegalSpaces[i][j] = "00"}
                 }
             }
             setLegalMoves(arrLegalSpaces);
-            console.log('in useeffect', arrLegalSpaces);
+            // console.log('in useeffect', arrLegalSpaces);
         }
 
     }, [boardState, currentTile]);
 
     // triggers when game is done
-    // useEffect(()=> {
-    //     let isThereALegalMove = false;
+    useEffect(()=> {
+        setGameIsDone(false);
+        let isThereALegalMove = false;
 
-    //     for (let i = 0; i < tilesRemaining.length; i++) {
-    //         const tile = tilesRemaining[i];
+        for (let i = 0; i < tilesRemaining.length; i++) {
+            const tile = tilesRemaining[i];
+            // console.log('tile', tile);
 
-    //         if (boardState.length) {
-    //             // start with a new 2D array for the board state
-    //             const arrLegalSpaces = new Array(numberOfRows)
+            if (boardState.length) {
+                // console.log('inside if');
+                // start with a new 2D array for the board state
+                const arrLegalSpaces = new Array(numberOfRows)
 
-    //             for (let i = 0; i < numberOfRows; i++) {
-    //                 arrLegalSpaces[i] = new Array(numberOfColumns);
-    //                 for (let j = 0; j < numberOfColumns; j++) {
-    //                     if (checkLegalSpace(i, j, tile)) {
-    //                         // console.log('tile has legal move:', tile)
-    //                         isThereALegalMove = true;
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     if (!boardState.length) {isThereALegalMove = true}
-    //     if (!isThereALegalMove) {setGameIsDone(true)}
+                for (let i = 0; i < numberOfRows; i++) {
+                    arrLegalSpaces[i] = new Array(numberOfColumns);
+                    for (let j = 0; j < numberOfColumns; j++) {
+                        if (checkLegalSpace(i, j, tile)) {
+                            // console.log('tile has legal move:', tile)
+                            isThereALegalMove = true;
+                            // console.log('legal move at', i, j)
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        if (!boardState.length) {isThereALegalMove = true}
+        if (!isThereALegalMove) {setGameIsDone(true)}
 
-    // }, [boardState, currentTile, tilesRemaining]);
+    }, [boardState, currentTile, tilesRemaining]);
 
     // functions
 
@@ -397,7 +362,7 @@ const GameDisplay = () => {
             <div className='game-display-info game-display-border'>
                 <h2>Game: Session #{currentPlaySession.id}</h2>
                 <h3>Turn: {turn} - Score: {score}</h3>
-                {/* {gameIsDone ? <h3>Game Is Over!</h3> : null} */}
+                <h3 className='game-display__game-is-over'>{gameIsDone ? '*******************No Moves Remaining, Game Is Over!*******************' : null}</h3>
 
                 <div className='game-display-rules'>
                     <div>Rules:</div>

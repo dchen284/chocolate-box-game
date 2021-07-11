@@ -42,6 +42,10 @@
     padding: 10px; */
 }
 
+.game-display__game-is-over {
+    color: red;
+}
+
 .game-display-board > h3 > span {
     font-size: 20px;
     margin: 0px 20px;
