@@ -120,9 +120,25 @@
 }
 
 /* selected tile display */
-.selected-tile {
-    position: relative;
-    top: 10px;
+.selected-tile_container {
+    width: 125px;
+    height: 125px;
+    margin-left: 5px;
+}
+
+.selected-tile_container--border {
+    background: linear-gradient(rgb(98, 1, 1), rgb(59, 0, 0));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.selected-tile_container_grid {
+    display: grid;
+    grid-template-columns: 100px;
+    grid-template-rows: 100px;
+    width: 100px;
+    height: 100px;
 }
 
 /* spaces used in both board display and tiles display */

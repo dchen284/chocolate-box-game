@@ -32,7 +32,7 @@ const TilesDisplay = ({arrTiles}) => {
     return (
         <>
             <h3>
-                Click a Tile Below to Select for Placing
+                Click a Tile to Select for Placing
             </h3>
             <div className="tiles_container tiles_container--border">
                 <div
