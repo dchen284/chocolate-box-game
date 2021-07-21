@@ -3,7 +3,7 @@
 
 ## Live Site
 https://chocolate-box-game.herokuapp.com/
-![Home Page](https://i.imgur.com/Av0Sh0U.png)
+![Home Page](https://i.imgur.com/1FjbObx.png)
 
 ## Technologies Used
 * Front-end: React, Redux, JavaScript
