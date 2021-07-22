@@ -15,7 +15,7 @@ const LoginPage = () => {
                 </div>
             </div>
             <div className="login-element-container or-container">
-                <h2>- or -</h2>
+                <h2 className="form-title or-text">-or-</h2>
             </div>
             <div className="login-element-container">
                 <div>

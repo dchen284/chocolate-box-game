@@ -1,0 +1,20 @@
+
+
+@font-face {
+    font-family: "Alex Brush";
+    src: url("../fonts/alex-brush/AlexBrush-Regular.ttf") format("truetype");
+    }
+
+@font-face {
+    font-family: "Gondola SD";
+    src: url("../fonts/Gondola-SD/Gondola_SD-Swash.ttf") format("truetype");
+    }
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/roboto/Roboto-Regular.ttf") format("truetype");
+    }
+
+/* .form-title {
+    color: red;
+} */

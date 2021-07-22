@@ -16,7 +16,7 @@
 .navbar-container > div > div
 {
     color: white;
-    font-family: fantasy;
+    font-family: "Papyrus", fantasy;
 }
 
 .navbar-name {
@@ -24,7 +24,7 @@
     height: 25px;
     background-color:#582618;
     color: white;
-    font-family: fantasy;
+    font-family: "Papyrus", fantasy;
     justify-items: center;
     align-items: center;
 }

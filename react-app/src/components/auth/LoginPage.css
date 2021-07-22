@@ -1,4 +1,9 @@
 @import '../index.css';
+@import '../../fonts/font-stylesheet.css';
+
+.form-title {
+    font-family: "Gondola SD", "Alex Brush", fantasy;
+}
 
 .login-container {
     display: grid;
@@ -25,6 +30,10 @@
     display: flex;
     justify-content: space-between;
     padding: 5px 0px;
+}
+
+.form-label {
+    font-family: "Trebuchet MS", sans-serif;
 }
 
 .form-container {
@@ -61,8 +70,8 @@
 }
 
 .or-container {
-    font-family: fantasy;
-    padding: 10px;
+    font-family: "Gondola SD", fantasy;
+    padding: 10px 10px 10px 10px;
     background-color: white;
     /* border: 5px solid #481E0F;
     outline: 5px solid tan; */
@@ -72,4 +81,11 @@
         0 0 0 11px #481E0F;
     height: 30px;
     align-self: center;
+    /* align-items: center;
+    justify-items: center; */
+}
+
+.or-text {
+    position: relative;
+    top: 5px;
 }

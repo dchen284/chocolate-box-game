@@ -50,39 +50,43 @@ const SignUpForm = () => {
           <div className="error-display" key={ind}>{error}</div>
         ))}
       </div>
-      <h2>Sign Up For a New Account!</h2>
+      <h3 className='form-title'>Sign Up For a New Account!</h3>
       <div className='form-line'>
-        <label>User Name</label>
+        <label className='form-label'>User Name</label>
         <input
           type='text'
           name='username'
+          placeholder='Username'
           onChange={updateUsername}
           value={username}
         ></input>
       </div>
       <div className='form-line'>
-        <label>Email</label>
+        <label className='form-label'>Email</label>
         <input
           type='text'
           name='email'
+          placeholder='Email'
           onChange={updateEmail}
           value={email}
         ></input>
       </div>
       <div className='form-line'>
-        <label>Password</label>
+        <label className='form-label'>Password</label>
         <input
           type='password'
           name='password'
+          placeholder='Password'
           onChange={updatePassword}
           value={password}
         ></input>
       </div>
       <div className='form-line'>
-        <label>Repeat Password</label>
+        <label className='form-label'>Repeat Password</label>
         <input
           type='password'
           name='repeat_password'
+          placeholder='Password'
           onChange={updateRepeatPassword}
           value={repeatPassword}
           // required={true}
