@@ -66,3 +66,16 @@
     background-color: #EDDDBD;
     margin: 10px;
 }
+
+textarea {
+    box-sizing: border-box;
+    border-radius: 5px;
+    box-shadow:
+    0 0 0 3px #EDDDBD,
+    0 0 0 5px #481E0F;
+    margin: 10px 0px;
+}
+
+textarea:focus {
+    background-color: #EDDDBD;
+}

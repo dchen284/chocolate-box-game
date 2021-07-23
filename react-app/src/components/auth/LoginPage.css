@@ -89,3 +89,13 @@
     position: relative;
     top: 5px;
 }
+
+input:focus {
+    background-color: #EDDDBD;
+}
+
+input {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
