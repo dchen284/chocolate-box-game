@@ -41,7 +41,7 @@
     padding: 30px;
     margin: 20px 0px;
     width: 350px;
-    height: 280px;
+    min-height: 280px;
     background-color: white;
     box-shadow:
         0 0 0 3px #481E0F,
