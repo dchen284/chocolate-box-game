@@ -65,8 +65,13 @@
     background-color: tan;
 } */
 
+.error-container {
+    padding: 5px;
+}
+
 .error-display {
     color: red;
+    padding: 5px;
 }
 
 .or-container {
