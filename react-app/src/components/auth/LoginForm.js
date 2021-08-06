@@ -40,41 +40,43 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={onLogin} className="form-container">
-      <div>
+    <>
+     <div className="error-container">
         {errors.map((error, ind) => (
           <div className="error-display" key={ind}>{error}</div>
         ))}
       </div>
-      <h3 className="form-title">Log In To Play!</h3>
-      <div className='form-line'>
-        <label htmlFor='email' className='form-label'>Email</label>
-        <input
-          name='email'
-          type='text'
-          placeholder='Email'
-          value={email}
-          onChange={updateEmail}
-        />
-      </div>
-      <div className='form-line'>
-        <label htmlFor='password' className='form-label'>Password</label>
-        <input
-          name='password'
-          type='password'
-          placeholder='Password'
-          value={password}
-          onChange={updatePassword}
-        />
-      </div>
-      <div className='form-line'>
-        {/* <button className="pure-button button-login-form" type='submit'>Login</button> */}
-        <button className="button-login-form button-chocolate" type='submit'>Login</button>
-      </div>
-      <div className='form-line'>
-        <button className="button-login-form button-chocolate" onClick={onLoginDemoUser}>Demo User</button>
-      </div>
-    </form>
+      <form onSubmit={onLogin} className="form-container">
+        <h3 className="form-title">Log In To Play!</h3>
+        <div className='form-line'>
+          <label htmlFor='email' className='form-label'>Email</label>
+          <input
+            name='email'
+            type='text'
+            placeholder='Email'
+            value={email}
+            onChange={updateEmail}
+          />
+        </div>
+        <div className='form-line'>
+          <label htmlFor='password' className='form-label'>Password</label>
+          <input
+            name='password'
+            type='password'
+            placeholder='Password'
+            value={password}
+            onChange={updatePassword}
+          />
+        </div>
+        <div className='form-line'>
+          {/* <button className="pure-button button-login-form" type='submit'>Login</button> */}
+          <button className="button-login-form button-chocolate" type='submit'>Login</button>
+        </div>
+        <div className='form-line'>
+          <button className="button-login-form button-chocolate" onClick={onLoginDemoUser}>Demo User</button>
+        </div>
+      </form>
+    </>
   );
 };
 

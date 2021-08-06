@@ -3,6 +3,7 @@
 
 .form-title {
     font-family: "Gondola SD", "Alex Brush", fantasy;
+    padding-top: 5px;
 }
 
 .login-container {
@@ -52,21 +53,14 @@
 .button-login-form,
 .button-signup-form {
     width: 150px;
-    /* box-shadow:
-    0 0 0 3px #B36638,
-    0 0 0 5px #481E0F;
-    color: #EDDDBD;
-    background-color: #8e4a22;
-    margin: 10px; */
-
 }
 
-/* .pure-button {
-    background-color: tan;
-} */
-
 .error-container {
-    padding: 5px;
+    margin: 5px;
+    background: pink;
+    border-radius: 15px;
+    position: absolute;
+    top: 65px;
 }
 
 .error-display {
